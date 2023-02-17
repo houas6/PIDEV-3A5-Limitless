@@ -13,22 +13,23 @@ import java.util.Objects;
  */
 public class Produit {
     int id_produit;
+    String nom_produit;
+    float prix;
+    String description;
 
-    public Produit(int id_produit, String nom_produit, float prix, String description, int id_fournisseur) {
+    public Produit(int id_produit, String nom_produit, float prix, String description) {
         this.id_produit = id_produit;
         this.nom_produit = nom_produit;
         this.prix = prix;
         this.description = description;
-        this.id_fournisseur = id_fournisseur;
+        
     }
-    String nom_produit;
-    float prix;
-    String description;
-    int id_fournisseur;
+    
+    
 
     @Override
     public String toString() {
-        return "Produit{" + "id_produit=" + id_produit + ", nom_produit=" + nom_produit + ", prix=" + prix + ", description=" + description + ", id_fournisseur=" + id_fournisseur + '}';
+        return "Produit{" + "id_produit=" + id_produit + ", nom_produit=" + nom_produit + ", prix=" + prix + ", description=" + description + '}';
     }
 
     @Override
@@ -38,7 +39,7 @@ public class Produit {
         hash = 47 * hash + Objects.hashCode(this.nom_produit);
         hash = 47 * hash + Float.floatToIntBits(this.prix);
         hash = 47 * hash + Objects.hashCode(this.description);
-        hash = 47 * hash + this.id_fournisseur;
+        
         return hash;
     }
 
@@ -60,9 +61,7 @@ public class Produit {
         if (Float.floatToIntBits(this.prix) != Float.floatToIntBits(other.prix)) {
             return false;
         }
-        if (this.id_fournisseur != other.id_fournisseur) {
-            return false;
-        }
+        
         if (!Objects.equals(this.nom_produit, other.nom_produit)) {
             return false;
         }
@@ -72,11 +71,11 @@ public class Produit {
         return true;
     }
 
-    public Produit(String nom_produit, float prix, String description, int id_fournisseur) {
+    public Produit(String nom_produit, float prix, String description) {
         this.nom_produit = nom_produit;
         this.prix = prix;
         this.description = description;
-        this.id_fournisseur = id_fournisseur;
+        
     }
 
     public int getId_produit() {
@@ -111,11 +110,5 @@ public class Produit {
         this.description = description;
     }
 
-    public int getId_fournisseur() {
-        return id_fournisseur;
-    }
-
-    public void setId_fournisseur(int id_fournisseur) {
-        this.id_fournisseur = id_fournisseur;
-    }
+    
 }

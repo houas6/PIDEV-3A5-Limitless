@@ -27,7 +27,7 @@ public class CRUDProduit implements InterfaceServices{
     public void ajouterproduit(Produit p) {
         try {
         ste = conn.createStatement();
-        String req = "Insert into produit values(0,'"+p.getNom_produit()+"','"+p.getPrix()+"','"+p.getDescription()+"','"+p.getId_fournisseur()+"')";
+        String req = "Insert into produit values(0,'"+p.getNom_produit()+"','"+p.getPrix()+"','"+p.getDescription()+"')";
         ste.executeUpdate(req);
         System.out.println("Produit ajouté");
     } catch (SQLException ex) {
@@ -37,9 +37,9 @@ public class CRUDProduit implements InterfaceServices{
     
     public void ajouterproduit2(Produit p) {
        try {
-            String req = "INSERT INTO `produit` (`nom_produit`, `prix`,`description`,`id_fournisseur`) VALUES (?,?,?,?)";
+            String req = "INSERT INTO `produit` (`nom_produit`, `prix`,`description`) VALUES (?,?,?)";
             PreparedStatement ps = conn.prepareStatement(req);
-            ps.setInt(4, p.getId_fournisseur());
+            
             ps.setString(3, p.getDescription());
             ps.setFloat(2, p.getPrix());
             ps.setString(1, p.getNom_produit());
@@ -81,7 +81,7 @@ public class CRUDProduit implements InterfaceServices{
         ResultSet result = ste.executeQuery(req);
         
         while (result.next()) {
-            Produit resultProduit = new Produit(result.getInt("id_produit"), result.getString("nom_produit"),result.getFloat("prix"),result.getString("description"),result.getInt("id_fournisseur"));
+            Produit resultProduit = new Produit(result.getInt("id_produit"), result.getString("nom_produit"),result.getFloat("prix"),result.getString("description"));
             prod.add(resultProduit);
         }
         System.out.println(prod);
