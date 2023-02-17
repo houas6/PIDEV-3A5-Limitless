@@ -23,7 +23,10 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.SpinnerValueFactory;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
 
 /**
  * FXML Controller class
@@ -42,6 +45,35 @@ public class AjouterController implements Initializable {
     private Button fxajout;
     @FXML
     private TextField idproduit;
+    
+    @FXML
+    private Button afficher;
+    @FXML
+    private TableView<Produit> table_produit;
+    @FXML
+    private TableColumn<?, ?> fxxidproduit;
+    @FXML
+    private TableColumn<?, ?> fxxnomproduit;
+    @FXML
+    private TableColumn<?, ?> fxxprix;
+    @FXML
+    private TableColumn<?, ?> fxxdescription;
+    public void setID_produit(String message)
+       {
+       this.fxxidproduit.setText(message);
+       }
+    public void setNom_produit(String message)
+       {
+       this.fxxnomproduit.setText(message);
+       }
+       public void setPrix(String message)
+       {
+       this.fxxprix.setText(message);
+       }
+       public void setDescription(String message)
+       {
+       this.fxxdescription.setText(message);
+       }
 
     /**
      * Initializes the controller class.
@@ -50,7 +82,16 @@ public class AjouterController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
     }    
-
+    
+     @FXML
+    private void afficher(ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader();
+        
+        loader.setLocation(getClass().getResource("Details.fxml"));
+        Parent root = loader.load();
+        afficher.getScene().setRoot(root);
+    }
+    
     @FXML
     private void Ajouterproduit(ActionEvent event) {
         String nom_produit=fxnomproduit.getText();
@@ -72,19 +113,22 @@ public class AjouterController implements Initializable {
     
     public void start (){
         try {
-        FXMLLoader loader=FXMLLoader.load(getClass().getResource("Ajouter.fxml"));
+        FXMLLoader loader=FXMLLoader.load(getClass().getResource("Details.fxml"));
         Parent root = loader.load();
-        root=FXMLLoader.load(getClass().getResource("Details.fxml"));
+        root=FXMLLoader.load(getClass().getResource("Ajouter.fxml"));
         } catch (IOException ex) {
             Logger.getLogger(AjouterController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
+    
+    
+
     @FXML
     private void supprimer(ActionEvent event) {
         CRUDProduit cr=new CRUDProduit();
-        Produit P =new Produit(nom_produit,prix,description);
-        int id_produit = cr.getId_produit(idproduit.getText()) ; 
+        Produit P =new Produit();
+        int id_produit = cr.getid(Integer.parseInt(idproduit.getText())) ; 
         P.setId_produit(id_produit);
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Confirmation");
@@ -93,25 +137,22 @@ public class AjouterController implements Initializable {
         
         Optional<ButtonType> btn = alert.showAndWait();
         if(btn.get() == ButtonType.OK){
-            sc.supprimerc(t);
-            populateTable();
-            Notifications notificationBuilder = Notifications.create()
-                                                     .title("transport supprimer")
-                                                     .graphic(null)
-                                                     .hideAfter(javafx.util.Duration.seconds(5) )
-                                                      .position(Pos.TOP_LEFT) ;
-         notificationBuilder.show(); 
-           dest.clear();
-         
-        pays.getSelectionModel().clearSelection();
-        ville.getSelectionModel().clearSelection();
-        SpinnerValueFactory<Integer> svf = new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 1000, 1);
-        prix.setValueFactory(svf); 
-        }
-        else{
-            alert.close();
-        } 
+            cr.supprimerproduit(id_produit);
+            
+                }
+    }
+
+    @FXML
+    private void getselected(MouseEvent event) {
+        Produit P = new Produit(); 
+        P=table_produit.getSelectionModel().getSelectedItem();  
+        fxxidproduit.setText(""+P.getId_produit());
+        fxxnomproduit.setText(P.getNom_produit()); 
+        fxxprix.setText(""+P.getPrix()); 
+        fxxdescription.setText(P.getDescription());
     }
 }
+   
+    
     
 

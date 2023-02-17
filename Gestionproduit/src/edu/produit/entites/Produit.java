@@ -17,6 +17,9 @@ public class Produit {
     float prix;
     String description;
 
+    public Produit() {
+    }
+
     public Produit(int id_produit, String nom_produit, float prix, String description) {
         this.id_produit = id_produit;
         this.nom_produit = nom_produit;

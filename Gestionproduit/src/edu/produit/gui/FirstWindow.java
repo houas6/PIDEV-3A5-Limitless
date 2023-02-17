@@ -25,18 +25,16 @@ import javafx.stage.Stage;
 public class FirstWindow extends Application {
     
     @Override
-    public void start(Stage primaryStage) {
-        try {
+    public void start(Stage primaryStage) throws Exception {
+        
             Parent root;
             root=FXMLLoader.load(getClass().getResource("Ajouter.fxml"));
             Scene scene = new Scene(root);
             
-            primaryStage.setTitle("");
+            
             primaryStage.setScene(scene);
             primaryStage.show();
-        } catch (IOException ex) {
-            Logger.getLogger(FirstWindow.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        
     }
 
     /**

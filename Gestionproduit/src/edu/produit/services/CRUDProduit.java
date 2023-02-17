@@ -92,4 +92,24 @@ public class CRUDProduit implements InterfaceServices{
    return prod;
     }
     
+    
+    public int getid (int n ){ 
+    int t=0 ; 
+    try {
+            String requete = "select * from produit where ?= Id_produit";
+            PreparedStatement pst = conn.prepareStatement(requete);
+            pst.setInt(1, n);
+            ResultSet e = pst.executeQuery();
+            while(e.next()){
+            Produit pre = new Produit(); 
+            
+            pre.setId_produit(e.getInt("id_produit"));
+            t=pre.getId_produit();   }
+
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+   
+return t ; 
+    }
 }

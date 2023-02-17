@@ -31,6 +31,8 @@ public class DetailsController implements Initializable {
     private TableColumn<String, Produit> fxxdescription;
     @FXML
     private TableView<Produit> table_produit;
+    @FXML
+    private TableColumn<?, Produit> fxxidproduit;
 
     /**
      * Initializes the controller class.
@@ -39,6 +41,10 @@ public class DetailsController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
     }    
+    public void setID_produit(String message)
+       {
+       this.fxxidproduit.setText(message);
+       }
     public void setNom_produit(String message)
        {
        this.fxxnomproduit.setText(message);
@@ -54,14 +60,13 @@ public class DetailsController implements Initializable {
 
     @FXML
     private void getselected(MouseEvent event) {
-        String nom_produit=fxxnomproduit.getText();
-        float prix= Float.parseFloat(fxxprix.getText());
-        String description= fxxdescription.getText();
-        Produit P = new Produit(nom_produit,prix,description); 
-   P=table_produit.getSelectionModel().getSelectedItem();  
-   nom_produit.setText(P.getNom_produit()); 
-   prix.setValue(P.getPrix()); 
-   description.setValue(P.getDescription());
+        
+        Produit P = new Produit(); 
+        P=table_produit.getSelectionModel().getSelectedItem();  
+        fxxidproduit.setText(""+P.getId_produit());
+        fxxnomproduit.setText(P.getNom_produit()); 
+        fxxprix.setText(""+P.getPrix()); 
+        fxxdescription.setText(P.getDescription());
    
     }
     
