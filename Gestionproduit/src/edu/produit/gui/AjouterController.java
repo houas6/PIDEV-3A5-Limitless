@@ -27,6 +27,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
+//import org.controlsfx.control.Notifications;
 
 /**
  * FXML Controller class
@@ -46,18 +47,21 @@ public class AjouterController implements Initializable {
     @FXML
     private TextField idproduit;
     
-    @FXML
-    private Button afficher;
+    
     @FXML
     private TableView<Produit> table_produit;
     @FXML
-    private TableColumn<?, ?> fxxidproduit;
+    private TableColumn<Integer, Produit> fxxidproduit;
     @FXML
-    private TableColumn<?, ?> fxxnomproduit;
+    private TableColumn<String, Produit> fxxnomproduit;
     @FXML
-    private TableColumn<?, ?> fxxprix;
+    private TableColumn<Float, Produit> fxxprix;
     @FXML
-    private TableColumn<?, ?> fxxdescription;
+    private TableColumn<String, Produit> fxxdescription;
+    @FXML
+    private Button modifier;
+    
+    
     public void setID_produit(String message)
        {
        this.fxxidproduit.setText(message);
@@ -83,14 +87,7 @@ public class AjouterController implements Initializable {
         // TODO
     }    
     
-     @FXML
-    private void afficher(ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader();
-        
-        loader.setLocation(getClass().getResource("Details.fxml"));
-        Parent root = loader.load();
-        afficher.getScene().setRoot(root);
-    }
+    
     
     @FXML
     private void Ajouterproduit(ActionEvent event) {
@@ -111,7 +108,7 @@ public class AjouterController implements Initializable {
         alert.show();}
         
     
-    public void start (){
+    /*public void start (){
         try {
         FXMLLoader loader=FXMLLoader.load(getClass().getResource("Details.fxml"));
         Parent root = loader.load();
@@ -119,7 +116,7 @@ public class AjouterController implements Initializable {
         } catch (IOException ex) {
             Logger.getLogger(AjouterController.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }
+    }*/
 
     
     
@@ -150,6 +147,31 @@ public class AjouterController implements Initializable {
         fxxnomproduit.setText(P.getNom_produit()); 
         fxxprix.setText(""+P.getPrix()); 
         fxxdescription.setText(P.getDescription());
+    }
+
+    @FXML
+    private void modifier(ActionEvent event) {
+        
+        CRUDProduit cr = new CRUDProduit(); 
+           int id_produit = cr.getid(Integer.parseInt(idproduit.getText())) ;  
+            
+        Produit p = new Produit( id_produit, fxnomproduit.getText(),Integer.parseInt(fxprix.getText()),  fxdescription.getText());
+        
+
+        cr.modifierproduit(p);
+        
+        fxnomproduit.clear(); 
+         fxprix.clear() ; 
+         fxdescription.clear(); 
+         
+        
+        
+        /*Notifications notificationBuilder = Notifications.create()
+                                                     .title("produit modifier")
+                                                     .graphic(null)
+                                                     .hideAfter(javafx.util.Duration.seconds(5) )
+                                                      .position(Pos.TOP_LEFT) ;
+         notificationBuilder.show(); */
     }
 }
    

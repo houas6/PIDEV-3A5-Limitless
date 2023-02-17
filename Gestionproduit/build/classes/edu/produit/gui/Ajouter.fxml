@@ -15,13 +15,12 @@
       <TextField fx:id="fxnomproduit" layoutX="148.0" layoutY="85.0" />
       <TextField fx:id="fxprix" layoutX="148.0" layoutY="158.0" />
       <TextField fx:id="fxdescription" layoutX="148.0" layoutY="236.0" />
-      <Button fx:id="fxajout" layoutX="169.0" layoutY="307.0" mnemonicParsing="false" onAction="#Ajouterproduit" text="Valider" />
+      <Button fx:id="fxajout" layoutX="161.0" layoutY="284.0" mnemonicParsing="false" onAction="#Ajouterproduit" text="Ajouter" />
       <Label layoutX="442.0" layoutY="42.0" text="Supprimer" />
       <Label layoutX="169.0" layoutY="33.0" text="Ajouter" />
       <Label layoutX="442.0" layoutY="111.0" text="Id_produit" />
       <TextField fx:id="idproduit" layoutX="395.0" layoutY="158.0" />
       <Button layoutX="434.0" layoutY="236.0" mnemonicParsing="false" onAction="#supprimer" text="Supprimer" />
-      <Button fx:id="afficher" layoutX="647.0" layoutY="60.0" mnemonicParsing="false" onAction="#afficher" text="Afficher" />
       <TableView fx:id="table_produit" layoutX="108.0" layoutY="344.0" onMouseClicked="#getselected" prefHeight="200.0" prefWidth="637.0">
          <columns>
             <TableColumn fx:id="fxxidproduit" prefWidth="116.800048828125" text="Id produit" />
@@ -30,5 +29,6 @@
             <TableColumn fx:id="fxxdescription" prefWidth="323.20000610351565" text="Description" />
          </columns>
       </TableView>
+      <Button fx:id="modifier" layoutX="238.0" layoutY="284.0" mnemonicParsing="false" onAction="#modifier" text="Modifier" />
    </children>
 </AnchorPane>
