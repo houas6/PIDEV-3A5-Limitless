@@ -18,6 +18,11 @@ public class client {
     private String prenom_client;
     private String address_client;
 
+    public client(String nom_client, String prenom_client) {
+        this.nom_client = nom_client;
+        this.prenom_client = prenom_client;
+    }
+
     public client(int id_client, String nom_client, String prenom_client, String address_client) {
         this.id_client = id_client;
         this.nom_client = nom_client;

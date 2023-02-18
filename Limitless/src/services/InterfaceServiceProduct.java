@@ -13,7 +13,7 @@ import models.product;
 public interface InterfaceServiceProduct {
     public void ajouterproduct(product p);
     public void supprimerproduct(int id_product);
-    public List<product> afficherArticles();
+    public List<product> afficherproduct();
     public product getproduct(int id_product);
     
 }

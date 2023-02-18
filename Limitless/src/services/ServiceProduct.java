@@ -54,7 +54,7 @@ Connection conn = MyConnection.getInstance().getConnection();
     }
 
     @Override
-    public List<product> afficherArticles() {
+    public List<product> afficherproduct() {
        try {
         ste= conn.createStatement();
     } catch (SQLException ex) {

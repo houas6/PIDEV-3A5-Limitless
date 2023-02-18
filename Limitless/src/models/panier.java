@@ -17,6 +17,15 @@ public class panier {
     private int id_client;
  private ArrayList<product> products;
     private double total_panier;
+    private int quantite=1;
+
+    public int getQuantite() {
+        return quantite;
+    }
+
+    public void setQuantite(int quantite) {
+        this.quantite = quantite;
+    }
     
     public double getTotal_panier() {
         return total_panier;

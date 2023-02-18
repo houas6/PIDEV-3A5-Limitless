@@ -8,9 +8,11 @@
             <file>file:/C:/Users/rassa/Documents/NetBeansProjects/Limitless/src/models/product.java</file>
             <file>file:/C:/Users/rassa/Documents/NetBeansProjects/Limitless/src/services/ServiceCommande.java</file>
             <file>file:/C:/Users/rassa/Documents/NetBeansProjects/Limitless/src/limitless/Limitless.java</file>
-            <file>file:/C:/Users/rassa/Documents/NetBeansProjects/Limitless/src/models/commande.java</file>
             <file>file:/C:/Users/rassa/Documents/NetBeansProjects/Limitless/src/services/ServiceClient.java</file>
-            <file>file:/C:/Users/rassa/Documents/NetBeansProjects/Limitless/src/models/client.java</file>
+            <file>file:/C:/Users/rassa/Documents/NetBeansProjects/Limitless/src/services/InterfaceServicePanier.java</file>
+            <file>file:/C:/Users/rassa/Documents/NetBeansProjects/Limitless/src/GUI/CartController.java</file>
+            <file>file:/C:/Users/rassa/Documents/NetBeansProjects/Limitless/src/GUI/cart.fxml</file>
+            <file>file:/C:/Users/rassa/Documents/NetBeansProjects/Limitless/src/GUI/firstwindow.java</file>
             <file>file:/C:/Users/rassa/Documents/NetBeansProjects/Limitless/src/models/panier.java</file>
         </group>
     </open-files>

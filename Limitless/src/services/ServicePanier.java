@@ -22,7 +22,7 @@ import java.util.List;
 public class ServicePanier implements InterfaceServicePanier{
 Statement ste;
 Connection conn = MyConnection.getInstance().getConnection();
-    @Override
+   /* @Override
     public void ajouterPanier(panier p1 , int id_product) {
         try {
             String req = "INSERT INTO `panier` (`id_client`,`id_product`) VALUES (?,?)";
@@ -35,7 +35,41 @@ Connection conn = MyConnection.getInstance().getConnection();
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
         }
+    }*/
+ @Override
+public void ajouterPanier(panier p1, int id_product) {
+    try {
+        // Check if the product already exists in the cart
+        String selectReq = "SELECT quantite_product FROM panier WHERE id_client = ? AND id_product = ?";
+        PreparedStatement selectPs = conn.prepareStatement(selectReq);
+        selectPs.setInt(1, p1.getId_client());
+        selectPs.setInt(2, id_product);
+        ResultSet rs = selectPs.executeQuery();
+
+        if (rs.next()) {
+            // Product already exists, update the quantity
+            int quantite = rs.getInt("quantite_product") + 1;
+            String updateReq = "UPDATE panier SET quantite_product = ? WHERE id_client = ? AND id_product = ?";
+            PreparedStatement updatePs = conn.prepareStatement(updateReq);
+            updatePs.setInt(1, quantite);
+            updatePs.setInt(2, p1.getId_client());
+            updatePs.setInt(3, id_product);
+            updatePs.executeUpdate();
+            System.out.println("Product quantity updated in the cart!");
+        } else {
+            // Product does not exist, add a new row to the cart
+            String insertReq = "INSERT INTO panier (id_client, id_product, quantite_product) VALUES (?, ?, 1)";
+            PreparedStatement insertPs = conn.prepareStatement(insertReq);
+            insertPs.setInt(1, p1.getId_client());
+            insertPs.setInt(2, id_product);
+            insertPs.executeUpdate();
+            System.out.println("Product added to the cart!");
+        }
+    } catch (SQLException ex) {
+        System.out.println(ex.getMessage());
     }
+}
+    
 
     @Override
     public void supprimerPanier(int id_client) {
@@ -78,7 +112,44 @@ Connection conn = MyConnection.getInstance().getConnection();
     
     
     
-    
+@Override
+    public void decrementQuantite(panier p1, int id_product) {
+    try {
+        // Check if the product exists in the cart
+        String selectReq = "SELECT quantite_product FROM panier WHERE id_client = ? AND id_product = ?";
+        PreparedStatement selectPs = conn.prepareStatement(selectReq);
+        selectPs.setInt(1, p1.getId_client());
+        selectPs.setInt(2, id_product);
+        ResultSet rs = selectPs.executeQuery();
+
+        if (rs.next()) {
+            int quantite = rs.getInt("quantite_product");
+            if (quantite > 1) {
+                // Product exists and quantity is more than 1, decrement the quantity
+                String updateReq = "UPDATE panier SET quantite_product = ? WHERE id_client = ? AND id_product = ?";
+                PreparedStatement updatePs = conn.prepareStatement(updateReq);
+                updatePs.setInt(1, quantite - 1);
+                updatePs.setInt(2, p1.getId_client());
+                updatePs.setInt(3, id_product);
+                updatePs.executeUpdate();
+                System.out.println("Product quantity decremented in the cart!");
+            } else {
+                // Product exists but quantity is 1, remove the product from the cart
+                String deleteReq = "DELETE FROM panier WHERE id_client = ? AND id_product = ?";
+                PreparedStatement deletePs = conn.prepareStatement(deleteReq);
+                deletePs.setInt(1, p1.getId_client());
+                deletePs.setInt(2, id_product);
+                deletePs.executeUpdate();
+                System.out.println("Product removed from the cart!");
+            }
+        } else {
+            // Product does not exist in the cart
+            System.out.println("Product not found in the cart!");
+        }
+    } catch (SQLException ex) {
+        System.out.println(ex.getMessage());
+    }
+}
     
     
     
