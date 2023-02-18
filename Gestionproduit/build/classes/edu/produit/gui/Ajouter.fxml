@@ -29,6 +29,6 @@
             <TableColumn fx:id="fxxdescription" prefWidth="323.20000610351565" text="Description" />
          </columns>
       </TableView>
-      <Button fx:id="modifier" layoutX="238.0" layoutY="284.0" mnemonicParsing="false" onAction="#modifier" text="Modifier" />
+      <Button fx:id="modifier" layoutX="238.0" layoutY="284.0" mnemonicParsing="false" onMouseClicked="#modifierproduit" text="Modifier" />
    </children>
 </AnchorPane>

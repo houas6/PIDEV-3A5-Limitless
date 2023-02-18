@@ -19,6 +19,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
@@ -28,6 +29,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
+import javafx.stage.Stage;
 //import org.controlsfx.control.Notifications;
 
 /**
@@ -149,32 +151,24 @@ public class AjouterController implements Initializable {
             
                 }
     }
-
+        private void redirectToPage(){
+            Parent root;
+            try {
+           
+            root = FXMLLoader.load(getClass().getResource("Modifier.fxml"));
+            Scene c=new Scene(root);
+             Stage stage=(Stage)modifier.getScene().getWindow();
+            stage.setScene(c);
+        } catch (IOException ex) {
+            Logger.getLogger(AjouterController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 
 
     @FXML
-    private void modifier(ActionEvent event) {
+    private void modifierproduit(MouseEvent event) {
+        this.redirectToPage();
         
-        CRUDProduit cr = new CRUDProduit(); 
-           int id_produit = cr.getid(Integer.parseInt(idproduit.getText())) ;  
-            
-        Produit p = new Produit( id_produit, fxnomproduit.getText(),Integer.parseInt(fxprix.getText()),  fxdescription.getText());
-        
-
-        cr.modifierproduit(p);
-        
-        fxnomproduit.clear(); 
-         fxprix.clear() ; 
-         fxdescription.clear(); 
-         
-        
-        
-        /*Notifications notificationBuilder = Notifications.create()
-                                                     .title("produit modifier")
-                                                     .graphic(null)
-                                                     .hideAfter(javafx.util.Duration.seconds(5) )
-                                                      .position(Pos.TOP_LEFT) ;
-         notificationBuilder.show(); */
     }
 }
    

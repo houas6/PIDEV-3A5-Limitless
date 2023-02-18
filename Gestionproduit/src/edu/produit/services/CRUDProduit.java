@@ -52,7 +52,7 @@ public class CRUDProduit implements InterfaceServices{
     
     public void modifierproduit(Produit p) {
        try {
-            String req = "UPDATE `produit` SET `nom_produit` = '"+ p.getNom_produit()+ "','`prix` = '" +p.getPrix()+ "','`description`='"+p.getDescription()+"' WHERE `produit`.`id_produit` = " + p.getId_produit();
+            String req = "UPDATE `produit` SET `nom_produit` = '"+ p.getNom_produit()+ "',`prix` = '" +p.getPrix()+ "',`description`='"+p.getDescription()+"' WHERE `produit`.`id_produit` = " + p.getId_produit();
             Statement st = conn.createStatement();
             st.executeUpdate(req);
             System.out.println("Produit updated !");
@@ -97,7 +97,7 @@ public class CRUDProduit implements InterfaceServices{
     public int getid (int n ){ 
     int t=0 ; 
     try {
-            String requete = "select * from produit where ?= Id_produit";
+            String requete = "select * from produit where ?= id_produit";
             PreparedStatement pst = conn.prepareStatement(requete);
             pst.setInt(1, n);
             ResultSet e = pst.executeQuery();
