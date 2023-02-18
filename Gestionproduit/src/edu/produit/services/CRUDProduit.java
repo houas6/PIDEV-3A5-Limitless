@@ -77,7 +77,8 @@ public class CRUDProduit implements InterfaceServices{
     public List<Produit> afficherproduit() {
        List<Produit> prod = new ArrayList<Produit>();
         try {
-        String req = "SELECT * FROM `produit`";
+            ste =conn.createStatement();
+            String req = "SELECT * FROM `produit`";
         ResultSet result = ste.executeQuery(req);
         
         while (result.next()) {

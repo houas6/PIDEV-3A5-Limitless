@@ -26,6 +26,7 @@ import javafx.scene.control.SpinnerValueFactory;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 //import org.controlsfx.control.Notifications;
 
@@ -51,18 +52,20 @@ public class AjouterController implements Initializable {
     @FXML
     private TableView<Produit> table_produit;
     @FXML
-    private TableColumn<Integer, Produit> fxxidproduit;
+    private TableColumn<Produit,Integer> fxxidproduit;
     @FXML
-    private TableColumn<String, Produit> fxxnomproduit;
+    private TableColumn<Produit, String> fxxnomproduit;
     @FXML
-    private TableColumn<Float, Produit> fxxprix;
+    private TableColumn<Produit, Float> fxxprix;
     @FXML
-    private TableColumn<String, Produit> fxxdescription;
+    private TableColumn<Produit, String> fxxdescription;
     @FXML
     private Button modifier;
+    private CRUDProduit cr=new CRUDProduit();
+    Produit P;
     
     
-    public void setID_produit(String message)
+    /*public void setID_produit(String message)
        {
        this.fxxidproduit.setText(message);
        }
@@ -77,7 +80,7 @@ public class AjouterController implements Initializable {
        public void setDescription(String message)
        {
        this.fxxdescription.setText(message);
-       }
+       }*/
 
     /**
      * Initializes the controller class.
@@ -85,6 +88,14 @@ public class AjouterController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
+        fxxidproduit.setCellValueFactory(new PropertyValueFactory<>("id_produit"));
+        fxxnomproduit.setCellValueFactory(new PropertyValueFactory<>("nom_produit"));
+        fxxprix.setCellValueFactory(new PropertyValueFactory<>("prix"));
+        fxxdescription.setCellValueFactory(new PropertyValueFactory<>("description"));
+        
+             for (Produit Pe : cr.afficherproduit()) {
+            table_produit.getItems().add(Pe);
+        }
     }    
     
     
@@ -108,15 +119,15 @@ public class AjouterController implements Initializable {
         alert.show();}
         
     
-    /*public void start (){
+    public void start (){
         try {
-        FXMLLoader loader=FXMLLoader.load(getClass().getResource("Details.fxml"));
+        FXMLLoader loader=FXMLLoader.load(getClass().getResource("Ajouter.fxml"));
         Parent root = loader.load();
-        root=FXMLLoader.load(getClass().getResource("Ajouter.fxml"));
+        //root=FXMLLoader.load(getClass().getResource("Ajouter.fxml"));
         } catch (IOException ex) {
             Logger.getLogger(AjouterController.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }*/
+    }
 
     
     
@@ -139,15 +150,7 @@ public class AjouterController implements Initializable {
                 }
     }
 
-    @FXML
-    private void getselected(MouseEvent event) {
-        Produit P = new Produit(); 
-        P=table_produit.getSelectionModel().getSelectedItem();  
-        fxxidproduit.setText(""+P.getId_produit());
-        fxxnomproduit.setText(P.getNom_produit()); 
-        fxxprix.setText(""+P.getPrix()); 
-        fxxdescription.setText(P.getDescription());
-    }
+
 
     @FXML
     private void modifier(ActionEvent event) {
