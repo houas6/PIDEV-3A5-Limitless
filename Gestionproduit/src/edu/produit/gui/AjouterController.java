@@ -65,6 +65,8 @@ public class AjouterController implements Initializable {
     private Button modifier;
     private CRUDProduit cr=new CRUDProduit();
     Produit P;
+    @FXML
+    private Button refreshlisteproduit;
     
     
     /*public void setID_produit(String message)
@@ -163,12 +165,32 @@ public class AjouterController implements Initializable {
             Logger.getLogger(AjouterController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
+        private void redirectToPage2(){
+            Parent root;
+            try {
+            
+            
+           
+            root = FXMLLoader.load(getClass().getResource("Ajouter.fxml"));
+            Scene c=new Scene(root);
+            Stage stage=(Stage)refreshlisteproduit.getScene().getWindow();
+            stage.setScene(c);
+        } catch (IOException ex) {
+            Logger.getLogger(AjouterController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+          
+    }
 
     @FXML
     private void modifierproduit(MouseEvent event) {
         this.redirectToPage();
         
+    }
+
+    @FXML
+    private void refresh(MouseEvent event) {
+        this.redirectToPage2();
     }
 }
    
