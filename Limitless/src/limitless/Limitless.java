@@ -43,10 +43,11 @@ public class Limitless {
  
       //serv3.ajouterPanier(pan2, 2); 
     
-       
+       serv3.supprimerproduitpannier(1, 3);
       //serv3.supprimerPanier(1);
-       // System.out.println(serv3.getpanier(2));
-       serv3.decrementQuantite(pan2, 2);
+      // System.out.println(serv3.getpanier(1));
+      // serv3.decrementQuantite(pan2, 2);
+     // serv3.incrementQuantite(pan2, 2);
         
         
         commande c1= new commande(0,serv1.getclient(1),14.5);

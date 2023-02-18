@@ -90,6 +90,8 @@ public void ajouterPanier(panier p1, int id_product) {
     public panier getpanier(int id_client) {
       panier panier= new panier();
         ServiceProduct sa = new ServiceProduct();
+   
+         int quantite=1;
           try {
         String req = "SELECT * FROM `panier` WHERE id_client =  ?";
         PreparedStatement pste=conn.prepareStatement(req);
@@ -99,13 +101,16 @@ public void ajouterPanier(panier p1, int id_product) {
         while(result.next()){
              
            product resultproduct = sa.getproduct(result.getInt(2));
+            quantite= result.getInt(3);
+           
       panier.addproduct(resultproduct);
         }
     } catch (SQLException ex) {
          System.out.println(ex);   
     }
           panier.setId_client(id_client);
-         double totalCost = panier.getProducts().stream().mapToDouble(x->x.getPrice_product()).sum();
+          panier.setQuantite(quantite);
+         double totalCost = panier.getProducts().stream().mapToDouble(x->x.getPrice_product()* panier.getQuantite()).sum();
          panier.setTotal_panier(totalCost);
     return panier;
     }
@@ -150,6 +155,92 @@ public void ajouterPanier(panier p1, int id_product) {
         System.out.println(ex.getMessage());
     }
 }
+    
+    
+    
+    
+@Override
+    public void incrementQuantite(panier p1, int id_product) {
+    try {
+        // Check if the product exists in the cart
+        String selectReq = "SELECT quantite_product FROM panier WHERE id_client = ? AND id_product = ?";
+        PreparedStatement selectPs = conn.prepareStatement(selectReq);
+        selectPs.setInt(1, p1.getId_client());
+        selectPs.setInt(2, id_product);
+        ResultSet rs = selectPs.executeQuery();
+
+        if (rs.next()) {
+            // Product exists in the cart, increment the quantity
+            int quantite = rs.getInt("quantite_product");
+            String updateReq = "UPDATE panier SET quantite_product = ? WHERE id_client = ? AND id_product = ?";
+            PreparedStatement updatePs = conn.prepareStatement(updateReq);
+            updatePs.setInt(1, quantite + 1);
+            updatePs.setInt(2, p1.getId_client());
+            updatePs.setInt(3, id_product);
+            updatePs.executeUpdate();
+            System.out.println("Product quantity incremented in the cart!");
+        } else {
+            // Product does not exist in the cart, add the product with quantity 1
+            String insertReq = "INSERT INTO panier (id_client, id_product, quantite_product) VALUES (?, ?, 1)";
+            PreparedStatement insertPs = conn.prepareStatement(insertReq);
+            insertPs.setInt(1, p1.getId_client());
+            insertPs.setInt(2, id_product);
+            insertPs.executeUpdate();
+            System.out.println("Product added to the cart!");
+        }
+    } catch (SQLException ex) {
+        System.out.println(ex.getMessage());
+    }
+}
+    
+    
+    
+    
+    
+    
+@Override
+    public int getQuantite(int client_id, int product_id) {
+    int quantite = 0;
+    try {
+        String req = "SELECT quantite_product FROM panier WHERE id_client=? AND id_product=?";
+        PreparedStatement ps = conn.prepareStatement(req);
+        ps.setInt(1, client_id);
+        ps.setInt(2, product_id);
+        ResultSet rs = ps.executeQuery();
+        if (rs.next()) {
+            quantite = rs.getInt("quantite_product");
+        }
+        rs.close();
+        ps.close();
+    } catch (SQLException ex) {
+        System.out.println(ex.getMessage());
+    }
+    return quantite;
+}
+    
+    
+    
+    
+@Override
+    public void supprimerproduitpannier(int id_client, int id_product) {
+    try {
+        String req = "DELETE FROM panier WHERE id_client = " + id_client + " AND id_product = " + id_product;
+        Statement st = conn.createStatement();
+        st.executeUpdate(req);
+        System.out.println("Product " + id_product + " deleted from cart of client " + id_client);
+    } catch (SQLException ex) {
+        System.out.println(ex.getMessage());
+    }
+}
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
     
     

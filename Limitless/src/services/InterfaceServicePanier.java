@@ -16,5 +16,8 @@ public interface InterfaceServicePanier {
     public void supprimerPanier(int id_client);
     public panier getpanier (int id_client);
      public void decrementQuantite(panier p1, int id_product);
+     public void incrementQuantite(panier p1, int id_product);
+      public int getQuantite(int client_id, int product_id);
+      public void supprimerproduitpannier(int id_client, int id_product);
     
 }
