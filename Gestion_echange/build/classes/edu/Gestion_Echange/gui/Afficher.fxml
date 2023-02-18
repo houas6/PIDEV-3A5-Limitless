@@ -21,6 +21,7 @@
       <Label layoutX="82.0" layoutY="292.0" text="id_echange" />
       <TextField fx:id="idechangesupp" layoutX="159.0" layoutY="288.0" />
       <Button fx:id="fxsupprimerechangeback" layoutX="348.0" layoutY="288.0" mnemonicParsing="false" onAction="#supprimerechange" text="supprimer" />
-      <Button fx:id="fxrefreshsupp" layoutX="471.0" layoutY="288.0" mnemonicParsing="false" onMouseClicked="#refreshechanges" text="refresh" />
+      <Button fx:id="modifierfx" layoutX="385.0" layoutY="14.0" mnemonicParsing="false" onMouseClicked="#modiferfx" prefHeight="26.0" prefWidth="124.0" text="modifier" />
+      <Button fx:id="redajout" layoutX="523.0" layoutY="14.0" mnemonicParsing="false" onMouseClicked="#redajout" prefHeight="26.0" prefWidth="150.0" text="ajouter" />
    </children>
 </AnchorPane>

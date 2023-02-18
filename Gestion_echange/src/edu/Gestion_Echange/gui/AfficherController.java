@@ -57,8 +57,11 @@ public class AfficherController implements Initializable {
     private Button fxsupprimerechangeback;
     @FXML
     private TextField idechangesupp;
-    @FXML
     private Button fxrefreshsupp;
+    @FXML
+    private Button modifierfx;
+    @FXML
+    private Button redajout;
     
    
 
@@ -97,13 +100,13 @@ public class AfficherController implements Initializable {
         Optional<ButtonType> btn = alert.showAndWait();
         if(btn.get() == ButtonType.OK){
             ce.supprimerechange(id_echange);
-    }
-    }
-
-    @FXML
-    private void refreshechanges(MouseEvent event) {
+            
         this.redirectToListEchangerefresh();
     }
+  
+    }
+
+  
     private void redirectToListEchangerefresh(){
         Parent root;
         try { 
@@ -115,5 +118,40 @@ public class AfficherController implements Initializable {
             Logger.getLogger(AfficherController.class.getName()).log(Level.SEVERE, null, ex);
         }
         
+    }
+private void redirectToupdateechange(){
+      Parent root;
+    try {
+            root = FXMLLoader.load(getClass().getResource("modifierechange.fxml"));
+            Scene c=new Scene(root);
+            Stage stage=(Stage)modifierfx.getScene().getWindow();
+            stage.setScene(c);
+        } catch (IOException ex) {
+            Logger.getLogger(AfficherController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+       
+        
+    }
+private void redirectToaddechange(){
+      Parent root;
+    try {
+            root = FXMLLoader.load(getClass().getResource("ajoutere.fxml"));
+            Scene c=new Scene(root);
+            Stage stage=(Stage)modifierfx.getScene().getWindow();
+            stage.setScene(c);
+        } catch (IOException ex) {
+            Logger.getLogger(AfficherController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+       
+        
+    }
+    @FXML
+    private void modiferfx(MouseEvent event) {
+        this.redirectToupdateechange();
+    }
+
+    @FXML
+    private void redajout(MouseEvent event) {
+        this.redirectToaddechange();
     }
 }

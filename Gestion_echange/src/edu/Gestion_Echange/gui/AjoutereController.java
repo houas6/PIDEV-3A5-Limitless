@@ -42,8 +42,8 @@ public class AjoutereController implements Initializable {
     @FXML
     private Button fxajout;
     @FXML
-    private Button afficherliste;
-
+    private Button rliste;
+   
     /**
      * Initializes the controller class.
      */
@@ -55,26 +55,29 @@ public class AjoutereController implements Initializable {
     @FXML
     private void addperson(ActionEvent event) {
         
-       
-        int produit_echange= Integer.parseInt(fxproduitechange.getText());
+        if(!fxproduitechange.getText().equals("") && !fxproduitoffert.getText().equals("")  && !fxproduitoffert.getText().equals("") && !fxcommentaire.getText().equals("")  ){
+       CRUDEchange ce = new CRUDEchange();
+            int produit_echange= Integer.parseInt(fxproduitechange.getText());
         int produit_offert= Integer.parseInt(fxproduitoffert.getText());
         String statut=fxstatut.getText();
         String commentaire=fxcommentaire.getText();
         Echanges e1= new Echanges(produit_echange,produit_offert,statut,commentaire);
-        CRUDEchange ce = new CRUDEchange();
+        
         ce.ajouterechange(e1);
        
         
         
-       Alert alert = new Alert(Alert.AlertType.INFORMATION);
-
-alert.setTitle("Information Dialog");
-
-alert.setHeaderText(null);
-
-alert.setContentText("demande dechange  effectue avec succés!");
-
-alert.show();
+      Alert alert = new Alert(Alert.AlertType.INFORMATION);
+    alert.setTitle("Success");
+    alert.setContentText("ajout!");
+    alert.show();
+        this.redirectToList();}
+   else{
+       Alert alert = new Alert(Alert.AlertType.ERROR);
+    alert.setTitle("ERROR");
+    alert.setContentText("Verifier les champs!");
+    alert.show();
+   }
 
     }
         private void redirectToList(){
@@ -83,7 +86,7 @@ alert.show();
             
             root = FXMLLoader.load(getClass().getResource("Afficher.fxml"));
             Scene c=new Scene(root);
-             Stage stage=(Stage)afficherliste.getScene().getWindow();
+             Stage stage=(Stage)fxajout.getScene().getWindow();
             stage.setScene(c);
         } catch (IOException ex) {
             Logger.getLogger(AjoutereController.class.getName()).log(Level.SEVERE, null, ex);
@@ -91,10 +94,11 @@ alert.show();
     }
 
     @FXML
-    private void afficherlisteechange(MouseEvent event) {
+    private void rlist(MouseEvent event) {
         this.redirectToList();
     }
 
+   
    
     
 }
