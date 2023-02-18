@@ -17,5 +17,6 @@ public interface InterfaceServices  {
     public void ajouterechange2 (Echanges e);
     public void modifierechange(Echanges e);
     public void supprimerechange(int id);
+    public int getIdechange (int n );
     public List<Echanges> afficherechange();
 }

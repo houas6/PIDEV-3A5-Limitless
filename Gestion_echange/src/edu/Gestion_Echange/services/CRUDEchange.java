@@ -8,6 +8,7 @@ package edu.Gestion_Echange.services;
 import edu.Gestion_Echange.entites.Echanges;
 import edu.Gestion_Echange.utils.MyConnection;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -80,5 +81,23 @@ Connection conn = MyConnection.getInstance().getConnection();
     }
    return ech;
     }
-    
+   public int getIdechange (int n ){
+    int t=0 ;
+    try {   
+            String requete = "select * from echanges where ?= id_echange";
+            PreparedStatement pst = conn.prepareStatement(requete);
+            pst.setInt(1, n);
+            ResultSet e = pst.executeQuery();
+            while(e.next()){
+            Echanges pre = new Echanges();
+           
+            pre.setId_echange(e.getInt("id_echange"));
+            t=pre.getId_echange();   }
+
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+   
+return t ;
+   } 
 }

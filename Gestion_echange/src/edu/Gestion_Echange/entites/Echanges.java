@@ -28,6 +28,9 @@ public class Echanges {
         this.commentaire = commentaire;
     }
 
+    public Echanges() {
+    }
+
     @Override
     public String toString() {
         return "Echanges{" + "id_echange=" + id_echange + ", produit_echange=" + produit_echange + ", produit_offert=" + produit_offert + ", statut=" + statut + ", commentaire=" + commentaire + '}';

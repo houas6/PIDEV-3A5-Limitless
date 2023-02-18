@@ -8,15 +8,29 @@ package edu.Gestion_Echange.gui;
 import edu.Gestion_Echange.entites.Echanges;
 import edu.Gestion_Echange.services.CRUDEchange;
 import edu.Gestion_Echange.utils.EchangesHolder;
+import java.io.IOException;
 import java.net.URL;
+import java.util.Optional;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
+import javafx.stage.Stage;
 
 /**
  * FXML Controller class
@@ -39,6 +53,12 @@ public class AfficherController implements Initializable {
     private TableColumn<Echanges, String> commentaire;
     private CRUDEchange ce=new CRUDEchange();
     Echanges e;
+    @FXML
+    private Button fxsupprimerechangeback;
+    @FXML
+    private TextField idechangesupp;
+    @FXML
+    private Button fxrefreshsupp;
     
    
 
@@ -59,12 +79,41 @@ public class AfficherController implements Initializable {
              for (Echanges c : ce.afficherechange()) {
             table.getItems().add(c);
         }
-            //Candidature cand = new Candidature(c.getNom(),c.getPrenom(),c.getCurriculumVitae(),c.getEtat(),c.getScore(),cp);
-            
-         //   Echanges e1 =new Echanges(e.getId_echange(),e.getProduit_echange(),e.getProduit_offert(),e.getStatut(),e.getCommentaire());
-         //   table.getItems().add(e1);
-            //System.out.println(c.toString());
+           
         
     }    
-    
+
+    @FXML
+    private void supprimerechange(ActionEvent event) {
+      CRUDEchange cee=new CRUDEchange();
+       Echanges ee= new Echanges();
+        int id_echange = cee.getIdechange(Integer.parseInt(idechangesupp.getText())) ;
+        ee.setId_echange(id_echange);
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Confirmation");
+        alert.setHeaderText("Confirmation de Suppression !");
+        alert.setContentText("Voulez-Vous Vraiment Supprimer");
+       
+        Optional<ButtonType> btn = alert.showAndWait();
+        if(btn.get() == ButtonType.OK){
+            ce.supprimerechange(id_echange);
+    }
+    }
+
+    @FXML
+    private void refreshechanges(MouseEvent event) {
+        this.redirectToListEchangerefresh();
+    }
+    private void redirectToListEchangerefresh(){
+        Parent root;
+        try { 
+            root = FXMLLoader.load(getClass().getResource("Afficher.fxml"));
+            Scene c=new Scene(root);
+            Stage stage=(Stage)fxrefreshsupp.getScene().getWindow();
+            stage.setScene(c);
+        } catch (IOException ex) {
+            Logger.getLogger(AfficherController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }
 }

@@ -21,6 +21,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
 /**
@@ -40,6 +41,8 @@ public class AjoutereController implements Initializable {
     private TextArea fxcommentaire;
     @FXML
     private Button fxajout;
+    @FXML
+    private Button afficherliste;
 
     /**
      * Initializes the controller class.
@@ -75,13 +78,23 @@ alert.show();
 
     }
         private void redirectToList(){
-        try {
             Parent root;
-            root = FXMLLoader.load(getClass().getResource("/masterhrdesktopv2/views/recrutement/Candidat.fxml"));
+            try {
+            
+            root = FXMLLoader.load(getClass().getResource("Afficher.fxml"));
             Scene c=new Scene(root);
+             Stage stage=(Stage)afficherliste.getScene().getWindow();
+            stage.setScene(c);
         } catch (IOException ex) {
             Logger.getLogger(AjoutereController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+
+    @FXML
+    private void afficherlisteechange(MouseEvent event) {
+        this.redirectToList();
+    }
+
+   
     
 }

@@ -6,8 +6,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Text?>
 
-
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/19" fx:controller="edu.Gestion_Echange.gui.AjoutereController">
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.Gestion_Echange.gui.AjoutereController">
    <children>
       <Text fill="#c20000" layoutX="228.0" layoutY="52.0" strokeType="OUTSIDE" strokeWidth="0.0" text="demande d'echange " />
       <Text layoutX="42.0" layoutY="122.0" strokeType="OUTSIDE" strokeWidth="0.0" text="produit à echanger " />
@@ -19,5 +18,6 @@
       <TextField fx:id="fxstatut" editable="false" layoutX="190.0" layoutY="196.0" text="en cours" />
       <TextArea fx:id="fxcommentaire" layoutX="192.0" layoutY="245.0" prefHeight="114.0" prefWidth="238.0" />
       <Button fx:id="fxajout" layoutX="424.0" layoutY="158.0" mnemonicParsing="false" onAction="#addperson" text="demander l'echange" />
+      <Button fx:id="afficherliste" layoutX="474.0" layoutY="209.0" mnemonicParsing="false" onMouseClicked="#afficherlisteechange" text="afficher" />
    </children>
 </AnchorPane>
