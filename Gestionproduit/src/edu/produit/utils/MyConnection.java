@@ -11,7 +11,7 @@ import java.util.logging.Logger;
 
 public class MyConnection {
   private  Connection  conn;
-   String url = "jdbc:mysql://localhost:3306/esprit";
+   String url = "jdbc:mysql://localhost:3306/limitless";
    String user = "root";
    String pwd = "";
    private static MyConnection instance;

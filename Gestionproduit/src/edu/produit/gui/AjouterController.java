@@ -67,6 +67,10 @@ public class AjouterController implements Initializable {
     Produit P;
     @FXML
     private Button refreshlisteproduit;
+    @FXML
+    private TableColumn<Produit, Integer> fxxiduser;
+    @FXML
+    private TextField fxiduser;
     
     
     /*public void setID_produit(String message)
@@ -96,6 +100,7 @@ public class AjouterController implements Initializable {
         fxxnomproduit.setCellValueFactory(new PropertyValueFactory<>("nom_produit"));
         fxxprix.setCellValueFactory(new PropertyValueFactory<>("prix"));
         fxxdescription.setCellValueFactory(new PropertyValueFactory<>("description"));
+         fxxiduser.setCellValueFactory(new PropertyValueFactory<>("id_user"));
         
              for (Produit Pe : cr.afficherproduit()) {
             table_produit.getItems().add(Pe);
@@ -109,7 +114,8 @@ public class AjouterController implements Initializable {
         String nom_produit=fxnomproduit.getText();
         float prix= Float.parseFloat(fxprix.getText());
         String description= fxdescription.getText();
-        Produit p1 = new Produit(nom_produit,prix,description);
+        int id_user= Integer.parseInt(fxiduser.getText());
+        Produit p1 = new Produit(nom_produit,prix,description,id_user);
         CRUDProduit cr = new CRUDProduit();
         cr.ajouterproduit(p1);
          Alert alert = new Alert(Alert.AlertType.INFORMATION);

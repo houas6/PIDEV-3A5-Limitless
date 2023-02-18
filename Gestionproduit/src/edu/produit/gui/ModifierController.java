@@ -32,6 +32,8 @@ public class ModifierController implements Initializable {
     private Button modifier;
     @FXML
     private TextField fxidproduit1;
+    @FXML
+    private TextField fxiduser1;
 
     /**
      * Initializes the controller class.
@@ -46,7 +48,7 @@ public class ModifierController implements Initializable {
         CRUDProduit cr = new CRUDProduit(); 
            int id_produit = cr.getid(Integer.parseInt(fxidproduit1.getText())) ;  
             
-        Produit p = new Produit( id_produit, fxnomproduit1.getText(),Integer.parseInt(fxprix1.getText()),  fxdescription1.getText());
+        Produit p = new Produit( id_produit, fxnomproduit1.getText(),Integer.parseInt(fxprix1.getText()),  fxdescription1.getText(),Integer.parseInt(fxiduser1.getText()));
         
 
         cr.modifierproduit(p);
@@ -54,6 +56,7 @@ public class ModifierController implements Initializable {
         fxnomproduit1.clear(); 
          fxprix1.clear() ; 
          fxdescription1.clear(); 
+         fxiduser1.clear();
          
         
         

@@ -16,6 +16,30 @@ public class Produit {
     String nom_produit;
     float prix;
     String description;
+    int id_user;
+
+    public void setId_user(int id_user) {
+        this.id_user = id_user;
+    }
+
+    public int getId_user() {
+        return id_user;
+    }
+
+    public Produit(String nom_produit, float prix, String description, int id_user) {
+        this.nom_produit = nom_produit;
+        this.prix = prix;
+        this.description = description;
+        this.id_user = id_user;
+    }
+
+    public Produit(int id_produit, String nom_produit, float prix, String description, int id_user) {
+        this.id_produit = id_produit;
+        this.nom_produit = nom_produit;
+        this.prix = prix;
+        this.description = description;
+        this.id_user = id_user;
+    }
 
     public Produit() {
     }

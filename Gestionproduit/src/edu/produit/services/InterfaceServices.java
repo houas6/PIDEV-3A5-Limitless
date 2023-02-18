@@ -13,8 +13,8 @@ import java.util.List;
  * @author USER
  */
 public interface InterfaceServices {
-    public void ajouterproduit(Produit p);
-    public void ajouterproduit2 (Produit p);
+    
+    public void ajouterproduit (Produit p);
     public void modifierproduit(Produit p);
     public void supprimerproduit(int id_produit);
     public List<Produit> afficherproduit();

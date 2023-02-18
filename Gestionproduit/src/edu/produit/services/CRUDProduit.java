@@ -24,7 +24,7 @@ public class CRUDProduit implements InterfaceServices{
     Connection conn = MyConnection.getInstance().getConnection();
     
     
-    public void ajouterproduit(Produit p) {
+    /*public void ajouterproduit(Produit p) {
         try {
         ste = conn.createStatement();
         String req = "Insert into produit values(0,'"+p.getNom_produit()+"','"+p.getPrix()+"','"+p.getDescription()+"')";
@@ -32,14 +32,14 @@ public class CRUDProduit implements InterfaceServices{
         System.out.println("Produit ajouté");
     } catch (SQLException ex) {
             System.out.println("Produit non ajouté!!!!");    }
-    }
+    }*/
 
     
-    public void ajouterproduit2(Produit p) {
+    public void ajouterproduit(Produit p) {
        try {
-            String req = "INSERT INTO `produit` (`nom_produit`, `prix`,`description`) VALUES (?,?,?)";
+            String req = "INSERT INTO `produit` (`nom_produit`, `prix`,`description`,`id_user`) VALUES (?,?,?,?)";
             PreparedStatement ps = conn.prepareStatement(req);
-            
+            ps.setInt(4, p.getId_user());
             ps.setString(3, p.getDescription());
             ps.setFloat(2, p.getPrix());
             ps.setString(1, p.getNom_produit());
@@ -52,7 +52,7 @@ public class CRUDProduit implements InterfaceServices{
     
     public void modifierproduit(Produit p) {
        try {
-            String req = "UPDATE `produit` SET `nom_produit` = '"+ p.getNom_produit()+ "',`prix` = '" +p.getPrix()+ "',`description`='"+p.getDescription()+"' WHERE `produit`.`id_produit` = " + p.getId_produit();
+            String req = "UPDATE `produit` SET `nom_produit` = '"+ p.getNom_produit()+ "',`prix` = '" +p.getPrix()+ "',`description`='"+p.getDescription()+"',`id_user`='"+p.getId_user()+"' WHERE `produit`.`id_produit` = " + p.getId_produit();
             Statement st = conn.createStatement();
             st.executeUpdate(req);
             System.out.println("Produit updated !");
@@ -82,7 +82,7 @@ public class CRUDProduit implements InterfaceServices{
         ResultSet result = ste.executeQuery(req);
         
         while (result.next()) {
-            Produit resultProduit = new Produit(result.getInt("id_produit"), result.getString("nom_produit"),result.getFloat("prix"),result.getString("description"));
+            Produit resultProduit = new Produit(result.getInt("id_produit"), result.getString("nom_produit"),result.getFloat("prix"),result.getString("description"),result.getInt("id_user"));
             prod.add(resultProduit);
         }
         System.out.println(prod);
