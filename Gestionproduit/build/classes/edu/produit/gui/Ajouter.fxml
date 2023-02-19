@@ -28,8 +28,8 @@
             <TableColumn fx:id="fxxnomproduit" prefWidth="135.19998931884766" text="Nom Produit" />
             <TableColumn fx:id="fxxprix" prefWidth="85.5999755859375" text="Prix" />
             <TableColumn fx:id="fxxdescription" prefWidth="111.20001220703125" text="Description" />
-            <TableColumn fx:id="fxxiduser" prefWidth="142.39993286132812" text="Id user" />
-            <TableColumn fx:id="fxximage1" prefWidth="200.79998779296875" text="Image" />
+            <TableColumn fx:id="fxxiduser" prefWidth="97.59994506835938" text="Id user" />
+            <TableColumn fx:id="fxximage1" prefWidth="245.5999755859375" text="Image" />
          </columns>
       </TableView>
       <Button fx:id="modifier" layoutX="238.0" layoutY="284.0" mnemonicParsing="false" onMouseClicked="#modifierproduit" text="Modifier" />
