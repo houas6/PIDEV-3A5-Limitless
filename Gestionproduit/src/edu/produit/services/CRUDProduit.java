@@ -37,8 +37,9 @@ public class CRUDProduit implements InterfaceServices{
     
     public void ajouterproduit(Produit p) {
        try {
-            String req = "INSERT INTO `produit` (`nom_produit`, `prix`,`description`,`id_user`) VALUES (?,?,?,?)";
+            String req = "INSERT INTO `produit` (`nom_produit`, `prix`,`description`,`id_user`,`image`) VALUES (?,?,?,?,?)";
             PreparedStatement ps = conn.prepareStatement(req);
+            ps.setBytes(5, p.getImage());
             ps.setInt(4, p.getId_user());
             ps.setString(3, p.getDescription());
             ps.setFloat(2, p.getPrix());
@@ -82,7 +83,7 @@ public class CRUDProduit implements InterfaceServices{
         ResultSet result = ste.executeQuery(req);
         
         while (result.next()) {
-            Produit resultProduit = new Produit(result.getInt("id_produit"), result.getString("nom_produit"),result.getFloat("prix"),result.getString("description"),result.getInt("id_user"));
+            Produit resultProduit = new Produit(result.getInt("id_produit"), result.getString("nom_produit"),result.getFloat("prix"),result.getString("description"),result.getInt("id_user"),result.getBytes("image"));
             prod.add(resultProduit);
         }
         System.out.println(prod);

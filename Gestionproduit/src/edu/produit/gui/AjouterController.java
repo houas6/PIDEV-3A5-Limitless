@@ -7,8 +7,10 @@ package edu.produit.gui;
 
 import edu.produit.entites.Produit;
 import edu.produit.services.CRUDProduit;
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.nio.file.Files;
 import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -28,7 +30,10 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 //import org.controlsfx.control.Notifications;
 
@@ -71,6 +76,12 @@ public class AjouterController implements Initializable {
     private TableColumn<Produit, Integer> fxxiduser;
     @FXML
     private TextField fxiduser;
+    @FXML
+    private ImageView fximage;
+    @FXML
+    private Button chooseimage;
+    @FXML
+    private TableColumn<Produit, Byte> fxximage1;
     
     
     /*public void setID_produit(String message)
@@ -101,6 +112,7 @@ public class AjouterController implements Initializable {
         fxxprix.setCellValueFactory(new PropertyValueFactory<>("prix"));
         fxxdescription.setCellValueFactory(new PropertyValueFactory<>("description"));
          fxxiduser.setCellValueFactory(new PropertyValueFactory<>("id_user"));
+         fxximage1.setCellValueFactory(new PropertyValueFactory<>("image"));
         
              for (Produit Pe : cr.afficherproduit()) {
             table_produit.getItems().add(Pe);
@@ -109,7 +121,7 @@ public class AjouterController implements Initializable {
     
     
     
-    @FXML
+    /*@FXML
     private void Ajouterproduit(ActionEvent event) {
     String nom_produit=fxnomproduit.getText();
     String prixStr = fxprix.getText();
@@ -162,8 +174,80 @@ public class AjouterController implements Initializable {
                 alert.showAndWait();
             }
         }
-}
+}*/
+@FXML
+private void Ajouterproduit(ActionEvent event) {
+    String nom_produit=fxnomproduit.getText();
+    String prixStr = fxprix.getText();
+    String description= fxdescription.getText();
+    String id_userStr = fxiduser.getText();
 
+    if (nom_produit.isEmpty()) {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setContentText("Nom produit doit etre saisi");
+        alert.setTitle("Probleme");
+        alert.setHeaderText(null);
+        alert.showAndWait();
+    } else if (prixStr.isEmpty()) {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setContentText("Prix doit etre saisi");
+        alert.setTitle("Probleme");
+        alert.setHeaderText(null);
+        alert.showAndWait();
+    } else if (description.isEmpty()) {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setContentText("Description doit etre saisi");
+        alert.setTitle("Probleme");
+        alert.setHeaderText(null);
+        alert.showAndWait();
+    } else if (id_userStr.isEmpty()) {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setContentText("ID utilisateur doit etre saisi");
+        alert.setTitle("Probleme");
+        alert.setHeaderText(null);
+        alert.showAndWait();
+    } else {
+        try {
+            float prix = Float.parseFloat(prixStr);
+            int id_user = Integer.parseInt(id_userStr);
+
+            // Open a file chooser to let the user select an image file
+            FileChooser fileChooser = new FileChooser();
+            fileChooser.setTitle("Choisir une image");
+            fileChooser.getExtensionFilters().addAll(
+                new FileChooser.ExtensionFilter("Images", "*.png", "*.jpg", "*.gif")
+            );
+            File selectedFile = fileChooser.showOpenDialog(null);
+
+            if (selectedFile != null) {
+                // Read the bytes of the selected image file
+                byte[] imageBytes = Files.readAllBytes(selectedFile.toPath());
+
+                Produit p1 = new Produit(nom_produit, prix, description, id_user, imageBytes);
+                CRUDProduit cr = new CRUDProduit();
+                cr.ajouterproduit(p1);
+
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Information Dialog");
+                alert.setHeaderText(null);
+                alert.setContentText("Produit inséré avec succès!");
+                alert.showAndWait();
+            }
+        } catch (NumberFormatException e) {
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setContentText("Prix et ID utilisateur doivent etre des nombres");
+            alert.setTitle("Probleme");
+            alert.setHeaderText(null);
+            alert.showAndWait();
+        } catch (IOException e) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Erreur");
+            alert.setHeaderText(null);
+            alert.setContentText("Erreur lors de la lecture de l'image sélectionnée");
+            alert.showAndWait();
+        }
+    }
+}
         
     
     public void start (){
@@ -234,6 +318,20 @@ public class AjouterController implements Initializable {
     @FXML
     private void refresh(MouseEvent event) {
         this.redirectToPage2();
+    }
+
+    
+
+    @FXML
+    private void chooseimage(ActionEvent event) {
+        FileChooser fileChooser = new FileChooser();
+    fileChooser.getExtensionFilters().addAll(
+        new FileChooser.ExtensionFilter("Image Files", "*.png", "*.jpg", "*.gif"));
+    File selectedFile = fileChooser.showOpenDialog(null);
+    if (selectedFile != null) {
+        Image image = new Image(selectedFile.toURI().toString());
+        fximage.setImage(image);
+    }
     }
 }
    

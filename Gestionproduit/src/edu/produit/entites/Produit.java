@@ -17,6 +17,32 @@ public class Produit {
     float prix;
     String description;
     int id_user;
+    byte[] image;
+
+    public void setImage(byte[] image) {
+        this.image = image;
+    }
+
+    public byte[] getImage() {
+        return image;
+    }
+
+    public Produit(String nom_produit, float prix, String description, int id_user, byte[] image) {
+        this.nom_produit = nom_produit;
+        this.prix = prix;
+        this.description = description;
+        this.id_user = id_user;
+        this.image = image;
+    }
+
+    public Produit(int id_produit, String nom_produit, float prix, String description, int id_user, byte[] image) {
+        this.id_produit = id_produit;
+        this.nom_produit = nom_produit;
+        this.prix = prix;
+        this.description = description;
+        this.id_user = id_user;
+        this.image = image;
+    }
 
     public void setId_user(int id_user) {
         this.id_user = id_user;
