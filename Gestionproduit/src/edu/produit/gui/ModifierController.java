@@ -7,13 +7,22 @@ package edu.produit.gui;
 
 import edu.produit.entites.Produit;
 import edu.produit.services.CRUDProduit;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
+import javafx.stage.Stage;
 
 /**
  * FXML Controller class
@@ -34,6 +43,8 @@ public class ModifierController implements Initializable {
     private TextField fxidproduit1;
     @FXML
     private TextField fxiduser1;
+    @FXML
+    private Button retour;
 
     /**
      * Initializes the controller class.
@@ -60,12 +71,34 @@ public class ModifierController implements Initializable {
          
         
         
-        /*Notifications notificationBuilder = Notifications.create()
-                                                     .title("produit modifier")
-                                                     .graphic(null)
-                                                     .hideAfter(javafx.util.Duration.seconds(5) )
-                                                      .position(Pos.TOP_LEFT) ;
-         notificationBuilder.show(); */
+       Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Information Dialog");
+            alert.setHeaderText(null);
+            alert.setContentText("Produit modifier avec succès!");
+            alert.showAndWait();
+    } 
+
+        
+    
+    private void redirectToPage3(){
+            Parent root;
+            try {
+            
+            
+           
+            root = FXMLLoader.load(getClass().getResource("Ajouter.fxml"));
+            Scene c=new Scene(root);
+            Stage stage=(Stage)retour.getScene().getWindow();
+            stage.setScene(c);
+        } catch (IOException ex) {
+            Logger.getLogger(AjouterController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+          
+    }
+    @FXML
+    private void retour(MouseEvent event) {
+        this.redirectToPage3();
     }
     
 }

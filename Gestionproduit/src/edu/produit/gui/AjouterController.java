@@ -111,22 +111,59 @@ public class AjouterController implements Initializable {
     
     @FXML
     private void Ajouterproduit(ActionEvent event) {
-        String nom_produit=fxnomproduit.getText();
-        float prix= Float.parseFloat(fxprix.getText());
-        String description= fxdescription.getText();
-        int id_user= Integer.parseInt(fxiduser.getText());
-        Produit p1 = new Produit(nom_produit,prix,description,id_user);
-        CRUDProduit cr = new CRUDProduit();
-        cr.ajouterproduit(p1);
-         Alert alert = new Alert(Alert.AlertType.INFORMATION);
+    String nom_produit=fxnomproduit.getText();
+    String prixStr = fxprix.getText();
+    String description= fxdescription.getText();
+    String id_userStr = fxiduser.getText();
 
-        alert.setTitle("Information Dialog");
+        if (nom_produit.isEmpty()) {
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setContentText("Nom produit doit etre saisi");
+            alert.setTitle("Probleme");
+            alert.setHeaderText(null);
+            alert.showAndWait();
+        } else if (prixStr.isEmpty()) {
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setContentText("Prix doit etre saisi");
+            alert.setTitle("Probleme");
+            alert.setHeaderText(null);
+            alert.showAndWait();
+        } else if (description.isEmpty()) {
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setContentText("Description doit etre saisi");
+            alert.setTitle("Probleme");
+            alert.setHeaderText(null);
+            alert.showAndWait();
+        } else if (id_userStr.isEmpty()) {
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setContentText("ID utilisateur doit etre saisi");
+            alert.setTitle("Probleme");
+            alert.setHeaderText(null);
+            alert.showAndWait();
+        } else {
+            try {
+                float prix = Float.parseFloat(prixStr);
+                int id_user = Integer.parseInt(id_userStr);
 
-        alert.setHeaderText(null);
+                Produit p1 = new Produit(nom_produit, prix, description, id_user);
+                CRUDProduit cr = new CRUDProduit();
+                cr.ajouterproduit(p1);
 
-        alert.setContentText("Produit insérée avec succés!");
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Information Dialog");
+                alert.setHeaderText(null);
+                alert.setContentText("Produit inséré avec succès!");
+                alert.showAndWait();
+            } catch (NumberFormatException e) {
+                Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                alert.setContentText("Prix et ID utilisateur doivent etre des nombres");
+                alert.setTitle("Probleme");
+                alert.setHeaderText(null);
+                alert.showAndWait();
+            }
+        }
+}
 
-        alert.show();}
         
     
     public void start (){
