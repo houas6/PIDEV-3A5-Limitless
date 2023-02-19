@@ -5,6 +5,7 @@
  */
 package conexionbd.services;
 
+import conexionbd.services.implementations.IUtilisateur;
 import Entities.Utilisateur;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -20,11 +21,12 @@ import joksova.utils.MyConnection;
  *
  * @author hasse
  */
-public class CRUDUtilisateur {
+public class CRUDUtilisateur implements IUtilisateur {
 
     public CRUDUtilisateur() {
     }
 
+    @Override
     public void ajouterUtilisateur() {
 
         try {
@@ -37,6 +39,7 @@ public class CRUDUtilisateur {
         }
     }
     
+    @Override
     public void ajouterUtilisateur2(Utilisateur u) {
 
         try {
@@ -52,7 +55,34 @@ public class CRUDUtilisateur {
         }
     }
 
-    public List<Utilisateur> afficherUtilsateur() {
+    
+    @Override
+    public void supprimerUtilisateur(int id) {
+        try {
+            String requete4 = "DELETE FROM Utilisateur where id_user="+id;
+            Statement st3=new MyConnection().getCnx().createStatement();
+            st3.executeUpdate(requete4);
+            System.out.println("Utilisateur supprimé");
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+    }
+    
+    @Override
+    public void modifierUtilisateur (int id, String nom, String mdp, String mail)
+    {
+        try {
+            String Requete5="UPDATE Utilisateur SET username='"+nom+"',password='"+mdp+"', mail='"+mail+"' where id_user="+id;
+            PreparedStatement st4=new MyConnection().getCnx().prepareStatement(Requete5);
+            st4.executeUpdate();
+            System.out.println("Utilisateur modifié");
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());;
+        }
+    }
+
+    @Override
+    public List<Utilisateur> afficherUtilisateur() {
         List<Utilisateur> users = new ArrayList<>();
         try {
             
@@ -73,26 +103,6 @@ public class CRUDUtilisateur {
 return users;
     }
     
-    public void supprimerUtilisateur(int id) {
-        try {
-            String requete4 = "DELETE FROM Utilisateur where id_user="+id;
-            Statement st3=new MyConnection().getCnx().createStatement();
-            st3.executeUpdate(requete4);
-            System.out.println("Utilisateur supprimé");
-        } catch (SQLException ex) {
-            System.out.println(ex.getMessage());
-        }
-    }
-    
-    public void modifierUtilisateur (int id, String nom, String mdp, String mail)
-    {
-        try {
-            String Requete5="UPDATE Utilisateur SET username='"+nom+"',password='"+mdp+"', mail='"+mail+"' where id_user="+id;
-            PreparedStatement st4=new MyConnection().getCnx().prepareStatement(Requete5);
-            st4.executeUpdate();
-            System.out.println("Utilisateur modifié");
-        } catch (SQLException ex) {
-            System.out.println(ex.getMessage());;
-        }
-    }
+   
+
 }

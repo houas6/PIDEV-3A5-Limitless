@@ -23,8 +23,10 @@ public class Auth {
         Utilisateur user = Utilisateur.getUserByEmail(email);
         if (user != null && user.getPassword().equals(password)) {
             currentUtilisateur = user;
+            System.out.println("Utilisateur Connecte");
             return true;
         } else {
+            System.out.println("Utilisateur NonConnecte");
             return false;
         }
     }

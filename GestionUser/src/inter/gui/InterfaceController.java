@@ -27,9 +27,9 @@ import javafx.scene.control.TextField;
 public class InterfaceController implements Initializable {
 
     @FXML
-    private TextField fxnom;
+    private TextField fxusername;
     @FXML
-    private TextField fxprenom;
+    private TextField fxpassword;
 
     /**
      * Initializes the controller class.
@@ -42,8 +42,8 @@ public class InterfaceController implements Initializable {
     @FXML
     private void addperson(ActionEvent event) {
         try {
-            String nom=fxnom.getText();
-            String prenom=fxprenom.getText();
+            String nom=fxusername.getText();
+            String prenom=fxpassword.getText();
             Utilisateur u1 =new Utilisateur(nom,prenom,"dhiaafaf@gmail.com");
             CRUDUtilisateur cuser=new CRUDUtilisateur();
             cuser.ajouterUtilisateur2(u1);
@@ -52,9 +52,9 @@ public class InterfaceController implements Initializable {
             DetailController dt = loader.getController();
             dt.setNom(u1.getUsername());
             dt.setPrenom(u1.getPassword());
-            fxnom.getScene().setRoot(root);
+            fxpassword.getScene().setRoot(root);
         } catch (IOException ex) {
-            System.out.println(ex.getMessage());;
+            System.out.println(ex.getMessage());
         }
     }
     

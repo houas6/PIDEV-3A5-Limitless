@@ -31,6 +31,13 @@ public class Utilisateur {
     public Utilisateur() {
     }
 
+    public Utilisateur(String mail, String password ) {
+        this.mail = mail;
+        this.password = password;
+        
+    }
+    
+    
     public Utilisateur(String username, String password, String mail) {
         this.username = username;
         this.password = password;
@@ -137,7 +144,7 @@ public class Utilisateur {
         Utilisateur user = null;
         try {
             conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/esprit", "root", "");
-            stmt = conn.prepareStatement("SELECT * FROM users WHERE id = ?");
+            stmt = conn.prepareStatement("SELECT * FROM utilisateur WHERE id_user = ?");
             stmt.setInt(1, id);
             rs = stmt.executeQuery();
             if (rs.next()) {
@@ -156,7 +163,7 @@ public class Utilisateur {
         Utilisateur user = null;
         try {
             conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/esprit", "root", "");
-            stmt = conn.prepareStatement("SELECT * FROM users WHERE email = ?");
+            stmt = conn.prepareStatement("SELECT * FROM utilisateur WHERE mail = ?");
             stmt.setString(1, email);
             rs = stmt.executeQuery();
             if (rs.next()) {
