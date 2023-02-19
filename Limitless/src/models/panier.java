@@ -14,8 +14,8 @@ import java.util.Objects;
  */
 public class panier {
    
-    private int id_client;
- private ArrayList<product> products;
+    private int id_user;
+ private ArrayList<produit> products;
     private double total_panier;
     private int quantite=1;
 
@@ -36,43 +36,45 @@ public class panier {
     }
    
 
-    public panier(int id_client) {
+    public panier(int id_user) {
         
-        this.id_client = id_client;
+        this.id_user = id_user;
         this.products = new ArrayList<>();
         
     }
     
-     public void addproduct(product product) {
+     public void addproduct(produit product) {
         products.add(product);
-        total_panier += product.getPrice_product();
+        total_panier += product.getPrix();
     }
     public panier() {
         products = new ArrayList<>();
     }
 
+    public int getId_user() {
+        return id_user;
+    }
+
+    public void setId_user(int id_user) {
+        this.id_user = id_user;
+    }
+
     
 
 
-    public int getId_client() {
-        return id_client;
-    }
+  
 
-    public void setId_client(int id_client) {
-        this.id_client = id_client;
-    }
-
-    public ArrayList<product> getProducts() {
+    public ArrayList<produit> getProducts() {
         return products;
     }
 
-    public void setProducts(ArrayList<product> products) {
+    public void setProducts(ArrayList<produit> products) {
         this.products = products;
     }
 
     @Override
     public String toString() {
-        return "panier{" +  "id_client=" + id_client + ", products=" + products + ", total_panier=" + total_panier + '}';
+        return "panier{" +  "id_client=" + id_user + ", products=" + products + ", total_panier=" + total_panier + '}';
     }
 
    
@@ -82,7 +84,7 @@ public class panier {
     public int hashCode() {
         int hash = 3;
         
-        hash = 71 * hash + this.id_client;
+        hash = 71 * hash + this.id_user;
         hash = 71 * hash + Objects.hashCode(this.products);
        
         return hash;
@@ -101,7 +103,7 @@ public class panier {
         }
         final panier other = (panier) obj;
        
-        if (this.id_client != other.id_client) {
+        if (this.id_user != other.id_user) {
             return false;
         }
         

@@ -37,31 +37,31 @@ Connection conn = MyConnection.getInstance().getConnection();
         }
     }*/
  @Override
-public void ajouterPanier(panier p1, int id_product) {
+public void ajouterPanier(panier p1, int id_produit) {
     try {
-        // Check if the product already exists in the cart
-        String selectReq = "SELECT quantite_product FROM panier WHERE id_client = ? AND id_product = ?";
+        // Check if the produit already exists in the cart
+        String selectReq = "SELECT quantite_product FROM panier WHERE id_user = ? AND id_produit = ?";
         PreparedStatement selectPs = conn.prepareStatement(selectReq);
-        selectPs.setInt(1, p1.getId_client());
-        selectPs.setInt(2, id_product);
+        selectPs.setInt(1, p1.getId_user());
+        selectPs.setInt(2, id_produit);
         ResultSet rs = selectPs.executeQuery();
 
         if (rs.next()) {
             // Product already exists, update the quantity
             int quantite = rs.getInt("quantite_product") + 1;
-            String updateReq = "UPDATE panier SET quantite_product = ? WHERE id_client = ? AND id_product = ?";
+            String updateReq = "UPDATE panier SET quantite_product = ? WHERE id_user = ? AND id_produit = ?";
             PreparedStatement updatePs = conn.prepareStatement(updateReq);
             updatePs.setInt(1, quantite);
-            updatePs.setInt(2, p1.getId_client());
-            updatePs.setInt(3, id_product);
+            updatePs.setInt(2, p1.getId_user());
+            updatePs.setInt(3, id_produit);
             updatePs.executeUpdate();
             System.out.println("Product quantity updated in the cart!");
         } else {
             // Product does not exist, add a new row to the cart
-            String insertReq = "INSERT INTO panier (id_client, id_product, quantite_product) VALUES (?, ?, 1)";
+            String insertReq = "INSERT INTO panier (id_user, id_produit, quantite_product) VALUES (?, ?, 1)";
             PreparedStatement insertPs = conn.prepareStatement(insertReq);
-            insertPs.setInt(1, p1.getId_client());
-            insertPs.setInt(2, id_product);
+            insertPs.setInt(1, p1.getId_user());
+            insertPs.setInt(2, id_produit);
             insertPs.executeUpdate();
             System.out.println("Product added to the cart!");
         }
@@ -72,10 +72,10 @@ public void ajouterPanier(panier p1, int id_product) {
     
 
     @Override
-    public void supprimerPanier(int id_client) {
+    public void supprimerPanier(int id_user) {
        
          try{
-            String req = "DELETE FROM `panier` WHERE id_client = " + id_client;
+            String req = "DELETE FROM `panier` WHERE id_user = " + id_user;
             Statement st = conn.createStatement();
             st.executeUpdate(req);
             System.out.println("panier deleted !");
@@ -87,20 +87,21 @@ public void ajouterPanier(panier p1, int id_product) {
        }
 
     @Override
-    public panier getpanier(int id_client) {
+    public panier getpanier(int id_user) {
       panier panier= new panier();
         ServiceProduct sa = new ServiceProduct();
+        ServicePanier sp = new ServicePanier();
    
          int quantite=1;
           try {
-        String req = "SELECT * FROM `panier` WHERE id_client =  ?";
+        String req = "SELECT * FROM `panier` WHERE id_user =  ?";
         PreparedStatement pste=conn.prepareStatement(req);
-        pste.setInt(1, id_client);
+        pste.setInt(1, id_user);
             
         ResultSet result = pste.executeQuery();
         while(result.next()){
              
-           product resultproduct = sa.getproduct(result.getInt(2));
+           produit resultproduct = sa.getproduct(result.getInt(2));
             quantite= result.getInt(3);
            
       panier.addproduct(resultproduct);
@@ -108,9 +109,9 @@ public void ajouterPanier(panier p1, int id_product) {
     } catch (SQLException ex) {
          System.out.println(ex);   
     }
-          panier.setId_client(id_client);
+          panier.setId_user(id_user);
           panier.setQuantite(quantite);
-         double totalCost = panier.getProducts().stream().mapToDouble(x->x.getPrice_product()* panier.getQuantite()).sum();
+         double totalCost = panier.getProducts().stream().mapToDouble(x->x.getPrix() * sp.getQuantite(id_user, x.getId_produit())).sum();
          panier.setTotal_panier(totalCost);
     return panier;
     }
@@ -118,32 +119,32 @@ public void ajouterPanier(panier p1, int id_product) {
     
     
 @Override
-    public void decrementQuantite(panier p1, int id_product) {
+    public void decrementQuantite(panier p1, int id_produit) {
     try {
-        // Check if the product exists in the cart
-        String selectReq = "SELECT quantite_product FROM panier WHERE id_client = ? AND id_product = ?";
+        // Check if the produit exists in the cart
+        String selectReq = "SELECT quantite_product FROM panier WHERE id_user = ? AND id_produit = ?";
         PreparedStatement selectPs = conn.prepareStatement(selectReq);
-        selectPs.setInt(1, p1.getId_client());
-        selectPs.setInt(2, id_product);
+        selectPs.setInt(1, p1.getId_user());
+        selectPs.setInt(2, id_produit);
         ResultSet rs = selectPs.executeQuery();
 
         if (rs.next()) {
             int quantite = rs.getInt("quantite_product");
             if (quantite > 1) {
                 // Product exists and quantity is more than 1, decrement the quantity
-                String updateReq = "UPDATE panier SET quantite_product = ? WHERE id_client = ? AND id_product = ?";
+                String updateReq = "UPDATE panier SET quantite_product = ? WHERE id_user = ? AND id_produit = ?";
                 PreparedStatement updatePs = conn.prepareStatement(updateReq);
                 updatePs.setInt(1, quantite - 1);
-                updatePs.setInt(2, p1.getId_client());
-                updatePs.setInt(3, id_product);
+                updatePs.setInt(2, p1.getId_user());
+                updatePs.setInt(3, id_produit);
                 updatePs.executeUpdate();
                 System.out.println("Product quantity decremented in the cart!");
             } else {
-                // Product exists but quantity is 1, remove the product from the cart
-                String deleteReq = "DELETE FROM panier WHERE id_client = ? AND id_product = ?";
+                // Product exists but quantity is 1, remove the produit from the cart
+                String deleteReq = "DELETE FROM panier WHERE id_user = ? AND id_produit = ?";
                 PreparedStatement deletePs = conn.prepareStatement(deleteReq);
-                deletePs.setInt(1, p1.getId_client());
-                deletePs.setInt(2, id_product);
+                deletePs.setInt(1, p1.getId_user());
+                deletePs.setInt(2, id_produit);
                 deletePs.executeUpdate();
                 System.out.println("Product removed from the cart!");
             }
@@ -160,31 +161,31 @@ public void ajouterPanier(panier p1, int id_product) {
     
     
 @Override
-    public void incrementQuantite(panier p1, int id_product) {
+    public void incrementQuantite(panier p1, int id_produit) {
     try {
-        // Check if the product exists in the cart
-        String selectReq = "SELECT quantite_product FROM panier WHERE id_client = ? AND id_product = ?";
+        // Check if the produit exists in the cart
+        String selectReq = "SELECT quantite_product FROM panier WHERE id_user = ? AND id_produit = ?";
         PreparedStatement selectPs = conn.prepareStatement(selectReq);
-        selectPs.setInt(1, p1.getId_client());
-        selectPs.setInt(2, id_product);
+        selectPs.setInt(1, p1.getId_user());
+        selectPs.setInt(2, id_produit);
         ResultSet rs = selectPs.executeQuery();
 
         if (rs.next()) {
             // Product exists in the cart, increment the quantity
             int quantite = rs.getInt("quantite_product");
-            String updateReq = "UPDATE panier SET quantite_product = ? WHERE id_client = ? AND id_product = ?";
+            String updateReq = "UPDATE panier SET quantite_product = ? WHERE id_user = ? AND id_produit = ?";
             PreparedStatement updatePs = conn.prepareStatement(updateReq);
             updatePs.setInt(1, quantite + 1);
-            updatePs.setInt(2, p1.getId_client());
-            updatePs.setInt(3, id_product);
+            updatePs.setInt(2, p1.getId_user());
+            updatePs.setInt(3, id_produit);
             updatePs.executeUpdate();
             System.out.println("Product quantity incremented in the cart!");
         } else {
-            // Product does not exist in the cart, add the product with quantity 1
-            String insertReq = "INSERT INTO panier (id_client, id_product, quantite_product) VALUES (?, ?, 1)";
+            // Product does not exist in the cart, add the produit with quantity 1
+            String insertReq = "INSERT INTO panier (id_user, id_produit, quantite_product) VALUES (?, ?, 1)";
             PreparedStatement insertPs = conn.prepareStatement(insertReq);
-            insertPs.setInt(1, p1.getId_client());
-            insertPs.setInt(2, id_product);
+            insertPs.setInt(1, p1.getId_user());
+            insertPs.setInt(2, id_produit);
             insertPs.executeUpdate();
             System.out.println("Product added to the cart!");
         }
@@ -199,13 +200,13 @@ public void ajouterPanier(panier p1, int id_product) {
     
     
 @Override
-    public int getQuantite(int client_id, int product_id) {
+    public int getQuantite(int user_id, int produit_id) {
     int quantite = 0;
     try {
-        String req = "SELECT quantite_product FROM panier WHERE id_client=? AND id_product=?";
+        String req = "SELECT quantite_product FROM panier WHERE id_user=? AND id_produit=?";
         PreparedStatement ps = conn.prepareStatement(req);
-        ps.setInt(1, client_id);
-        ps.setInt(2, product_id);
+        ps.setInt(1, user_id);
+        ps.setInt(2, produit_id);
         ResultSet rs = ps.executeQuery();
         if (rs.next()) {
             quantite = rs.getInt("quantite_product");
@@ -222,12 +223,12 @@ public void ajouterPanier(panier p1, int id_product) {
     
     
 @Override
-    public void supprimerproduitpannier(int id_client, int id_product) {
+    public void supprimerproduitpannier(int id_user, int id_produit) {
     try {
-        String req = "DELETE FROM panier WHERE id_client = " + id_client + " AND id_product = " + id_product;
+        String req = "DELETE FROM panier WHERE id_user = " + id_user + " AND id_produit = " + id_produit;
         Statement st = conn.createStatement();
         st.executeUpdate(req);
-        System.out.println("Product " + id_product + " deleted from cart of client " + id_client);
+        System.out.println("Product " + id_produit + " deleted from cart of utilisateur " + id_user);
     } catch (SQLException ex) {
         System.out.println(ex.getMessage());
     }

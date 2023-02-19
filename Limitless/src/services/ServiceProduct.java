@@ -6,7 +6,7 @@
 package services;
 
 import java.util.List;
-import models.product;
+import models.produit;
 import DB.MyConnection;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -27,12 +27,14 @@ public class ServiceProduct implements InterfaceServiceProduct{
 Connection conn = MyConnection.getInstance().getConnection();
 
     @Override
-    public void ajouterproduct(product p) {
+    public void ajouterproduct(produit p) {
        try {
-            String req = "INSERT INTO `products` (`name_product`, `price_product`) VALUES (?,?)";
+            String req = "INSERT INTO `produit` (`nom_produit`, `prix`, `description`, `id_user` ) VALUES (?,?,?,?)";
             PreparedStatement ps = conn.prepareStatement(req);
-            ps.setString(1, p.getName_product());
-            ps.setFloat(2, (float) p.getPrice_product());
+            ps.setString(1, p.getNom_produit());
+            ps.setFloat(2, (float) p.getPrix());
+            ps.setString(3, p.getDescritpion());
+            ps.setInt(4, p.getId_user());
          
             ps.executeUpdate();
             System.out.println("product ajouter !");
@@ -42,9 +44,9 @@ Connection conn = MyConnection.getInstance().getConnection();
     }
 
     @Override
-    public void supprimerproduct(int id_product) {
+    public void supprimerproduct(int id_produit) {
         try{
-            String req = "DELETE FROM `products` WHERE id_product = " + id_product;
+            String req = "DELETE FROM `produit` WHERE id_produit = " + id_produit;
             Statement st = conn.createStatement();
             st.executeUpdate(req);
             System.out.println("product deleted !");
@@ -54,19 +56,19 @@ Connection conn = MyConnection.getInstance().getConnection();
     }
 
     @Override
-    public List<product> afficherproduct() {
+    public List<produit> afficherproduct() {
        try {
         ste= conn.createStatement();
     } catch (SQLException ex) {
         Logger.getLogger(ServiceProduct.class.getName()).log(Level.SEVERE, null, ex);
     }
-    List<product> productss = new ArrayList<product>();
+    List<produit> productss = new ArrayList<produit>();
         try {
-        String req = "SELECT * FROM `products`";
+        String req = "SELECT * FROM `produit`";
         ResultSet result = ste.executeQuery(req);
         
         while (result.next()) {
-            product resultproduct = new product(result.getInt("id_product"), result.getString("name_product"), result.getFloat("price_product"));
+            produit resultproduct = new produit(result.getInt("id_produit"), result.getString("nom_produit"), result.getFloat("prix"));
             productss.add(resultproduct);
         }
         System.out.println(productss);
@@ -78,16 +80,16 @@ Connection conn = MyConnection.getInstance().getConnection();
     }
 
     @Override
-    public product getproduct(int id_product) {
+    public produit getproduct(int id_produit) {
        
          try {
-        String req = "SELECT * FROM `products` WHERE id_product = ?";
+        String req = "SELECT * FROM `produit` WHERE id_produit = ?";
         PreparedStatement pste=conn.prepareStatement(req);
-        pste.setInt(1, id_product);
+        pste.setInt(1, id_produit);
         
         ResultSet result = pste.executeQuery();
        result.next();
-           product resultproduct = new product(result.getInt("id_product"), result.getString("name_product"), result.getFloat("price_product"));
+           produit resultproduct = new produit(result.getInt("id_produit"), result.getString("nom_produit"), result.getFloat("prix"));
         return resultproduct;
       
     } catch (SQLException ex) {

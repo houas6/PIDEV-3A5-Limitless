@@ -15,8 +15,8 @@ import java.util.Objects;
  */
 public class commande {
      private int id_commande;
-    private client cl;
-    private ArrayList<product> products;
+    private utilisateur cl;
+    private ArrayList<produit> products;
    
     private double total_commande;
 
@@ -24,7 +24,7 @@ public class commande {
         products = new ArrayList<>();
     }
 
-    public commande(int id_commande, client cl, double total_commande) {
+    public commande(int id_commande, utilisateur cl, double total_commande) {
         this.id_commande = id_commande;
         this.cl = cl;
        this.products = new ArrayList<>();
@@ -40,19 +40,19 @@ public class commande {
         this.id_commande = id_commande;
     }
 
-    public client getCl() {
+    public utilisateur getCl() {
         return cl;
     }
 
-    public void setCl(client cl) {
+    public void setCl(utilisateur cl) {
         this.cl = cl;
     }
 
-    public ArrayList<product> getProducts() {
+    public ArrayList<produit> getProducts() {
         return products;
     }
 
-    public void setProducts(ArrayList<product> products) {
+    public void setProducts(ArrayList<produit> products) {
         this.products = products;
     }
 
@@ -113,9 +113,9 @@ public class commande {
         return true;
     }
     
-     public void addproduct(product product) {
+     public void addproduct(produit product) {
         products.add(product);
-        total_commande += product.getPrice_product();
+        total_commande += product.getPrix();
     }
    
     

@@ -24,16 +24,16 @@ public class ServiceCommande implements InterfaceServiceCommande{
     @Override
     public void ajoutercommande(commande c) {
         ServicePanier sp= new ServicePanier();
-        panier resultpanier = sp.getpanier(c.getCl().getId_client());
+        panier resultpanier = sp.getpanier(c.getCl().getId_user());
         
         try {
-            String req = "INSERT INTO `commande` (`id_commande`,`id_client`,`nom_client`,`prenom_client`,`adresse_client`,`total`) VALUES (?,?,?,?,?,?)";
+            String req = "INSERT INTO `commande` (`id_commande`,`id_user`,`nom`,`prenom`,`adresse`,`total`) VALUES (?,?,?,?,?,?)";
             PreparedStatement ps = conn.prepareStatement(req);
             ps.setInt(1, c.getId_commande());
-            ps.setInt(2, c.getCl().getId_client());
-            ps.setString(3, c.getCl().getNom_client());
-            ps.setString(4, c.getCl().getPrenom_client());
-            ps.setString(5, c.getCl().getAddress_client());
+            ps.setInt(2, c.getCl().getId_user());
+            ps.setString(3, c.getCl().getNom());
+            ps.setString(4, c.getCl().getPrenom());
+            ps.setString(5, c.getCl().getAdresse());
             ps.setDouble(6, resultpanier.getTotal_panier());
            
             ps.executeUpdate();
@@ -44,16 +44,16 @@ public class ServiceCommande implements InterfaceServiceCommande{
     }
 
     @Override
-    public commande recupererCommandeClient(int id_client) {
+    public commande recupererCommandeClient(int id_user) {
          
-        ServiceClient sc = new ServiceClient();
+        ServiceUtilisateur sc = new ServiceUtilisateur();
         ServicePanier sp= new ServicePanier();
         commande command = new commande();
      
           try {
-        String req = "SELECT * FROM `commande` WHERE id_client = ?";
+        String req = "SELECT * FROM `commande` WHERE id_user = ?";
         PreparedStatement pste=conn.prepareStatement(req);
-        pste.setInt(1, id_client);
+        pste.setInt(1, id_user);
         
         ResultSet result = pste.executeQuery();
        result.next();
@@ -64,9 +64,9 @@ public class ServiceCommande implements InterfaceServiceCommande{
          System.out.println(ex);   
     }
           
-          command.setCl(sc.getclient(id_client)); 
+          command.setCl(sc.getutilisateur(id_user)); 
           
-        panier resultpanier = sp.getpanier(id_client);
+        panier resultpanier = sp.getpanier(id_user);
         command.setTotal_commande(resultpanier.getTotal_panier());
     return command;
     }
