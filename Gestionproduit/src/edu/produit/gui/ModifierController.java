@@ -87,7 +87,7 @@ public class ModifierController implements Initializable {
             
            
             root = FXMLLoader.load(getClass().getResource("Ajouter.fxml"));
-            Scene c=new Scene(root);
+            Scene c=new Scene(root,800,600);
             Stage stage=(Stage)retour.getScene().getWindow();
             stage.setScene(c);
         } catch (IOException ex) {

@@ -8,7 +8,7 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane id="AnchorPane" onMouseClicked="#refresh" prefHeight="647.0" prefWidth="803.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.produit.gui.AjouterController">
+<AnchorPane id="AnchorPane" onMouseClicked="#refresh" prefHeight="647.0" prefWidth="803.0" stylesheets="@design.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.produit.gui.AjouterController">
    <children>
       <Label layoutX="39.0" layoutY="89.0" text="Nom produit" />
       <Label layoutX="53.0" layoutY="140.0" text="Prix" />

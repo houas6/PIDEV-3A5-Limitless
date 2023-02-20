@@ -29,7 +29,7 @@ public class FirstWindow extends Application {
         
             Parent root;
             root=FXMLLoader.load(getClass().getResource("Ajouter.fxml"));
-            Scene scene = new Scene(root);
+            Scene scene = new Scene(root,800,600);
             
             
             primaryStage.setScene(scene);
