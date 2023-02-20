@@ -55,31 +55,57 @@ public class AjoutereController implements Initializable {
     @FXML
     private void addperson(ActionEvent event) {
         
-        if(!fxproduitechange.getText().equals("") && !fxproduitoffert.getText().equals("")  && !fxproduitoffert.getText().equals("") && !fxcommentaire.getText().equals("")  ){
+      
        CRUDEchange ce = new CRUDEchange();
-            int produit_echange= Integer.parseInt(fxproduitechange.getText());
-        int produit_offert= Integer.parseInt(fxproduitoffert.getText());
+        String produit_echangestr= fxproduitechange.getText();
+        String produit_offertstr= fxproduitoffert.getText();
+
+           
         String statut=fxstatut.getText();
         String commentaire=fxcommentaire.getText();
-        Echanges e1= new Echanges(produit_echange,produit_offert,statut,commentaire);
-        
-        ce.ajouterechange(e1);
-       
-        
-        
-      Alert alert = new Alert(Alert.AlertType.INFORMATION);
-    alert.setTitle("Success");
-    alert.setContentText("ajout!");
-    alert.show();
-        this.redirectToList();}
-   else{
-       Alert alert = new Alert(Alert.AlertType.ERROR);
-    alert.setTitle("ERROR");
-    alert.setContentText("Verifier les champs!");
-    alert.show();
-   }
-
+          if (produit_echangestr.isEmpty()) {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setContentText("produit à echanger doit etre saisi");
+        alert.setTitle("Probleme");
+        alert.setHeaderText(null);
+        alert.showAndWait();
+    } else if (produit_offertstr.isEmpty()) {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setContentText("Produit offert doit etre saisi");
+        alert.setTitle("Probleme");
+        alert.setHeaderText(null);
+        alert.showAndWait();  
     }
+          else if (commentaire.isEmpty()) {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setContentText("commentaire doit etre saisi");
+        alert.setTitle("Probleme");
+        alert.setHeaderText(null);
+        alert.showAndWait();  
+    }
+          else {
+        try {
+            int produit_echange= Integer.parseInt(fxproduitechange.getText());
+       int produit_offert= Integer.parseInt(fxproduitoffert.getText());
+             Echanges e1= new Echanges(produit_echange,produit_offert,statut,commentaire);
+             ce.ajouterechange(e1);
+              Alert alert = new Alert(Alert.AlertType.INFORMATION);
+              alert.setTitle("Success");
+               alert.setContentText("ajout!");
+                alert.show();
+                 this.redirectToList();
+        } catch (NumberFormatException e) {
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setContentText("Produit à echanger et produit offert  doivent etre des nombres");
+            alert.setTitle("Probleme");
+            alert.setHeaderText(null);
+            alert.showAndWait();
+        }
+    }    
+     }
+
+
+    
         private void redirectToList(){
             Parent root;
             try {
