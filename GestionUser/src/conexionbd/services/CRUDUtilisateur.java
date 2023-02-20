@@ -30,7 +30,7 @@ public class CRUDUtilisateur implements IUtilisateur {
     public void ajouterUtilisateur() {
 
         try {
-            String requete = "INSERT INTO Utilisateur(username,password,mail) VALUES ('dhia','saibi','dhiaeddine.saibi@esprit.tn')";
+            String requete = "INSERT INTO utilisateur(username,password,mail) VALUES ('dhia','saibi','dhiaeddine.saibi@esprit.tn')";
             Statement st = new MyConnection().getCnx().createStatement();
             st.executeUpdate(requete);
             System.out.println("Utilisateur ajoute");
@@ -43,11 +43,15 @@ public class CRUDUtilisateur implements IUtilisateur {
     public void ajouterUtilisateur2(Utilisateur u) {
 
         try {
-            String requete2 = "INSERT INTO Utilisateur(username,password,mail) VALUES (?,?,?)";
+            String requete2 = "INSERT INTO utilisateur(password,mail,nom,prenom,role,cin,numero) VALUES (?,?,?,?,'client',?,?)";
             PreparedStatement pst = new MyConnection().getCnx().prepareStatement(requete2);
-            pst.setString(1, u.getUsername());
-            pst.setString(2, u.getPassword());
-            pst.setString(3, u.getMail());
+            
+            pst.setString(1, u.getPassword());
+            pst.setString(2, u.getMail());
+            pst.setString(3, u.getNom());
+            pst.setString(4, u.getPrenom());
+            pst.setString(5, u.getCin());
+            pst.setString(6, u.getNumero());
             pst.executeUpdate();
             System.out.println("Utilisateur ajoute (methode dynamique)");
         } catch (SQLException ex) {
@@ -59,7 +63,7 @@ public class CRUDUtilisateur implements IUtilisateur {
     @Override
     public void supprimerUtilisateur(int id) {
         try {
-            String requete4 = "DELETE FROM Utilisateur where id_user="+id;
+            String requete4 = "DELETE FROM utilisateur where id_user="+id;
             Statement st3=new MyConnection().getCnx().createStatement();
             st3.executeUpdate(requete4);
             System.out.println("Utilisateur supprimé");
@@ -72,7 +76,7 @@ public class CRUDUtilisateur implements IUtilisateur {
     public void modifierUtilisateur (int id, String nom, String mdp, String mail)
     {
         try {
-            String Requete5="UPDATE Utilisateur SET username='"+nom+"',password='"+mdp+"', mail='"+mail+"' where id_user="+id;
+            String Requete5="UPDATE utilisateur SET username='"+nom+"',password='"+mdp+"', mail='"+mail+"' where id_user="+id;
             PreparedStatement st4=new MyConnection().getCnx().prepareStatement(Requete5);
             st4.executeUpdate();
             System.out.println("Utilisateur modifié");
@@ -86,7 +90,7 @@ public class CRUDUtilisateur implements IUtilisateur {
         List<Utilisateur> users = new ArrayList<>();
         try {
             
-            String requete3="SELECT * FROM Utilisateur";
+            String requete3="SELECT * FROM utilisateur";
             Statement st=new MyConnection().getCnx().createStatement();
             ResultSet rs = st.executeQuery(requete3);
             while(rs.next()) {

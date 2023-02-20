@@ -8,7 +8,7 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane id="AnchorPane" onMouseClicked="#refresh" prefHeight="567.0" prefWidth="803.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.produit.gui.AjouterController">
+<AnchorPane id="AnchorPane" onMouseClicked="#refresh" prefHeight="647.0" prefWidth="803.0" stylesheets="@design.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.produit.gui.AjouterController">
    <children>
       <Label layoutX="39.0" layoutY="89.0" text="Nom produit" />
       <Label layoutX="53.0" layoutY="140.0" text="Prix" />
@@ -22,7 +22,7 @@
       <Label layoutX="442.0" layoutY="111.0" text="Id_produit" />
       <TextField fx:id="idproduit" layoutX="395.0" layoutY="158.0" />
       <Button layoutX="434.0" layoutY="236.0" mnemonicParsing="false" onAction="#supprimer" text="Supprimer" />
-      <TableView fx:id="table_produit" layoutX="19.0" layoutY="344.0" prefHeight="200.0" prefWidth="746.0">
+      <TableView fx:id="table_produit" layoutX="19.0" layoutY="344.0" prefHeight="296.0" prefWidth="746.0">
          <columns>
             <TableColumn fx:id="fxxidproduit" prefWidth="65.60000419616699" text="Id produit" />
             <TableColumn fx:id="fxxnomproduit" prefWidth="135.19998931884766" text="Nom Produit" />

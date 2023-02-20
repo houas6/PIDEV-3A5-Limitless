@@ -3,12 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package edu.produit.gui;
+package inter.gui;
 
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.application.Application;
+import static javafx.application.Application.launch;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
@@ -20,21 +21,23 @@ import javafx.stage.Stage;
 
 /**
  *
- * @author USER
+ * @author hasse
  */
-public class FirstWindow extends Application {
+public class SignupWindow extends Application {
     
     @Override
-    public void start(Stage primaryStage) throws Exception {
+    public void start(Stage primaryStage) {
         
-            Parent root;
-            root=FXMLLoader.load(getClass().getResource("Ajouter.fxml"));
-            Scene scene = new Scene(root,800,600);
-            
-            
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource("signup.fxml"));
+            Scene scene = new Scene(root);
             primaryStage.setScene(scene);
+            primaryStage.setTitle("Inscription");
             primaryStage.show();
-        
+        } catch (IOException ex) {
+            System.out.println(ex.getMessage());
+        }
+         
     }
 
     /**

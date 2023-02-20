@@ -33,12 +33,17 @@ public class Auth {
         }
     }
 
-    public static boolean signUp(String username, String email, String password) {
-        CRUDUtilisateur cu=new CRUDUtilisateur();
+    public static boolean signUp(String nom,String prenom, String cin, String email, String password, String numero) {
+        
         if (Utilisateur.getUserByEmail(email) == null) {
+            Utilisateur currentUtilisateur = new Utilisateur();
             currentUtilisateur.setMail(email);
             currentUtilisateur.setPassword(password);
-            currentUtilisateur.setUsername(username);
+            currentUtilisateur.setPrenom(prenom);
+            currentUtilisateur.setNom(nom);
+            currentUtilisateur.setCin(cin);
+            currentUtilisateur.setNumero(numero);
+            CRUDUtilisateur cu=new CRUDUtilisateur();
             cu.ajouterUtilisateur2(currentUtilisateur);
             return true;
         } else {

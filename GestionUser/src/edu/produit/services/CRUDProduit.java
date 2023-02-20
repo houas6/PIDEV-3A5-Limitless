@@ -35,7 +35,6 @@ public class CRUDProduit implements InterfaceServices{
     }*/
 
     
-    @Override
     public void ajouterproduit(Produit p) {
        try {
             String req = "INSERT INTO `produit` (`nom_produit`, `prix`,`description`,`id_user`,`image`) VALUES (?,?,?,?,?)";

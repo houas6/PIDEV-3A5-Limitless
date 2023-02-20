@@ -23,7 +23,6 @@ public class Utilisateur {
     private String prenom;
     private String cin;
     private String role;
-    private String adresse;
     private String password;
     private String mail;
    
@@ -56,17 +55,7 @@ public class Utilisateur {
         this.mail = mail;
     }
 
-    public Utilisateur(int id_user, String numero, String nom, String prenom, String cin, String role, String adresse, String password, String mail) {
-        this.id_user = id_user;
-        this.numero = numero;
-        this.nom = nom;
-        this.prenom = prenom;
-        this.cin = cin;
-        this.role = role;
-        this.adresse = adresse;
-        this.password = password;
-        this.mail = mail;
-    }
+    
 
     public String getNom() {
         return nom;
@@ -100,15 +89,15 @@ public class Utilisateur {
         this.role = role;
     }
 
-    public String getAdresse() {
-        return adresse;
+    public String getNumero() {
+        return numero;
     }
 
-    public void setAdresse(String adresse) {
-        this.adresse = adresse;
+    public void setNumero(String numero) {
+        this.numero = numero;
     }
 
-    
+
     public int getId_user() {
         return id_user;
     }

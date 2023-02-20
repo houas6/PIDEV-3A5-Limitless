@@ -9,11 +9,11 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane style="-fx-background-radius: 20;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane style="-fx-background-radius: 20;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="inter.gui.SignupController">
    <children>
       <AnchorPane prefHeight="616.0" prefWidth="993.0" style="-fx-background-color: #030307; -fx-background-radius: 15;">
          <children>
-            <AnchorPane layoutX="55.0" layoutY="59.0" prefHeight="531.0" prefWidth="886.0" style="-fx-background-color: #131022; -fx-background-radius: 10;">
+            <AnchorPane layoutX="54.0" layoutY="59.0" prefHeight="531.0" prefWidth="886.0" style="-fx-background-color: #131022; -fx-background-radius: 10;">
                <children>
                   <Label layoutX="39.0" layoutY="34.0" textFill="WHITE">
                      <font>
@@ -60,30 +60,40 @@
                         <Font name="System Bold" size="13.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="fxemail" layoutX="220.0" layoutY="251.0" prefHeight="25.0" prefWidth="240.0" promptText="Entrez l'e-mail" />
-                  <PasswordField fx:id="fxpassword" layoutX="220.0" layoutY="305.0" prefHeight="25.0" prefWidth="240.0" promptText="Entrer le mot de passe" />
-                  <Button fx:id="fxlogin" layoutX="261.0" layoutY="378.0" mnemonicParsing="false" onAction="#login" prefHeight="25.0" prefWidth="159.0" style="-fx-background-color: e54233;" text="Connexion" textFill="WHITE" />
+                  <TextField fx:id="semail" layoutX="220.0" layoutY="251.0" prefHeight="25.0" prefWidth="240.0" promptText="Entrez l'e-mail" />
+                  <PasswordField fx:id="spassword" layoutX="220.0" layoutY="305.0" prefHeight="25.0" prefWidth="240.0" promptText="Entrez le mot de passe" />
+                  <Button fx:id="ssignup" layoutX="261.0" layoutY="417.0" mnemonicParsing="false" onAction="#signup" prefHeight="25.0" prefWidth="159.0" style="-fx-background-color: e54233;" text="Créer un compte" textFill="WHITE" />
                   <Label layoutX="81.0" layoutY="88.0" text="NOM" textFill="WHITE">
                      <font>
                         <Font name="System Bold" size="13.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="fxemail1" layoutX="220.0" layoutY="85.0" prefHeight="25.0" prefWidth="240.0" promptText="Entrez le nom" />
-                  <TextField fx:id="fxemail2" layoutX="221.0" layoutY="143.0" prefHeight="25.0" prefWidth="240.0" promptText="Entre le prénom" />
+                  <TextField fx:id="snom" layoutX="220.0" layoutY="85.0" prefHeight="25.0" prefWidth="240.0" promptText="Entrez le nom" />
+                  <TextField fx:id="sprenom" layoutX="221.0" layoutY="143.0" prefHeight="25.0" prefWidth="240.0" promptText="Entre le prénom" />
                   <Label layoutX="70.0" layoutY="146.0" text="PRENOM" textFill="WHITE">
                      <font>
                         <Font name="System Bold" size="13.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="fxemail3" layoutX="220.0" layoutY="193.0" prefHeight="25.0" prefWidth="240.0" promptText="Entrez l'e-mail" />
+                  <TextField fx:id="scin" layoutX="220.0" layoutY="193.0" prefHeight="25.0" prefWidth="240.0" promptText="Entrez le numéro de la CIN" />
                   <Label layoutX="85.0" layoutY="196.0" text="CIN" textFill="WHITE">
                      <font>
                         <Font name="System Bold" size="13.0" />
                      </font>
                   </Label>
+                  <TextField fx:id="snumero" layoutX="221.0" layoutY="358.0" prefHeight="25.0" prefWidth="240.0" promptText="Entrez le numéro" />
+                  <Label layoutX="68.0" layoutY="368.0" text="NUMERO" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="13.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="erreurSaisie" layoutX="74.0" layoutY="467.0" prefHeight="27.0" prefWidth="422.0" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font></Label>
                </children>
             </AnchorPane>
-            <Label layoutX="132.0" layoutY="17.0" text="Se Connecter" textFill="WHITE">
+            <Label layoutX="132.0" layoutY="17.0" text="Inscription" textFill="WHITE">
                <font>
                   <Font size="18.0" />
                </font>
