@@ -167,12 +167,12 @@ line.setLayoutY(50.0);
 
     @FXML
     private void payercommande(ActionEvent event) {
-      // client= sclient.getutilisateur(1);
-     //  client.setAdresse(adresse.getText());
+      client= sclient.getutilisateur(1);
+     client.setAdresse(adresse.getText());
         //commande.setCl(client);
         //commande.setTotal_commande(spanier.getpanier(1).getTotal_panier()+14);
        // commande.setId_commande(0);
-         commande c1= new commande(0,sclient.getutilisateur(1),spanier.getpanier(1).getTotal_panier()+14);
+         commande c1= new commande(0,client,spanier.getpanier(1).getTotal_panier()+14);
         scommande.ajoutercommande(c1);
         
         
