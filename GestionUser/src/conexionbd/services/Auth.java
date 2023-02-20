@@ -19,13 +19,15 @@ public class Auth {
         return currentUtilisateur;
     }
 
-    public static boolean signIn(String email, String password) {
+    public static boolean signIn(String email,String password) {
         Utilisateur user = Utilisateur.getUserByEmail(email);
+        currentUtilisateur = user;
         if (user != null && user.getPassword().equals(password)) {
-            currentUtilisateur = user;
+            System.out.println(currentUtilisateur);
             System.out.println("Utilisateur Connecte");
             return true;
         } else {
+            System.out.println(currentUtilisateur);
             System.out.println("Utilisateur NonConnecte");
             return false;
         }

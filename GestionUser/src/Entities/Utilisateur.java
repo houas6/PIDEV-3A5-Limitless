@@ -18,7 +18,7 @@ import java.util.Objects;
  */
 public class Utilisateur {
     private int id_user;
-    private String username;
+    private String numero;
     private String nom;
     private String prenom;
     private String cin;
@@ -33,28 +33,32 @@ public class Utilisateur {
 
     public Utilisateur(String mail, String password ) {
         this.mail = mail;
-        this.password = password;
-        
+        this.password = password;   
     }
     
     
-    public Utilisateur(String username, String password, String mail) {
-        this.username = username;
+    public Utilisateur(String numero, String password, String mail) {
+        this.numero = numero;
         this.password = password;
         this.mail = mail;
     }
     
-    
-    public Utilisateur(int id_user, String username, String password, String mail) {
+    public Utilisateur(int id_user, String password, String mail) {
         this.id_user = id_user;
-        this.username = username;
+        this.password = password;
+        this.mail = mail;
+    }
+    
+    public Utilisateur(int id_user, String numero, String password, String mail) {
+        this.id_user = id_user;
+        this.numero = numero;
         this.password = password;
         this.mail = mail;
     }
 
-    public Utilisateur(int id_user, String username, String nom, String prenom, String cin, String role, String adresse, String password, String mail) {
+    public Utilisateur(int id_user, String numero, String nom, String prenom, String cin, String role, String adresse, String password, String mail) {
         this.id_user = id_user;
-        this.username = username;
+        this.numero = numero;
         this.nom = nom;
         this.prenom = prenom;
         this.cin = cin;
@@ -114,11 +118,11 @@ public class Utilisateur {
     }
 
     public String getUsername() {
-        return username;
+        return numero;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setUsername(String numero) {
+        this.numero = numero;
     }
 
     public String getPassword() {
@@ -143,12 +147,12 @@ public class Utilisateur {
         ResultSet rs = null;
         Utilisateur user = null;
         try {
-            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/esprit", "root", "");
+            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/limitless", "root", "");
             stmt = conn.prepareStatement("SELECT * FROM utilisateur WHERE id_user = ?");
             stmt.setInt(1, id);
             rs = stmt.executeQuery();
             if (rs.next()) {
-                user = new Utilisateur(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4));
+                user = new Utilisateur(rs.getInt(1), rs.getString(2), rs.getString(3));
             }
         } catch (SQLException e) {
             System.out.println(e.getMessage());;
@@ -162,12 +166,12 @@ public class Utilisateur {
         ResultSet rs = null;
         Utilisateur user = null;
         try {
-            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/esprit", "root", "");
+            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/limitless", "root", "");
             stmt = conn.prepareStatement("SELECT * FROM utilisateur WHERE mail = ?");
             stmt.setString(1, email);
             rs = stmt.executeQuery();
             if (rs.next()) {
-                user = new Utilisateur(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4));
+                user = new Utilisateur(rs.getInt(1), rs.getString(2), rs.getString(3));
             }
         } catch (SQLException e) {
             System.out.println(e.getMessage());
@@ -197,7 +201,7 @@ public class Utilisateur {
         if (this.id_user != other.id_user) {
             return false;
         }
-        if (!Objects.equals(this.username, other.username)) {
+        if (!Objects.equals(this.numero, other.numero)) {
             return false;
         }
         if (!Objects.equals(this.password, other.password)) {
@@ -211,7 +215,7 @@ public class Utilisateur {
 
     @Override
     public String toString() {
-        return "Utilisateur{" + "id_user=" + id_user + ", username=" + username + ", password=" + password + ", mail=" + mail + '}';
+        return "Utilisateur{" + "id_user=" + id_user + ", numero=" + numero + ", password=" + password + ", mail=" + mail + '}';
     }
     
     
