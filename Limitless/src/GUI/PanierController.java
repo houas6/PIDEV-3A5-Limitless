@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package GUI;
+import java.io.IOException;
 import services.*;
 import models.*;
 import java.net.URL;
@@ -12,7 +13,9 @@ import java.util.Optional;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
@@ -28,6 +31,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.image.*;
+import javafx.scene.layout.AnchorPane;
 
 /**
  * FXML Controller class
@@ -49,6 +53,10 @@ public class PanierController implements Initializable {
     private Label Nomclient;
     @FXML
     private Label Nomclient1;
+    @FXML
+    private Button checkout;
+    @FXML
+    private AnchorPane bord;
     /**
      * Initializes the controller class.
      */
@@ -81,9 +89,9 @@ public class PanierController implements Initializable {
     productPrixLabel.setLayoutY(10);
     productPrixLabel.setFont(Font.font("Verdana", FontWeight.NORMAL, 12));
  
-    Label productQuantiteLabel = new Label("Quantité: " + spanier.getQuantite(1, p.getId_produit()));// remplace 1 par client.id
-    productQuantiteLabel.setLayoutX(360);
-    productQuantiteLabel.setLayoutY(10);
+    Label productQuantiteLabel = new Label(" "+spanier.getQuantite(1, p.getId_produit()));// remplace 1 par client.id
+    productQuantiteLabel.setLayoutX(375);
+    productQuantiteLabel.setLayoutY(45);
     productQuantiteLabel.setFont(Font.font("Verdana", FontWeight.NORMAL, 12));
  /*
     Button incrementButton = new Button("+");
@@ -115,7 +123,7 @@ incrementButton.setOnAction(event -> {
     spanier.incrementQuantite(spanier.getpanier(1), p.getId_produit());
     int newQuantity = spanier.getQuantite(1, p.getId_produit());
     if (newQuantity > oldQuantity) {
-        productQuantiteLabel.setText("Quantité: " + newQuantity);
+        productQuantiteLabel.setText(" " + newQuantity);
     }
     total.setText(String.valueOf(spanier.getpanier(1).getTotal_panier()));
 });
@@ -129,7 +137,7 @@ decrementButton.setOnAction(event -> {
         spanier.decrementQuantite(spanier.getpanier(1), p.getId_produit());
         int newQuantity = spanier.getQuantite(1, p.getId_produit());
         if (newQuantity < oldQuantity) {
-            productQuantiteLabel.setText("Quantité: " + newQuantity);
+            productQuantiteLabel.setText(" " + newQuantity);
         }
         total.setText(String.valueOf(spanier.getpanier(1).getTotal_panier()));
     }
@@ -138,8 +146,8 @@ decrementButton.setOnAction(event -> {
 ImageView supprimerImageView = new ImageView();
 supprimerImageView.setFitHeight(26);
 supprimerImageView.setFitWidth(35);
-supprimerImageView.setLayoutX(450);
-supprimerImageView.setLayoutY(12);
+supprimerImageView.setLayoutX(10);
+supprimerImageView.setLayoutY(50);
 supprimerImageView.setPickOnBounds(true);
 supprimerImageView.setPreserveRatio(true);
 
@@ -168,16 +176,7 @@ Nomclient.setText(sclient.getutilisateur(1).getNom());
 Nomclient1.setText(sclient.getutilisateur(1).getNom());
 
 
-/*Button deleteButton = new Button();
-    deleteButton.setGraphic(new ImageView(new javafx.scene.image.Image("ic_delete_black_18dp_1x")));
-    deleteButton.setLayoutX(450);
-    deleteButton.setLayoutY(10);
-    deleteButton.setOnAction(event -> {
-        int id_user = 1; // Remplacez 1 par client.id
-        int id_produit = p.getId_produit();
-        spanier.supprimerproduitpannier(1, id_produit);
-        vboxpanier.getChildren().remove(productPane);
-    });*/
+
 
  
     productPane.getChildren().addAll(productRefLabel, productDimensionLabel, productPrixLabel, productQuantiteLabel, incrementButton, decrementButton , supprimerImageView );
@@ -190,5 +189,23 @@ Nomclient1.setText(sclient.getutilisateur(1).getNom());
      
      
     }    
+
+    @FXML
+    private void checkout(ActionEvent event) throws IOException {
+       FXMLLoader loader = new FXMLLoader(getClass().getResource("commande.fxml"));
+        try{
+            Parent root = loader.load();
+            bord.getChildren().setAll(root);
+           
+           }
+        catch(IOException ex){
+            System.out.println(ex);
+        }
+        
+    }
+   
+    
+    
+    
     
 }

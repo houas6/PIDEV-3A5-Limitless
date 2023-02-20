@@ -16,7 +16,7 @@
    <children>
       <AnchorPane layoutX="10.0" layoutY="10.0" prefHeight="626.0" prefWidth="1005.0" style="-fx-background-radius: 20;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <AnchorPane prefHeight="616.0" prefWidth="993.0" style="-fx-background-color: #030307; -fx-background-radius: 15;">
+            <AnchorPane fx:id="bord" prefHeight="616.0" prefWidth="993.0" style="-fx-background-color: #030307; -fx-background-radius: 15;">
                <children>
                   <Pane layoutX="590.0" layoutY="-1.0" prefHeight="93.0" prefWidth="405.0" style="-fx-background-radius: 20 20 0 0;" styleClass="linear-grad" stylesheets="@../css/fullpackstyling.css">
                      <children>
@@ -82,7 +82,7 @@
                         </Label>
                         <Pane layoutX="569.0" layoutY="46.0" prefHeight="297.0" prefWidth="270.0" style="-fx-background-radius: 20;" styleClass="linear-grad" stylesheets="@../css/fullpackstyling.css">
                            <children>
-                              <Button layoutX="63.0" layoutY="285.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="145.0" styleClass="button4" stylesheets="@../css/fullpackstyling.css" text="Checkout" textFill="WHITE" />
+                              <Button fx:id="checkout" layoutX="63.0" layoutY="285.0" mnemonicParsing="false" onAction="#checkout" prefHeight="25.0" prefWidth="145.0" styleClass="linear-grad" stylesheets="@../css/fullpackstyling.css" text="Checkout" textFill="WHITE" />
                               <ImageView fitHeight="66.0" fitWidth="144.0" layoutX="102.0" layoutY="49.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
                                     <Image url="@../resources/eruro.png" />
