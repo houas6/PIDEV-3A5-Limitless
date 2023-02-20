@@ -5,23 +5,38 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.Glow?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="486.0" prefWidth="696.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.Gestion_Echange.gui.AfficherController">
+<AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="800.0" stylesheets="@design.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.Gestion_Echange.gui.AfficherController">
    <children>
-      <TableView fx:id="table" layoutX="28.0" layoutY="48.0" prefHeight="200.0" prefWidth="644.0">
+      <TableView fx:id="table" layoutX="10.0" layoutY="151.0" prefHeight="298.0" prefWidth="780.0">
         <columns>
-          <TableColumn fx:id="id_echange" prefWidth="75.0" text="id_echange" />
-          <TableColumn fx:id="produit_echange" prefWidth="133.60003662109375" text="produit_echange " />
-            <TableColumn fx:id="produit_offert" prefWidth="96.79998779296875" text="produit_offert" />
-            <TableColumn fx:id="statut" prefWidth="114.4000244140625" text="statut" />
-            <TableColumn fx:id="commentaire" prefWidth="221.5999755859375" text="commentaire" />
+          <TableColumn fx:id="id_echange" prefWidth="115.20001220703125" text="id_echange" />
+          <TableColumn fx:id="produit_echange" prefWidth="148.80001831054688" text="produit_echange " />
+            <TableColumn fx:id="produit_offert" prefWidth="132.0" text="produit_offert" />
+            <TableColumn fx:id="statut" prefWidth="131.20001220703125" text="statut" />
+            <TableColumn fx:id="commentaire" prefWidth="267.20001220703125" text="commentaire" />
         </columns>
       </TableView>
-      <Label layoutX="82.0" layoutY="292.0" text="id_echange" />
-      <TextField fx:id="idechangesupp" layoutX="159.0" layoutY="288.0" />
-      <Button fx:id="fxsupprimerechangeback" layoutX="348.0" layoutY="288.0" mnemonicParsing="false" onAction="#supprimerechange" text="supprimer" />
-      <Button fx:id="modifierfx" layoutX="385.0" layoutY="14.0" mnemonicParsing="false" onMouseClicked="#modiferfx" prefHeight="26.0" prefWidth="124.0" text="modifier" />
-      <Button fx:id="redajout" layoutX="523.0" layoutY="14.0" mnemonicParsing="false" onMouseClicked="#redajout" prefHeight="26.0" prefWidth="150.0" text="ajouter" />
+      <Label layoutX="173.0" layoutY="506.0" prefHeight="22.0" prefWidth="109.0" text="id_echange">
+         <font>
+            <Font size="19.0" />
+         </font></Label>
+      <TextField fx:id="idechangesupp" layoutX="299.0" layoutY="505.0" stylesheets="@design.css" />
+      <Button fx:id="fxsupprimerechangeback" layoutX="517.0" layoutY="502.0" mnemonicParsing="false" onAction="#supprimerechange" text="supprimer" />
+      <Button fx:id="modifierfx" layoutX="467.0" layoutY="108.0" mnemonicParsing="false" onMouseClicked="#modiferfx" prefHeight="26.0" prefWidth="124.0" text="modifier">
+         <font>
+            <Font size="16.0" />
+         </font></Button>
+      <Button fx:id="redajout" layoutX="606.0" layoutY="108.0" mnemonicParsing="false" onMouseClicked="#redajout" prefHeight="26.0" prefWidth="124.0" stylesheets="@design.css" text="ajouter" />
+      <Label id="h" fx:id="headerlist" contentDisplay="TOP" layoutX="304.0" layoutY="56.0" prefHeight="30.0" prefWidth="190.0" text="liste des echanges" textAlignment="CENTER" textFill="WHITE">
+         <font>
+            <Font name="Candara Bold Italic" size="43.0" />
+         </font>
+         <effect>
+            <Glow />
+         </effect></Label>
    </children>
 </AnchorPane>

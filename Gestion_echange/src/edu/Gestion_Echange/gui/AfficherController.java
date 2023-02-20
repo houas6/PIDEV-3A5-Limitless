@@ -25,6 +25,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -62,6 +63,8 @@ public class AfficherController implements Initializable {
     private Button modifierfx;
     @FXML
     private Button redajout;
+    @FXML
+    private Label headerlist;
     
    
 
@@ -112,7 +115,7 @@ public class AfficherController implements Initializable {
         try { 
             root = FXMLLoader.load(getClass().getResource("Afficher.fxml"));
             Scene c=new Scene(root);
-            Stage stage=(Stage)fxrefreshsupp.getScene().getWindow();
+            Stage stage=(Stage)fxsupprimerechangeback.getScene().getWindow();
             stage.setScene(c);
         } catch (IOException ex) {
             Logger.getLogger(AfficherController.class.getName()).log(Level.SEVERE, null, ex);

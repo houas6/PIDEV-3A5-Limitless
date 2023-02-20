@@ -23,6 +23,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
 /**
@@ -44,6 +45,8 @@ public class ModifierechangeController implements Initializable {
     private ComboBox<String> fxstatut;
     @FXML
     private Button fxmodifierechange;
+    @FXML
+    private Button rliste;
 
     /**
      * Initializes the controller class.
@@ -102,6 +105,11 @@ public class ModifierechangeController implements Initializable {
     alert.setContentText("Verifier les champs!");
     alert.show();
    }
+    }
+
+    @FXML
+    private void rlist(MouseEvent event) {
+        this.redirectToList();
     }
     
 }
