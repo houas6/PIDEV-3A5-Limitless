@@ -78,21 +78,25 @@ public class PanierController implements Initializable {
     productRefLabel.setLayoutX(10);
     productRefLabel.setLayoutY(10);
     productRefLabel.setFont(Font.font("Verdana", FontWeight.BOLD, 14));
+    productRefLabel.setStyle("-fx-font-weight: bold; -fx-text-fill: #ffffff;");
  
     Label productDimensionLabel = new Label("Nom: " + p.getNom_produit());
     productDimensionLabel.setLayoutX(120);
     productDimensionLabel.setLayoutY(10);
     productDimensionLabel.setFont(Font.font("Verdana", FontWeight.NORMAL, 12));
+    productDimensionLabel.setStyle("-fx-font-weight: bold; -fx-text-fill: #ffffff;");
  
     Label productPrixLabel = new Label("Prix: " + p.getPrix());
     productPrixLabel.setLayoutX(240);
     productPrixLabel.setLayoutY(10);
     productPrixLabel.setFont(Font.font("Verdana", FontWeight.NORMAL, 12));
+    productPrixLabel.setStyle("-fx-font-weight: bold; -fx-text-fill: #ffffff;");
  
     Label productQuantiteLabel = new Label(" "+spanier.getQuantite(1, p.getId_produit()));// remplace 1 par client.id
     productQuantiteLabel.setLayoutX(375);
     productQuantiteLabel.setLayoutY(45);
     productQuantiteLabel.setFont(Font.font("Verdana", FontWeight.NORMAL, 12));
+     productQuantiteLabel.setStyle("-fx-font-weight: bold; -fx-text-fill: #ffffff;");
  /*
     Button incrementButton = new Button("+");
     incrementButton.setLayoutX(400);
@@ -124,6 +128,7 @@ incrementButton.setOnAction(event -> {
     int newQuantity = spanier.getQuantite(1, p.getId_produit());
     if (newQuantity > oldQuantity) {
         productQuantiteLabel.setText(" " + newQuantity);
+         productQuantiteLabel.setStyle("-fx-font-weight: bold; -fx-text-fill: #ffffff;");
     }
     total.setText(String.valueOf(spanier.getpanier(1).getTotal_panier()));
 });
@@ -138,6 +143,8 @@ decrementButton.setOnAction(event -> {
         int newQuantity = spanier.getQuantite(1, p.getId_produit());
         if (newQuantity < oldQuantity) {
             productQuantiteLabel.setText(" " + newQuantity);
+             productQuantiteLabel.setStyle("-fx-font-weight: bold; -fx-text-fill: #ffffff;");
+            
         }
         total.setText(String.valueOf(spanier.getpanier(1).getTotal_panier()));
     }
