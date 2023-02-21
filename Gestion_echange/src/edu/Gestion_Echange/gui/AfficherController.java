@@ -84,6 +84,7 @@ public class AfficherController implements Initializable {
         commentaire.setCellValueFactory(new PropertyValueFactory<>("commentaire"));
              for (Echanges c : ce.afficherechange()) {
             table.getItems().add(c);
+           
         }
            
         

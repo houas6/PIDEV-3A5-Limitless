@@ -9,15 +9,16 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="800.0" stylesheets="@design.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.Gestion_Echange.gui.AfficherController">
+<AnchorPane id="AnchorPane" prefHeight="650.0" prefWidth="850.0" stylesheets="@design.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.Gestion_Echange.gui.AfficherController">
    <children>
-      <TableView fx:id="table" layoutX="10.0" layoutY="151.0" prefHeight="298.0" prefWidth="780.0">
+      <TableView fx:id="table" layoutX="8.0" layoutY="143.0" prefHeight="298.0" prefWidth="834.0">
         <columns>
           <TableColumn fx:id="id_echange" prefWidth="115.20001220703125" text="id_echange" />
           <TableColumn fx:id="produit_echange" prefWidth="148.80001831054688" text="produit_echange " />
             <TableColumn fx:id="produit_offert" prefWidth="132.0" text="produit_offert" />
             <TableColumn fx:id="statut" prefWidth="131.20001220703125" text="statut" />
-            <TableColumn fx:id="commentaire" prefWidth="267.20001220703125" text="commentaire" />
+            <TableColumn fx:id="commentaire" prefWidth="192.79998779296875" text="commentaire" />
+            <TableColumn fx:id="commentaire1" prefWidth="110.4000244140625" text="action" />
         </columns>
       </TableView>
       <Label layoutX="173.0" layoutY="506.0" prefHeight="22.0" prefWidth="109.0" text="id_echange">
@@ -30,8 +31,8 @@
          <font>
             <Font size="16.0" />
          </font></Button>
-      <Button fx:id="redajout" layoutX="606.0" layoutY="108.0" mnemonicParsing="false" onMouseClicked="#redajout" prefHeight="26.0" prefWidth="124.0" stylesheets="@design.css" text="ajouter" />
-      <Label id="h" fx:id="headerlist" contentDisplay="TOP" layoutX="304.0" layoutY="56.0" prefHeight="30.0" prefWidth="190.0" text="liste des echanges" textAlignment="CENTER" textFill="WHITE">
+      <Button fx:id="redajout" layoutX="606.0" layoutY="108.0" mnemonicParsing="false" onMouseClicked="#redajout" prefHeight="26.0" prefWidth="124.0" text="ajouter" />
+      <Label id="h" fx:id="headerlist" contentDisplay="TOP" layoutX="304.0" layoutY="56.0" prefHeight="30.0" prefWidth="190.0" stylesheets="@design.css" text="liste des echanges" textAlignment="CENTER" textFill="WHITE">
          <font>
             <Font name="Candara Bold Italic" size="43.0" />
          </font>

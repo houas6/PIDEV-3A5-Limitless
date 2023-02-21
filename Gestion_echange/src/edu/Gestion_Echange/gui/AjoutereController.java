@@ -6,8 +6,16 @@
 package edu.Gestion_Echange.gui;
 import edu.Gestion_Echange.entites.Echanges;
 import edu.Gestion_Echange.services.CRUDEchange;
+import edu.Gestion_Echange.utils.MyConnection;
 import java.io.IOException;
 import java.net.URL;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -19,10 +27,13 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 /**
  * FXML Controller class
@@ -34,8 +45,6 @@ public class AjoutereController implements Initializable {
     @FXML
     private TextField fxproduitechange;
     @FXML
-    private TextField fxproduitoffert;
-    @FXML
     private TextField fxstatut;
     @FXML
     private TextArea fxcommentaire;
@@ -43,12 +52,29 @@ public class AjoutereController implements Initializable {
     private Button fxajout;
     @FXML
     private Button rliste;
+    @FXML
+    private ComboBox<Integer> cmbxpof;
    
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+      //ajout des produit du l'utilisateur dans le combo box
+       
+        Connection conn = MyConnection.getInstance().getConnection();
+        String sql = "SELECT id_produit FROM produit WHERE id_user = 12";
+        List<Integer> produits = new ArrayList<>();
+           try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                produits.add(rs.getInt("id_produit"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+         ObservableList<Integer> observableList = FXCollections.observableList(produits);
+         cmbxpof.setItems(observableList);
         // TODO
     }    
 
@@ -58,7 +84,7 @@ public class AjoutereController implements Initializable {
       
        CRUDEchange ce = new CRUDEchange();
         String produit_echangestr= fxproduitechange.getText();
-        String produit_offertstr= fxproduitoffert.getText();
+        String  produit_offertstr=Integer.toString(cmbxpof.getValue()) ;
 
            
         String statut=fxstatut.getText();
@@ -86,7 +112,7 @@ public class AjoutereController implements Initializable {
           else {
         try {
             int produit_echange= Integer.parseInt(fxproduitechange.getText());
-       int produit_offert= Integer.parseInt(fxproduitoffert.getText());
+       int produit_offert=cmbxpof.getValue();
              Echanges e1= new Echanges(produit_echange,produit_offert,statut,commentaire);
              ce.ajouterechange(e1);
               Alert alert = new Alert(Alert.AlertType.INFORMATION);

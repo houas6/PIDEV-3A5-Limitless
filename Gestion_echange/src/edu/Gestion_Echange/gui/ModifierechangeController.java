@@ -7,11 +7,20 @@ package edu.Gestion_Echange.gui;
 
 import edu.Gestion_Echange.entites.Echanges;
 import edu.Gestion_Echange.services.CRUDEchange;
+import edu.Gestion_Echange.utils.MyConnection;
 import java.io.IOException;
 import java.net.URL;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -38,7 +47,7 @@ public class ModifierechangeController implements Initializable {
     @FXML
     private TextField fxpe;
     @FXML
-    private TextField fxpo;
+    private ComboBox<Integer> fxpo;
     @FXML
     private TextArea fxcomm;
     @FXML
@@ -56,6 +65,20 @@ public class ModifierechangeController implements Initializable {
        String choice1 = new String("confirmé");
         String choice2 = new String("annuler");
       fxstatut.getItems().addAll(choice1, choice2);
+      //combo box modifier 
+      Connection conn = MyConnection.getInstance().getConnection();
+        String sql = "SELECT id_produit FROM produit WHERE id_user = 12";
+        List<Integer> produits = new ArrayList<>();
+           try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                produits.add(rs.getInt("id_produit"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+         ObservableList<Integer> observableList = FXCollections.observableList(produits);
+         fxpo.setItems(observableList);
      
     }    
 
@@ -75,11 +98,11 @@ public class ModifierechangeController implements Initializable {
     
     @FXML
     private void modifierechange(ActionEvent event) {
-       if(!fxid.getText().equals("")&& !fxpe.getText().equals("") && !fxpo.getText().equals("")  && !fxstatut.getValue().equals("") && !fxcomm.getText().equals("")  ){
+       if(!fxid.getText().equals("")&& !fxpe.getText().equals("") && !fxpo.getValue().equals("")  && !fxstatut.getValue().equals("") && !fxcomm.getText().equals("")  ){
         CRUDEchange ce = new CRUDEchange();
         int id_echange= Integer.parseInt(fxid.getText());
         int produit_echange= Integer.parseInt(fxpe.getText());
-        int produit_offert= Integer.parseInt(fxpo.getText());
+        int produit_offert= fxpo.getValue();
         String statut=fxstatut.getValue();
         String commentaire=fxcomm.getText();
         
