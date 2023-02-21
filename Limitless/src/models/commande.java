@@ -17,8 +17,23 @@ public class commande {
      private int id_commande;
     private utilisateur cl;
     private ArrayList<produit> products;
-   
     private double total_commande;
+    private String status;
+
+    public commande(int id_commande, String status) {
+        this.id_commande = id_commande;
+        this.status = status;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+   
+    
 
      public commande() {
         products = new ArrayList<>();
@@ -30,6 +45,20 @@ public class commande {
        this.products = new ArrayList<>();
        
         this.total_commande = total_commande;
+    }
+
+    public commande(int id_commande, int id_user, String nom, String prenom, String adresse, float total_commande,String status) {
+        this.id_commande=id_commande;
+        this.cl = new utilisateur();
+        this.cl.setId_user(id_user);
+        this.cl.setNom(nom);
+        this.cl.setPrenom(prenom);
+        this.cl.setAdresse(adresse);
+        this.total_commande=total_commande;
+        this.status=status;
+        
+        
+     
     }
 
     public int getId_commande() {

@@ -41,7 +41,7 @@ public class Limitless {
        
        ServicePanier serv3 = new ServicePanier();
  
-    serv3.ajouterPanier(pan2, 16); 
+   // serv3.ajouterPanier(pan2, 16); 
     
       //serv3.supprimerproduitpannier(1, 16);
     // serv3.supprimerPanier(1);
@@ -49,7 +49,7 @@ public class Limitless {
     // serv3.decrementQuantite(pan2, 16);
      //serv3.incrementQuantite(pan2, 16);
        // System.out.println(serv3.getQuantite(1, 16));
-        System.out.println(serv3.getpanier(1).getTotal_panier());
+       // System.out.println(serv3.getpanier(1).getTotal_panier());
         
         
         commande c1= new commande(0,serv1.getutilisateur(1),14.5);
@@ -58,6 +58,9 @@ public class Limitless {
        // System.out.println(serv4.recupererCommandeClient(1));
        //serv4.supprimercommande(1);
          
+       // System.out.println(serv4.afficherCommands());
+       commande c= new commande(4,"paye");
+       serv4.modifierCommand(c);
          
          
          

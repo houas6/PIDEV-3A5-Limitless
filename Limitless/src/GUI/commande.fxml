@@ -96,7 +96,7 @@
                               <Font size="16.0" />
                            </font>
                         </Label>
-                        <Label layoutX="505.0" layoutY="420.0" text="Montant livraison" textFill="WHITE">
+                        <Label layoutX="505.0" layoutY="420.0" text="Tax" textFill="WHITE">
                            <font>
                               <Font size="16.0" />
                            </font>

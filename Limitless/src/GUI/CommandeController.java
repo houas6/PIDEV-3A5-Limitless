@@ -14,6 +14,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
@@ -26,6 +27,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
+import javafx.stage.Stage;
 import models.panier;
 import models.utilisateur;
 import services.ServicePanier;
@@ -174,6 +176,24 @@ line.setLayoutY(50.0);
        // commande.setId_commande(0);
          commande c1= new commande(0,client,spanier.getpanier(1).getTotal_panier()+14);
         scommande.ajoutercommande(c1);
+        
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("payment.fxml"));
+        try{
+            Parent root = loader.load();
+            Scene scene = new Scene(root);
+            Stage stage = (Stage) bord.getScene().getWindow();
+    stage.setTitle("Custom Title"); // Set the window title
+    stage.setScene(scene);
+    stage.setWidth(600); // Set the width of the new window
+    stage.setHeight(400); // Set the height of the new window
+    stage.show();
+           
+            
+           
+           }
+        catch(IOException ex){
+            System.out.println(ex);
+        }
         
         
         

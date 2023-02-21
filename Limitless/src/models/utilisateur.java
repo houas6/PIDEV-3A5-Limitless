@@ -31,6 +31,9 @@ public class utilisateur {
         this.username = username;
     }
 
+    public utilisateur() {
+    }
+
     @Override
     public String toString() {
         return "utilisateur{" + "id_user=" + id_user + ", password=" + password + ", mail=" + mail + ", nom=" + nom + ", prenom=" + prenom + ", adresse=" + adresse + ", role=" + role + ", cin=" + cin + ", username=" + username + '}';

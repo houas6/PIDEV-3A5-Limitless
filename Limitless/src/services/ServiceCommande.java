@@ -94,5 +94,37 @@ public class ServiceCommande implements InterfaceServiceCommande{
             System.err.println("Une erreur s'est produite lors de la suppression de la commande : " + ex.getMessage());
         }
     }
+   
+    public List<commande> afficherCommands() {
+    List<commande> comds = new ArrayList<>();
+        try {
+        String req = "SELECT * FROM commande";
+        ste=conn.createStatement();
+        ResultSet result = ste.executeQuery(req);
+        
+        while (result.next()) {
+            commande resultCommand = new commande(result.getInt("id_commande"),result.getInt("id_user"), result.getString("nom"), result.getString("prenom"), result.getString("adresse"),result.getFloat("total"),result.getString("status"));
+
+            comds.add(resultCommand);
+        }
+        
+      
+    } catch (SQLException ex) {
+         System.out.println(ex);   
+    }
+   return comds;
+    }
     
+    
+    @Override
+    public void modifierCommand(commande c) {
+        try {
+            String req = "UPDATE commande SET status = '" + c.getStatus()+ "' WHERE `id_commande` = " + c.getId_commande();
+            Statement st = conn.createStatement();
+            st.executeUpdate(req);
+            System.out.println(" updated !");
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+    }
 }
