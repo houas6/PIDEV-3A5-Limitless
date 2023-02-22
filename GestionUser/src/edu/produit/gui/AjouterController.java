@@ -24,6 +24,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
@@ -59,6 +60,9 @@ public class AjouterController implements Initializable {
     private Button fxajout;
     @FXML
     private TextField idproduit;
+    
+    @FXML
+    private Button fxcompte;
     
     
     @FXML
@@ -386,6 +390,18 @@ private void Ajouterproduit(ActionEvent event) {
         fxximage1.setCellValueFactory(
                 new PropertyValueFactory<>("image"));
         table_produit.setItems(data);
+    }
+    @FXML
+    private void gerercompte(ActionEvent event) {
+     try {
+        Parent root = FXMLLoader.load(getClass().getResource("changermotdepasse.fxml"));
+        Scene scene = new Scene(root);
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stage.setScene(scene);
+        stage.show();
+    } catch (IOException ex) {
+        System.out.println(ex.getMessage());
+    }
     }
 }
    

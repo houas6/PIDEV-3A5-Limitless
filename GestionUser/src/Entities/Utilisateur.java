@@ -17,6 +17,7 @@ import java.util.Objects;
  * @author hasse
  */
 public class Utilisateur {
+
     private int id_user;
     private String numero;
     private String nom;
@@ -25,37 +26,33 @@ public class Utilisateur {
     private String role;
     private String password;
     private String mail;
-   
 
     public Utilisateur() {
     }
 
-    public Utilisateur(String mail, String password ) {
+    public Utilisateur(String mail, String password) {
         this.mail = mail;
-        this.password = password;   
+        this.password = password;
     }
-    
-    
+
     public Utilisateur(String numero, String password, String mail) {
         this.numero = numero;
         this.password = password;
         this.mail = mail;
     }
-    
+
     public Utilisateur(int id_user, String password, String mail) {
         this.id_user = id_user;
         this.password = password;
         this.mail = mail;
     }
-    
+
     public Utilisateur(int id_user, String numero, String password, String mail) {
         this.id_user = id_user;
         this.numero = numero;
         this.password = password;
         this.mail = mail;
     }
-
-    
 
     public String getNom() {
         return nom;
@@ -97,7 +94,6 @@ public class Utilisateur {
         this.numero = numero;
     }
 
-
     public int getId_user() {
         return id_user;
     }
@@ -129,7 +125,7 @@ public class Utilisateur {
     public void setMail(String mail) {
         this.mail = mail;
     }
-    
+
     public static Utilisateur getUserById(int id) {
         Connection conn = null;
         PreparedStatement stmt = null;
@@ -144,7 +140,7 @@ public class Utilisateur {
                 user = new Utilisateur(rs.getInt(1), rs.getString(2), rs.getString(3));
             }
         } catch (SQLException e) {
-            System.out.println(e.getMessage());;
+            System.out.println(e.getMessage());
         }
         return user;
     }
@@ -165,8 +161,8 @@ public class Utilisateur {
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
-            return user;
-        }
+        return user;
+    }
 
     @Override
     public int hashCode() {
@@ -206,6 +202,5 @@ public class Utilisateur {
     public String toString() {
         return "Utilisateur{" + "id_user=" + id_user + ", numero=" + numero + ", password=" + password + ", mail=" + mail + '}';
     }
-    
-    
+
 }

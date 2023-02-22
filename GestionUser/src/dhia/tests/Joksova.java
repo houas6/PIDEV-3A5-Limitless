@@ -22,7 +22,7 @@ public class Joksova {
         // TODO code application logic here
         
         CRUDUtilisateur cu= new CRUDUtilisateur();
-        Utilisateur u1 = new Utilisateur("Hamdi","Dhaouedi","ham123@gmail.com");
+        //Utilisateur u1 = new Utilisateur("Hamdi","Dhaouedi","ham123@gmail.com");
         //cu.ajouterUtilisateur2(u1);
         //System.out.println(cu.afficherUtilsateur());
         System.out.println(cu.afficherUtilisateur());

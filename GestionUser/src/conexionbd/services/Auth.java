@@ -54,4 +54,33 @@ public class Auth {
     public static void logout() {
         currentUtilisateur = null;
     }
+    
+    
+public static boolean changePassword(String mail, String newPassword) {
+    try {
+        
+        Class.forName("com.mysql.jdbc.Driver");
+        Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/limitless", "root", "");
+        String query = "UPDATE utilisateur SET password=? WHERE mail=?";
+        PreparedStatement pstmt = conn.prepareStatement(query);
+        pstmt.setString(1, newPassword);
+        pstmt.setString(2, mail);
+
+        // Exécuter la requête
+        pstmt.executeUpdate();
+
+        // Fermer la connexion
+        conn.close();
+
+        System.out.println("Mot de passe modifié avec succès.");
+        return true;
+    } catch (Exception e) {
+        System.err.println("Erreur : " + e.getMessage());
+        return false;
+    }
+}
+
+    public static Object getInstance() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }

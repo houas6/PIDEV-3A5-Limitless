@@ -18,6 +18,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
@@ -59,43 +61,54 @@ public class SignupController implements Initializable {
     private void signup(ActionEvent event) {
         
         String email = semail.getText();
-        String password = spassword.getText();
-        String nom = snom.getText();
-        String prenom = sprenom.getText();
-        String numero= snumero.getText();
-        String cin = scin.getText();
-        // Vérifier si tous les champs sont remplis
-    if (email.isEmpty() || password.isEmpty() || nom.isEmpty() || prenom.isEmpty() || numero.isEmpty() || cin.isEmpty()) {
-        erreurSaisie.setText("Veuillez remplir tous les champs");
-        return;
-    }
-    
-    // Vérifier si le format de l'email est valide
-    if (!email.matches("[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}")) {
-        erreurSaisie.setText("L'adresse e-mail est invalide.");
-        return;
-    }
-    
-    // Vérifier si le format du numéro de téléphone est valide
-    if (!numero.matches("[0-9]{8}")) {
-        erreurSaisie.setText("Le numéro de téléphone est invalide.");
-        return;
-    }
-    
-    // Appeler la méthode Auth.signUp
-        boolean ConnexionResultat = Auth.signUp(nom, prenom,cin, email, password, numero);
-        if (ConnexionResultat==true) {
-            try {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("login.fxml"));
-                Parent root = loader.load();
-                Scene scene = new Scene(root);
-                Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-                stage.setScene(scene);
-                stage.show();
-            } catch (IOException ex) {
-                System.out.println(ex.getMessage());;
-            }
-        }
-    }
-    
+String password = spassword.getText();
+String nom = snom.getText();
+String prenom = sprenom.getText();
+String numero= snumero.getText();
+String cin = scin.getText();
+// Vérifier si tous les champs sont remplis
+if (email.isEmpty() || password.isEmpty() || nom.isEmpty() || prenom.isEmpty() || numero.isEmpty() || cin.isEmpty()) {
+    // afficher le message d'erreur dans une alert box
+    Alert alert = new Alert(AlertType.ERROR);
+    alert.setTitle("Erreur de saisie");
+    alert.setHeaderText("Veuillez remplir tous les champs");
+    alert.showAndWait();
+    return;
 }
+
+// Vérifier si le format de l'email est valide
+if (!email.matches("[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}")) {
+    // afficher le message d'erreur dans une alert box
+    Alert alert = new Alert(AlertType.ERROR);
+    alert.setTitle("Erreur de saisie");
+    alert.setHeaderText("L'adresse e-mail est invalide.");
+    alert.showAndWait();
+    return;
+}
+
+// Vérifier si le format du numéro de téléphone est valide
+if (!numero.matches("[0-9]{8}")) {
+    // afficher le message d'erreur dans une alert box
+    Alert alert = new Alert(AlertType.ERROR);
+    alert.setTitle("Erreur de saisie");
+    alert.setHeaderText("Le numéro de téléphone est invalide.");
+    alert.showAndWait();
+    return;
+}
+
+// Appeler la méthode Auth.signUp
+boolean ConnexionResultat = Auth.signUp(nom, prenom,cin, email, password, numero);
+if (ConnexionResultat==true) {
+    try {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("login.fxml"));
+        Parent root = loader.load();
+        Scene scene = new Scene(root);
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stage.setScene(scene);
+        stage.show();
+    } catch (IOException ex) {
+        System.out.println(ex.getMessage());
+    }
+}
+
+}}

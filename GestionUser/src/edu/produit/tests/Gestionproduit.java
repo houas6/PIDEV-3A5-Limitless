@@ -20,12 +20,12 @@ public class Gestionproduit {
      */
     public static void main(String[] args) {
         MyConnection connexion = MyConnection.getInstance();
-        Produit p = new Produit("makrouna", 500,"bzeyedthon",1);
-        CRUDProduit crud = new CRUDProduit();
-       crud.ajouterproduit(p);
-       crud.supprimerproduit(15);
-        
-        crud.afficherproduit();
+//        Produit p = new Produit("makrouna", 500,"bzeyedthon",1);
+//        CRUDProduit crud = new CRUDProduit();
+//       crud.ajouterproduit(p);
+//       crud.supprimerproduit(15);
+//        
+//        crud.afficherproduit();
     }
     
 }
