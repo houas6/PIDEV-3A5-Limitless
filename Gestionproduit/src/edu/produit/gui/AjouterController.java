@@ -45,6 +45,8 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableCell;
 import javafx.scene.image.Image;
@@ -99,6 +101,10 @@ public class AjouterController implements Initializable {
     private TableColumn<Produit, byte[]> fxximage1;
     @FXML
     private Button statist;
+    @FXML
+    private Button fxsearch;
+    @FXML
+    private TextField filterfield;
     
     
     /*public void setID_produit(String message)
@@ -499,10 +505,86 @@ private void tri(ActionEvent event) {
     private void stat(ActionEvent event) {
         this.redirectToPage3();
     }
+@FXML
+private void search(ActionEvent event) {
+    fxxidproduit.setCellValueFactory(new PropertyValueFactory<>("id_produit"));
+    fxxnomproduit.setCellValueFactory(new PropertyValueFactory<>("nom_produit"));
+    fxxprix.setCellValueFactory(new PropertyValueFactory<>("prix"));
+    fxxdescription.setCellValueFactory(new PropertyValueFactory<>("description"));
+    fxxiduser.setCellValueFactory(new PropertyValueFactory<>("id_user"));
+    fxximage1.setCellValueFactory(new PropertyValueFactory<>("image"));
 
-  
+    CRUDProduit cr = new CRUDProduit();
+    List<Produit> li = cr.ListClasse1();
+    ObservableList<Produit> dataList = FXCollections.observableArrayList(li);
+
+    FilteredList<Produit> filteredData = new FilteredList<>(dataList, b -> true);
+    filterfield.textProperty().addListener((observable, oldValue, newValue) -> {
+        filteredData.setPredicate(prd -> {
+            if (newValue == null || newValue.isEmpty()) {
+                return true;
+            }
+            String lowerCaseFilter = newValue.toLowerCase();
+            if (prd.getNom_produit().toLowerCase().indexOf(lowerCaseFilter) != -1) {
+                return true;
+            } else if (prd.getDescription().toLowerCase().indexOf(lowerCaseFilter) != -1) {
+                return true;
+            } else {
+                return false;
+            }
+        });
+    });
+
+    SortedList<Produit> sortedData = new SortedList<>(filteredData);
+    sortedData.comparatorProperty().bind(table_produit.comparatorProperty());
+
+    // Initialize the image column cell factory
+    fxximage1.setCellFactory(column -> {
+        TableCell<Produit, byte[]> cell = new TableCell<Produit, byte[]>() {
+            private final ImageView imageView = new ImageView();
+
+            @Override
+            protected void updateItem(byte[] item, boolean empty) {
+                super.updateItem(item, empty);
+
+                if (empty || item == null) {
+                    imageView.setImage(null);
+                } else {
+                    Image image = new Image(new ByteArrayInputStream(item));
+                    imageView.setImage(image);
+                }
+
+                setGraphic(imageView);
+            }
+        };
+
+        return cell;
+    });
+
+    String searchTerm = filterfield.getText().trim();
+    if (!searchTerm.isEmpty()) {
+        // Filter the dataList instead of querying the database again
+        filteredData.setPredicate(prd -> {
+            String lowerCaseFilter = searchTerm.toLowerCase();
+            if (prd.getNom_produit().toLowerCase().indexOf(lowerCaseFilter) != -1) {
+                return true;
+            } else if (prd.getDescription().toLowerCase().indexOf(lowerCaseFilter) != -1) {
+                return true;
+            } else {
+                return false;
+            }
+        });
+
+        // Set the table items with the filtered data
+        table_produit.setItems(filteredData);
+    } else {
+        // If the search field is empty, show all products
+        table_produit.setItems(sortedData);
+    }
 }
-   
+
+}
+ 
     
     
 

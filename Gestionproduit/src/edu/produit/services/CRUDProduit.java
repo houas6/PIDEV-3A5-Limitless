@@ -204,6 +204,28 @@ return t ;
     }
     return users;
 }
+public List<Produit> searchProduit(String searchTerm) {
+    List<Produit> produitList = new ArrayList<>();
+    try {
+        String requete = "SELECT * FROM produit WHERE nom_produit LIKE ?";
+        PreparedStatement pst = conn.prepareStatement(requete);
+        pst.setString(1, "%" + searchTerm + "%");
+        ResultSet rs = pst.executeQuery();
+        while (rs.next()) {
+            Produit produit = new Produit();
+            produit.setId_produit(rs.getInt("id_produit"));
+            produit.setNom_produit(rs.getString("nom_produit"));
+            produit.setPrix(rs.getFloat("prix"));
+            produit.setDescription(rs.getString("description"));
+            produit.setId_user(rs.getInt("id_user"));
+            produit.setImage(rs.getBytes("image"));
+            produitList.add(produit);
+        }
+    } catch (SQLException ex) {
+        System.out.println(ex.getMessage());
+    }
+    return produitList;
+}
 
 }
     
