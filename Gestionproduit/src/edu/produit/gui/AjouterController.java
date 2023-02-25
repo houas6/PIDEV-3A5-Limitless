@@ -17,6 +17,7 @@ import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -40,6 +41,15 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+import javafx.collections.ListChangeListener;
+import javafx.collections.ObservableList;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableCell;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+
 //import org.controlsfx.control.Notifications;
 
 /**
@@ -87,6 +97,8 @@ public class AjouterController implements Initializable {
     private Button chooseimage;
     @FXML
     private TableColumn<Produit, byte[]> fxximage1;
+    @FXML
+    private Button statist;
     
     
     /*public void setID_produit(String message)
@@ -387,6 +399,108 @@ private void Ajouterproduit(ActionEvent event) {
                 new PropertyValueFactory<>("image"));
         table_produit.setItems(data);
     }
+
+    @FXML
+private void tri(ActionEvent event) {
+    CRUDProduit cr = new CRUDProduit();
+    List<Produit> li = cr.ListClasse1();
+    ObservableList<Produit> data = FXCollections.observableArrayList(li);
+    
+    // Initialize the image column cell factory
+    fxximage1.setCellFactory(column -> {
+        TableCell<Produit, byte[]> cell = new TableCell<Produit, byte[]>() {
+            private final ImageView imageView = new ImageView();
+
+            @Override
+            protected void updateItem(byte[] item, boolean empty) {
+                super.updateItem(item, empty);
+
+                if (empty || item == null) {
+                    imageView.setImage(null);
+                } else {
+                    Image image = new Image(new ByteArrayInputStream(item));
+                    imageView.setImage(image);
+                }
+
+                setGraphic(imageView);
+            }
+        };
+
+        return cell;
+    });
+    
+    // Set the cell value factories for the other columns
+    fxxidproduit.setCellValueFactory(new PropertyValueFactory<>("id_produit"));
+    fxxnomproduit.setCellValueFactory(new PropertyValueFactory<>("nom_produit"));
+    fxxprix.setCellValueFactory(new PropertyValueFactory<>("prix"));
+    fxxdescription.setCellValueFactory(new PropertyValueFactory<>("description"));
+    fxxiduser.setCellValueFactory(new PropertyValueFactory<>("id_user"));
+
+    // Set the sorting for the table
+    table_produit.getSortOrder().add(fxxprix);
+    fxxprix.setSortType(TableColumn.SortType.ASCENDING);
+    
+    // Set the items to the table and update the view
+    table_produit.setItems(data);
+    table_produit.sort();
+    
+    // Add a listener to handle changes in the table columns
+    table_produit.getColumns().addListener((ListChangeListener<TableColumn<Produit, ?>>) c -> {
+        c.next();
+        if (c.wasReplaced()) {
+            TableColumn<Produit, ?> column = c.getAddedSubList().get(0);
+            if (column.equals(fxximage1)) {
+                fxximage1.setCellFactory(column2 -> {
+                    TableCell<Produit, byte[]> cell = new TableCell<Produit, byte[]>() {
+                        private final ImageView imageView = new ImageView();
+
+                        @Override
+                        protected void updateItem(byte[] item, boolean empty) {
+                            super.updateItem(item, empty);
+
+                            if (empty || item == null) {
+                                imageView.setImage(null);
+                            } else {
+                                Image image = new Image(new ByteArrayInputStream(item));
+                                imageView.setImage(image);
+                            }
+
+                            setGraphic(imageView);
+                        }
+                    };
+
+                    return cell;
+                });
+            }
+        }
+    });
+}
+
+
+
+
+    private void redirectToPage3(){
+            Parent root;
+            try {
+            
+            
+           
+            root = FXMLLoader.load(getClass().getResource("Produitstat.fxml"));
+            Scene c=new Scene(root);
+            Stage stage=(Stage)statist.getScene().getWindow();
+            stage.setScene(c);
+        } catch (IOException ex) {
+            Logger.getLogger(AjouterController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+          
+    }
+    @FXML
+    private void stat(ActionEvent event) {
+        this.redirectToPage3();
+    }
+
+  
 }
    
     

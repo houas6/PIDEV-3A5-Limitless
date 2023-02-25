@@ -7,13 +7,22 @@ package edu.produit.services;
 
 import edu.produit.entites.Produit;
 import edu.produit.utils.MyConnection;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.sql.Blob;
 import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -114,4 +123,87 @@ public class CRUDProduit implements InterfaceServices{
    
 return t ; 
     }
+    
+    
+    public List<Produit> ListClasse1() {
+    List<Produit> Mylist = new ArrayList<>();
+    try {
+        String requete = "select * from produit ORDER BY prix ";
+        PreparedStatement pst = conn.prepareStatement(requete);
+
+        ResultSet e = pst.executeQuery();
+        while (e.next()) {
+            Produit pr = new Produit();
+
+            pr.setId_produit(e.getInt("id_produit"));
+            pr.setNom_produit(e.getString("nom_produit"));
+            pr.setPrix(e.getInt("prix"));
+
+            pr.setDescription(e.getString("description"));
+            pr.setId_user(e.getInt("id_user"));
+
+            // Load the image from the database
+            Blob blob = e.getBlob("image");
+            if (blob != null) {
+                InputStream in = blob.getBinaryStream();
+                ByteArrayOutputStream out = new ByteArrayOutputStream();
+                byte[] buffer = new byte[4096];
+                int bytesRead = -1;
+
+                while ((bytesRead = in.read(buffer)) != -1) {
+                    out.write(buffer, 0, bytesRead);
+                }
+
+                byte[] imageBytes = out.toByteArray();
+                pr.setImage(imageBytes);
+            }
+
+            Mylist.add(pr);
+        }
+
+    } catch (SQLException | IOException ex) {
+        System.out.println(ex.getMessage());
+    }
+    return Mylist;
 }
+
+        public float totalPrixProduits(List<Produit> produits) {
+         float total = 0;
+    for (Produit p : produits) {
+        total += p.getPrix();
+    }
+    return total;
+}
+    public int nombreproduits() {
+    int count = 0;
+    String query = "SELECT COUNT(*) FROM produit";
+    try {
+        PreparedStatement ps = conn.prepareStatement(query);
+        ResultSet rs = ps.executeQuery();
+        rs.next();
+        count = rs.getInt(1);
+    } catch (SQLException ex) {
+        System.out.println("Error: " + ex.getMessage());
+    }
+    return count;
+}
+    public Map<Integer, String> chercherUser() {
+    Map<Integer, String> users = new HashMap<>();
+    try {
+        String sql = "SELECT id_user, nom FROM utilisateur";
+        Statement st = conn.createStatement();
+        PreparedStatement ps = conn.prepareStatement(sql);
+        ResultSet rs = ps.executeQuery();
+        while (rs.next()) {
+            int id_user = rs.getInt("id_user");
+            String nom = rs.getString("nom");
+            users.put(id_user, nom);
+        }
+    } catch (SQLException ex) {
+        System.out.println(ex.getMessage());
+    }
+    return users;
+}
+
+}
+    

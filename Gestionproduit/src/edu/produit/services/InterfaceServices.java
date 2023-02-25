@@ -7,6 +7,7 @@ package edu.produit.services;
 
 import edu.produit.entites.Produit;
 import java.util.List;
+import java.util.Map;
 
 /**
  *
@@ -18,4 +19,8 @@ public interface InterfaceServices {
     public void modifierproduit(Produit p);
     public void supprimerproduit(int id_produit);
     public List<Produit> afficherproduit();
+    public List<Produit> ListClasse1();
+    public float totalPrixProduits(List<Produit> produits);
+    public int nombreproduits();
+    public Map<Integer, String> chercherUser();
 }
