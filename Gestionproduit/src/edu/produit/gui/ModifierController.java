@@ -55,28 +55,84 @@ public class ModifierController implements Initializable {
     }    
 
     @FXML
-    private void modifier(ActionEvent event) {
-        CRUDProduit cr = new CRUDProduit(); 
-           int id_produit = cr.getid(Integer.parseInt(fxidproduit1.getText())) ;  
-            
-        Produit p = new Produit( id_produit, fxnomproduit1.getText(),Integer.parseInt(fxprix1.getText()),  fxdescription1.getText(),Integer.parseInt(fxiduser1.getText()));
-        
+private void modifier(ActionEvent event) {
+    String idProduitStr = fxidproduit1.getText();
+    String nomProduit = fxnomproduit1.getText();
+    String prixStr = fxprix1.getText();
+    String description = fxdescription1.getText();
+    String idUserStr = fxiduser1.getText();
 
-        cr.modifierproduit(p);
-        
-        fxnomproduit1.clear(); 
-         fxprix1.clear() ; 
-         fxdescription1.clear(); 
-         fxiduser1.clear();
-         
-        
-        
-       Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Information Dialog");
+    if (idProduitStr.isEmpty()) {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setContentText("ID du produit doit être saisi");
+        alert.setTitle("Problème");
+        alert.setHeaderText(null);
+        alert.showAndWait();
+    } else if (nomProduit.isEmpty()) {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setContentText("Nom du produit doit être saisi");
+        alert.setTitle("Problème");
+        alert.setHeaderText(null);
+        alert.showAndWait();
+    } else if (prixStr.isEmpty()) {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setContentText("Prix doit être saisi");
+        alert.setTitle("Problème");
+        alert.setHeaderText(null);
+        alert.showAndWait();
+    } else if (description.isEmpty()) {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setContentText("Description doit être saisie");
+        alert.setTitle("Problème");
+        alert.setHeaderText(null);
+        alert.showAndWait();
+    } else if (idUserStr.isEmpty()) {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setContentText("ID utilisateur doit être saisi");
+        alert.setTitle("Problème");
+        alert.setHeaderText(null);
+        alert.showAndWait();
+    } else {
+        try {
+            int idProduit = Integer.parseInt(idProduitStr);
+            float prix = Float.parseFloat(prixStr);
+            int idUser = Integer.parseInt(idUserStr);
+
+            CRUDProduit cr = new CRUDProduit(); 
+            int idProduitTrouve = cr.getid(idProduit);
+
+            if (idProduitTrouve != -1) {
+                Produit p = new Produit(idProduit, nomProduit, prix, description, idUser);
+
+                cr.modifierproduit(p);
+
+                fxnomproduit1.clear(); 
+                fxprix1.clear(); 
+                fxdescription1.clear(); 
+                fxiduser1.clear();
+
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Information Dialog");
+                alert.setHeaderText(null);
+                alert.setContentText("Produit modifié avec succès!");
+                alert.showAndWait();
+            } else {
+                Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                alert.setContentText("ID du produit n'existe pas dans la base de données");
+                alert.setTitle("Problème");
+                alert.setHeaderText(null);
+                alert.showAndWait();
+            }
+        } catch (NumberFormatException e) {
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setContentText("ID du produit, prix et ID utilisateur doivent être des nombres");
+            alert.setTitle("Problème");
             alert.setHeaderText(null);
-            alert.setContentText("Produit modifier avec succès!");
             alert.showAndWait();
-    } 
+        }
+    }
+}
+
 
         
     
