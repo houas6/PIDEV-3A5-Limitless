@@ -19,4 +19,5 @@ public interface InterfaceServices  {
     public void supprimerechange(int id);
     public int getIdechange (int n );
     public List<Echanges> afficherechange();
+    public List<Echanges> searchEchange(String searchTerm) ;
 }

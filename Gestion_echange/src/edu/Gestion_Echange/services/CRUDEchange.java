@@ -100,4 +100,25 @@ Connection conn = MyConnection.getInstance().getConnection();
    
 return t ;
    } 
+public List<Echanges> searchEchange(String searchTerm) {
+    List<Echanges> echangeList = new ArrayList<>();
+    try {
+        String requete = "SELECT * FROM echanges WHERE id_echange = ?";
+        PreparedStatement pst = conn.prepareStatement(requete);
+        pst.setInt(1, Integer.parseInt(searchTerm));
+        ResultSet rs = pst.executeQuery();
+        while (rs.next()) {
+            Echanges echange = new Echanges();
+            echange.setId_echange(rs.getInt("id_echange"));
+            echange.setProduit_echange(rs.getInt("produit_echange"));
+            echange.setProduit_offert(rs.getInt("produit_offert"));
+            echange.setStatut(rs.getString("statut"));
+            echange.setCommentaire(rs.getString("commentaire"));
+            echangeList.add(echange);
+        }
+    } catch (SQLException ex) {
+        System.out.println(ex.getMessage());
+    }
+    return echangeList;
+}
 }

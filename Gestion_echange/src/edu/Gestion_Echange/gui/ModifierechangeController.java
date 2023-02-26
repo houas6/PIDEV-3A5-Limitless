@@ -117,7 +117,7 @@ public class ModifierechangeController implements Initializable {
             icr1.sms(c);
         }
 */
-     Alert alert = new Alert(Alert.AlertType.INFORMATION);
+    Alert alert = new Alert(Alert.AlertType.INFORMATION);
     alert.setTitle("Success");
     alert.setContentText("echange modifié!");
     alert.show();
