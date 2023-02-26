@@ -41,7 +41,7 @@ public class Limitless {
        
        ServicePanier serv3 = new ServicePanier();
  
-   // serv3.ajouterPanier(pan2, 16); 
+   serv3.ajouterPanier(pan2, 16); 
     
       //serv3.supprimerproduitpannier(1, 16);
     // serv3.supprimerPanier(1);
@@ -60,7 +60,7 @@ public class Limitless {
          
        // System.out.println(serv4.afficherCommands());
        commande c= new commande(4,"paye");
-       serv4.modifierCommand(c);
+      // serv4.modifierCommand(c);
          
          
          

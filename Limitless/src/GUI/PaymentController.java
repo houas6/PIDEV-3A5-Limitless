@@ -4,7 +4,8 @@
  * and open the template in the editor.
  */
 package GUI;
-
+import models.*;
+import services.*;
 import com.stripe.exception.StripeException;
 import static java.lang.Integer.parseInt;
 import java.net.URL;
@@ -20,6 +21,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import models.MailSender;
 import models.panier;
 import models.utilisateur;
 import services.ServicePanier;
@@ -56,7 +58,7 @@ public class PaymentController implements Initializable {
     }    
 
     @FXML
-    private void Pay(ActionEvent event) throws StripeException {
+    private void Pay(ActionEvent event) throws StripeException, Exception {
        // PaymentApi.pay();
         System.out.println(isNum(m_exp.getText()));
           if ((isValidVisaCardNo(card.getText()) && (!card.getText().isEmpty()) && (isNum(card.getText())))
@@ -67,7 +69,12 @@ public class PaymentController implements Initializable {
               
              int k =floatToInt(f);
              System.out.println(k);
-          PaymentApi.pay(k);
+        //  PaymentApi.pay(k);
+         ServiceUtilisateur serv4 = new ServiceUtilisateur();
+         utilisateur client;
+         client=serv4.getutilisateur(1);
+         
+  MailSender.sendMail(client);
 
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Paiement");
