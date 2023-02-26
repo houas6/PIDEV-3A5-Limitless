@@ -69,7 +69,7 @@ public class PaymentController implements Initializable {
               
              int k =floatToInt(f);
              System.out.println(k);
-        //  PaymentApi.pay(k);
+          PaymentApi.pay(k);
          ServiceUtilisateur serv4 = new ServiceUtilisateur();
          utilisateur client;
          client=serv4.getutilisateur(1);

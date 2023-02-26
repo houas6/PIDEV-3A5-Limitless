@@ -42,7 +42,7 @@ import javafx.stage.StageStyle;
         public void start(Stage primaryStage) {
             Parent root;
             try{
-            root=FXMLLoader.load(getClass().getResource("payment.fxml"));
+            root=FXMLLoader.load(getClass().getResource("panier.fxml"));
   
 
             Scene scene = new Scene(root);
