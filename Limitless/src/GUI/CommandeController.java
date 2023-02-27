@@ -5,9 +5,25 @@
  */
 package GUI;
 
+import com.itextpdf.text.Document;
+import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.Element;
+import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.Phrase;
+import com.itextpdf.text.pdf.PdfPCell;
+import com.itextpdf.text.pdf.PdfPTable;
+import com.itextpdf.text.pdf.PdfWriter;
+import com.itextpdf.text.Font.FontFamily;
+import com.itextpdf.text.FontFactory;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.net.URL;
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -27,7 +43,9 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import javafx.stage.Window;
 import models.panier;
 import models.utilisateur;
 import services.ServicePanier;
@@ -76,6 +94,7 @@ public class CommandeController implements Initializable {
     private Label soustotal;
     @FXML
     private Label total;
+    
 
     /**
      * Initializes the controller class.
@@ -168,7 +187,7 @@ line.setLayoutY(50.0);
     }
 
     @FXML
-    private void payercommande(ActionEvent event) {
+    private void payercommande(ActionEvent event) throws FileNotFoundException, DocumentException {
       client= sclient.getutilisateur(1);
      client.setAdresse(adresse.getText());
         //commande.setCl(client);
@@ -176,6 +195,7 @@ line.setLayoutY(50.0);
        // commande.setId_commande(0);
          commande c1= new commande(0,client,spanier.getpanier(1).getTotal_panier()+14);
         scommande.ajoutercommande(c1);
+        genererTicketAchatPDF(spanier, bord.getScene().getWindow());
         
         FXMLLoader loader = new FXMLLoader(getClass().getResource("payment.fxml"));
         try{
@@ -195,8 +215,69 @@ line.setLayoutY(50.0);
             System.out.println(ex);
         }
         
-        
+     
+     
+     
+     
+  
+     
         
     }
-    
+    public static void genererTicketAchatPDF(ServicePanier spanier, Window parentWindow) {
+    FileChooser fileChooser = new FileChooser();
+    fileChooser.setTitle("Enregistrer les données");
+    File selectedFile = fileChooser.showSaveDialog(parentWindow);
+ 
+    if (selectedFile != null) {
+        try {
+            // Créer un document PDF
+            Document document = new Document();
+            PdfWriter.getInstance(document, new FileOutputStream(selectedFile));
+            document.open();
+ 
+            // Ajouter les éléments de l'interface utilisateur pour le ticket d'achat
+            com.itextpdf.text.Font titleFont = FontFactory.getFont(FontFactory.HELVETICA_BOLD, 18);
+            Paragraph title = new Paragraph("Ticket d'achat", titleFont);
+            title.setAlignment(Element.ALIGN_CENTER);
+            title.setSpacingAfter(10f);
+            document.add(title);
+ 
+            com.itextpdf.text.Font regularFont = FontFactory.getFont(FontFactory.HELVETICA, 12);
+            Paragraph date = new Paragraph("Date: " + LocalDate.now().toString(), regularFont);
+            date.setAlignment(Element.ALIGN_LEFT);
+            date.setSpacingAfter(10f);
+            document.add(date);
+ 
+            Paragraph produits = new Paragraph("Produits:", regularFont);
+            produits.setAlignment(Element.ALIGN_LEFT);
+            produits.setSpacingAfter(10f);
+            document.add(produits);
+ 
+            ArrayList<produit> products = spanier.getpanier(1).getProducts();
+            PdfPTable table = new PdfPTable(3); // 3 colonnes pour Nom, Prix et Quantité
+            table.setWidthPercentage(100);
+            table.setSpacingBefore(10f);
+            table.setSpacingAfter(10f);
+ 
+            // En-tête de table
+            table.addCell(new PdfPCell(new Phrase("Nom", regularFont)));
+            table.addCell(new PdfPCell(new Phrase("Prix", regularFont)));
+            table.addCell(new PdfPCell(new Phrase("Quantité", regularFont)));
+ 
+            // Contenu de table
+            for (produit p : products) {
+                table.addCell(new PdfPCell(new Phrase(p.getNom_produit(), regularFont)));
+                table.addCell(new PdfPCell(new Phrase(String.valueOf(p.getPrix()), regularFont)));
+                table.addCell(new PdfPCell(new Phrase(String.valueOf(spanier.getQuantite(1, p.getId_produit())), regularFont)));
+            }
+            document.add(table);
+ 
+            document.close();
+        } catch (IOException | DocumentException ex) {
+            System.err.println("Erreur lors de l'écriture dans le fichier: " + ex.getMessage());
+        }
+    } else {
+        System.out.println("La sélection de fichier a été annulée");
+    }
+}
 }

@@ -63,7 +63,7 @@ public class PanierController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-        ArrayList<produit> products = spanier.getpanier(1).getProducts();// remplace 1 par client.id
+        ArrayList<produit> products =  spanier.getpanier(1).getProducts();// remplace 1 par client.id
         System.out.println( products);
      
      
