@@ -76,8 +76,6 @@ public class AjouterController implements Initializable {
     @FXML
     private TableView<Produit> table_produit;
     @FXML
-    private TableColumn<Produit,Integer> fxxidproduit;
-    @FXML
     private TableColumn<Produit, String> fxxnomproduit;
     @FXML
     private TableColumn<Produit, Float> fxxprix;
@@ -93,10 +91,6 @@ public class AjouterController implements Initializable {
     private TableColumn<Produit, Integer> fxxiduser;
     @FXML
     private TextField fxiduser;
-    @FXML
-    private ImageView fximage;
-    @FXML
-    private Button chooseimage;
     @FXML
     private TableColumn<Produit, byte[]> fxximage1;
     @FXML
@@ -132,7 +126,7 @@ public class AjouterController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-        fxxidproduit.setCellValueFactory(new PropertyValueFactory<>("id_produit"));
+       // fxxidproduit.setCellValueFactory(new PropertyValueFactory<>("id_produit"));
         fxxnomproduit.setCellValueFactory(new PropertyValueFactory<>("nom_produit"));
         fxxprix.setCellValueFactory(new PropertyValueFactory<>("prix"));
         fxxdescription.setCellValueFactory(new PropertyValueFactory<>("description"));
@@ -310,17 +304,6 @@ private void Ajouterproduit(ActionEvent event) {
 
     
 
-    @FXML
-    private void chooseimage(ActionEvent event) {
-        FileChooser fileChooser = new FileChooser();
-    fileChooser.getExtensionFilters().addAll(
-        new FileChooser.ExtensionFilter("Image Files", "*.png", "*.jpg", "*.gif"));
-    File selectedFile = fileChooser.showOpenDialog(null);
-    if (selectedFile != null) {
-        Image image = new Image(selectedFile.toURI().toString());
-        fximage.setImage(image);
-    }
-    }
     
     public void populateTable(){
         CRUDProduit cr= new CRUDProduit();
@@ -331,8 +314,8 @@ private void Ajouterproduit(ActionEvent event) {
 
         
           
-        fxxidproduit.setCellValueFactory(
-                new PropertyValueFactory<>("id_produit"));
+       // fxxidproduit.setCellValueFactory(
+             //   new PropertyValueFactory<>("id_produit"));
         fxxnomproduit.setCellValueFactory(
                 new PropertyValueFactory<>("nom_produit"));
  
@@ -379,7 +362,7 @@ private void tri(ActionEvent event) {
     });
     
     // Set the cell value factories for the other columns
-    fxxidproduit.setCellValueFactory(new PropertyValueFactory<>("id_produit"));
+    //fxxidproduit.setCellValueFactory(new PropertyValueFactory<>("id_produit"));
     fxxnomproduit.setCellValueFactory(new PropertyValueFactory<>("nom_produit"));
     fxxprix.setCellValueFactory(new PropertyValueFactory<>("prix"));
     fxxdescription.setCellValueFactory(new PropertyValueFactory<>("description"));
@@ -450,7 +433,7 @@ private void tri(ActionEvent event) {
     }
 @FXML
 private void search(ActionEvent event) {
-    fxxidproduit.setCellValueFactory(new PropertyValueFactory<>("id_produit"));
+  //  fxxidproduit.setCellValueFactory(new PropertyValueFactory<>("id_produit"));
     fxxnomproduit.setCellValueFactory(new PropertyValueFactory<>("nom_produit"));
     fxxprix.setCellValueFactory(new PropertyValueFactory<>("prix"));
     fxxdescription.setCellValueFactory(new PropertyValueFactory<>("description"));

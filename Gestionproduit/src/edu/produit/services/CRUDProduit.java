@@ -92,7 +92,7 @@ public class CRUDProduit implements InterfaceServices{
         ResultSet result = ste.executeQuery(req);
         
         while (result.next()) {
-            Produit resultProduit = new Produit(result.getInt("id_produit"), result.getString("nom_produit"),result.getFloat("prix"),result.getString("description"),result.getInt("id_user"),result.getBytes("image"));
+            Produit resultProduit = new Produit( result.getString("nom_produit"),result.getFloat("prix"),result.getString("description"),result.getInt("id_user"),result.getBytes("image"));
             prod.add(resultProduit);
         }
         System.out.println(prod);
