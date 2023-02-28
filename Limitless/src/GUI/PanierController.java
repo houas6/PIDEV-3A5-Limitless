@@ -4,13 +4,20 @@
  * and open the template in the editor.
  */
 package GUI;
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import services.*;
 import models.*;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -65,6 +72,7 @@ public class PanierController implements Initializable {
         // TODO
         ArrayList<produit> products =  spanier.getpanier(1).getProducts();// remplace 1 par client.id
         System.out.println( products);
+      
      
      
      
@@ -74,11 +82,33 @@ public class PanierController implements Initializable {
     productPane.setPrefSize(500, 75);
     productPane.setStyle("-fx-background-color: linear-gradient(#ff0000, #530101); -fx-background-radius: 10; -fx-padding: 10px;");
  
-    Label productRefLabel = new Label("ID: " + p.getId_produit());
+   /* Label productRefLabel = new Label("ID: " + p.getId_produit());
     productRefLabel.setLayoutX(10);
     productRefLabel.setLayoutY(10);
     productRefLabel.setFont(Font.font("Verdana", FontWeight.BOLD, 14));
-    productRefLabel.setStyle("-fx-font-weight: bold; -fx-text-fill: #ffffff;");
+    productRefLabel.setStyle("-fx-font-weight: bold; -fx-text-fill: #ffffff;");*/
+   ImageView imageView = new ImageView();
+byte[] imageData = null;
+            try {
+                imageData = spanier.getProductImage(p.getId_produit()); // Make sure that imageData is not null
+            } catch (SQLException ex) {
+                Logger.getLogger(PanierController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+if (imageData != null) {
+    
+    Image image = new Image(new ByteArrayInputStream(imageData));
+    imageView.setImage(image);
+    imageView.setFitWidth(100);
+    imageView.setFitHeight(100);
+    imageView.setPreserveRatio(true);
+    imageView.setSmooth(true);
+    imageView.setCache(true);
+    
+    
+    // Add the ImageView to your scene graph
+    // (e.g. using a Pane or a Group)
+}
+    
  
     Label productDimensionLabel = new Label("Nom: " + p.getNom_produit());
     productDimensionLabel.setLayoutX(120);
@@ -153,7 +183,7 @@ decrementButton.setOnAction(event -> {
 ImageView supprimerImageView = new ImageView();
 supprimerImageView.setFitHeight(26);
 supprimerImageView.setFitWidth(35);
-supprimerImageView.setLayoutX(10);
+supprimerImageView.setLayoutX(110);
 supprimerImageView.setLayoutY(50);
 supprimerImageView.setPickOnBounds(true);
 supprimerImageView.setPreserveRatio(true);
@@ -186,7 +216,7 @@ Nomclient1.setText(sclient.getutilisateur(1).getNom());
 
 
  
-    productPane.getChildren().addAll(productRefLabel, productDimensionLabel, productPrixLabel, productQuantiteLabel, incrementButton, decrementButton , supprimerImageView );
+    productPane.getChildren().addAll( productDimensionLabel, productPrixLabel, productQuantiteLabel, incrementButton, decrementButton , supprimerImageView ,imageView);
     vboxpanier.getChildren().add(productPane);
     
 }
@@ -213,6 +243,6 @@ Nomclient1.setText(sclient.getutilisateur(1).getNom());
    
     
     
-    
+   
     
 }

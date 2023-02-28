@@ -7,6 +7,7 @@ package services;
 
 import models.panier;
 import DB.MyConnection;
+import java.sql.Blob;
 import models.*;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -68,6 +69,7 @@ public void ajouterPanier(panier p1, int id_produit) {
     } catch (SQLException ex) {
         System.out.println(ex.getMessage());
     }
+    
 }
     
 
@@ -240,7 +242,28 @@ public void ajouterPanier(panier p1, int id_produit) {
     
     
     
-    
+     public byte[] getProductImage(int productId) throws SQLException {
+        // Create the SQL statement to retrieve the BLOB column from the "produit" table
+        String sql = "SELECT image FROM produit WHERE id_produit = ?";
+
+        // Create a PreparedStatement to execute the SQL statement with the product ID parameter
+        PreparedStatement stmt = conn.prepareStatement(sql);
+        stmt.setInt(1, productId);
+
+        // Execute the query and get the ResultSet containing the BLOB data
+        ResultSet rs = stmt.executeQuery();
+
+        // Get the BLOB data from the ResultSet
+        if (rs.next()) {
+            Blob imageBlob = rs.getBlob("image");
+            if (imageBlob != null) {
+                return imageBlob.getBytes(1, (int) imageBlob.length());
+            }
+        }
+
+        // Return null if the BLOB column is not found or is null
+        return null;
+    }
     
     
     

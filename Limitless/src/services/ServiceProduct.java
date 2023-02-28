@@ -55,7 +55,7 @@ Connection conn = MyConnection.getInstance().getConnection();
         }    
     }
 
-    @Override
+    /*
     public List<produit> afficherproduct() {
        try {
         ste= conn.createStatement();
@@ -77,6 +77,24 @@ Connection conn = MyConnection.getInstance().getConnection();
          System.out.println(ex);   
     }
    return productss;
+    }*/
+    public List<produit> afficherproduct() {
+       List<produit> prod = new ArrayList<produit>();
+        try {
+            ste =conn.createStatement();
+            String req = "SELECT * FROM produit";
+        ResultSet result = ste.executeQuery(req);
+        
+        while (result.next()) {
+            produit resultProduit = new produit( result.getString("nom_produit"),result.getDouble("prix"),result.getString("description"),result.getInt("id_user"),result.getBytes("image"));
+            prod.add(resultProduit);
+        }
+        System.out.println(prod);
+      
+    } catch (SQLException ex) {
+         System.out.println(ex);   
+    }
+   return prod;
     }
 
     @Override
@@ -97,6 +115,7 @@ Connection conn = MyConnection.getInstance().getConnection();
     }
     return null;
     }
+    
     }
    
 
