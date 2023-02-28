@@ -9,16 +9,17 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="650.0" prefWidth="850.0" stylesheets="@design.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.Gestion_Echange.gui.AfficherController">
+<AnchorPane id="AnchorPane" prefHeight="650.0" prefWidth="950.0" stylesheets="@design.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.Gestion_Echange.gui.AfficherController">
    <children>
-      <TableView fx:id="table" layoutX="8.0" layoutY="143.0" prefHeight="298.0" prefWidth="834.0">
+      <TableView fx:id="table" layoutX="8.0" layoutY="143.0" prefHeight="298.0" prefWidth="938.0">
         <columns>
-          <TableColumn fx:id="id_echange" prefWidth="115.20001220703125" text="id_echange" />
-          <TableColumn fx:id="produit_echange" prefWidth="148.80001831054688" text="produit_echange " />
-            <TableColumn fx:id="produit_offert" prefWidth="132.0" text="produit_offert" />
-            <TableColumn fx:id="statut" prefWidth="131.20001220703125" text="statut" />
-            <TableColumn fx:id="commentaire" prefWidth="168.0" text="commentaire" />
-            <TableColumn fx:id="option" prefWidth="132.79998779296875" />
+          <TableColumn fx:id="id_echange" prefWidth="115.20001220703125" text="Id_echange" />
+          <TableColumn fx:id="produit_echange" prefWidth="148.80001831054688" text="Produit_echange " />
+            <TableColumn fx:id="produit_offert" prefWidth="132.0" text="Produit_offert" />
+            <TableColumn fx:id="statut" prefWidth="131.20001220703125" text="Statut" />
+            <TableColumn fx:id="commentaire" prefWidth="168.0" text="Commentaire" />
+            <TableColumn fx:id="option" prefWidth="121.59991455078125" text="spprimer" />
+            <TableColumn fx:id="modd" prefWidth="116.0001220703125" text="modifier" />
         </columns>
       </TableView>
       <Button fx:id="modifierfx" layoutX="692.0" layoutY="494.0" mnemonicParsing="false" onMouseClicked="#modiferfx" prefHeight="26.0" prefWidth="124.0" text="modifier">

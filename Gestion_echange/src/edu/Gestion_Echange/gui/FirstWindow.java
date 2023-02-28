@@ -29,7 +29,7 @@ public class FirstWindow extends Application {
         try {
             Parent root;
             root=FXMLLoader.load(getClass().getResource("Afficher.fxml"));          
-            Scene scene = new Scene(root,850,650);
+            Scene scene = new Scene(root,950,650);
             primaryStage.setTitle("");
             primaryStage.setScene(scene);
             primaryStage.show();

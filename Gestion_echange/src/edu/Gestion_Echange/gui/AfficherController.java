@@ -50,7 +50,7 @@ import java.util.stream.Collectors;
  * @author amine
  */
 public class AfficherController implements Initializable {
-
+   //***************données tablesview****************
     @FXML
     private TableView<Echanges> table;
     @FXML
@@ -63,14 +63,19 @@ public class AfficherController implements Initializable {
     private TableColumn<Echanges, String> statut;
     @FXML
     private TableColumn<Echanges, String> commentaire;
+    @FXML
+    private TableColumn<Echanges, String> option;
+    @FXML
+    private TableColumn<Echanges, String> modd;
     //
     private CRUDEchange ce=new CRUDEchange();
     Echanges e;
+    //************listes recherche************
     private final ObservableList<Echanges> dataList = FXCollections.observableArrayList();
     private List <Echanges>  echange;
     private List <Echanges>  echangefiltre;
-    
-    
+    //****** holder pour l'echange  selectionné avec le btn update *********
+    private Echanges selectedEchange;
     @FXML
     private Button modifierfx;
     @FXML
@@ -78,16 +83,10 @@ public class AfficherController implements Initializable {
     @FXML
     private TextField filterField;
     @FXML
-    private TableColumn<Echanges, String> option;
-    @FXML
     private Label headerlist;
 
     @Override
-    public void initialize(URL url, ResourceBundle rb) {
-        // TODO
-        
-        //EchangesHolder pt = EchangesHolder.getInstance();
-        //e =pt.getEchanges();
+    public void initialize(URL url, ResourceBundle rb) { 
         //*************affichage*****************
        echange= ce.afficherechange();
         table.setItems(FXCollections.observableArrayList(echange));
@@ -96,7 +95,7 @@ public class AfficherController implements Initializable {
         produit_offert.setCellValueFactory(new PropertyValueFactory<>("produit_offert"));
         statut.setCellValueFactory(new PropertyValueFactory<>("statut"));
         commentaire.setCellValueFactory(new PropertyValueFactory<>("commentaire"));   
-  
+             //*************recherche*****************
           filterField.textProperty().addListener((observable, oldValue, newValue) -> {
     echangefiltre = echange.stream()
         .filter(Echanges ->            
@@ -106,15 +105,11 @@ public class AfficherController implements Initializable {
         .collect(Collectors.toList());                  
     table.setItems(FXCollections.observableArrayList(echangefiltre));
 });
-        /*   
-        for (Echanges c : ce.afficherechange()) {
-            table.getItems().add(c);
-             }     
-*/
+
  //*********************** btn supprimer et fnction sypprimer******************************
                                             option.setCellFactory(column -> {
                                                 return new TableCell<Echanges, String>() {
-                                                    final Button deleteButton = new Button("Delete");
+                                                    final Button deleteButton = new Button("Delete");                                                    
                                                     @Override
                                                     protected void updateItem(String item, boolean empty) {
                                                         super.updateItem(item, empty);
@@ -133,8 +128,7 @@ public class AfficherController implements Initializable {
                                                                         System.out.println(data1);                         
                                                                         System.out.println("selectedData: " + data1.getId_echange());
                                                                     if(btn.get() == ButtonType.OK){
-                                                                        ce.supprimerechange(data1.getId_echange());
-                                                                        //table.getItems().remove(data1);
+                                                                        ce.supprimerechange(data1.getId_echange());                                                                        
                                                                         redirectToListEchangerefresh();
                                                                        }
                                                                     });
@@ -143,6 +137,57 @@ public class AfficherController implements Initializable {
                                                 }; 
                                             });
        //tests                         
+        //*********************** btn modifier et fnction sypprimer******************************
+                                            modd.setCellFactory(column -> {
+                                                return new TableCell<Echanges, String>() {
+                                                  
+                                                    final Button updateButton = new Button("Update");
+                                                    @Override
+                                                    protected void updateItem(String item, boolean empty) {
+                                                        super.updateItem(item, empty);
+                                                        if (empty) {
+                                                            setGraphic(null);
+                                                        } else {
+                                                            setGraphic(updateButton);
+                                                               updateButton.setOnAction((ActionEvent event) -> {
+                                                                    Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                                                                    alert.setTitle("Confirmation");
+                                                                    alert.setHeaderText("Confirmation de modification !");
+                                                                    alert.setContentText("Voulez-Vous Vraiment modifier");
+                                                                    
+                                                                     Optional<ButtonType> btn = alert.showAndWait();
+                                                                     Echanges data1 = getTableView().getItems().get(getIndex());
+                                                                        System.out.println(data1);                         
+                                                                        System.out.println("selectedData: " + data1.getId_echange());
+                                                                        selectedEchange = data1;
+                                                                    if(btn.get() == ButtonType.OK){
+                                                                      //   redirectToupdateechange();
+                                                                       
+                                                                        try {
+                                                                           // redirectToupdateechange();
+                                                                             
+                                                                          Echanges selectedEchange = table.getSelectionModel().getSelectedItem();
+                                                                            
+                                                                            // Open the ModifierController and pass the selected echange as a parameter
+                                                                            FXMLLoader loader = new FXMLLoader(getClass().getResource("modifierechange.fxml"));
+                                                                            Parent root = loader.load();
+                                                                            ModifierechangeController controller = loader.getController();
+                                                                            controller.setEchange(data1);
+                                                                            System.out.println("lecontr"+data1); 
+                                                                            
+                                                                            Stage stage = new Stage();
+                                                                            Scene scene = new Scene(root);
+                                                                            stage.setScene(scene);
+                                                                            stage.show();
+                                                                        } catch (IOException ex) {
+                                                                            Logger.getLogger(AfficherController.class.getName()).log(Level.SEVERE, null, ex);
+                                                                        }
+                                                                       }
+                                                                    });
+                                                        }
+                                                    }
+                                                }; 
+                                            });
              
     }    
 //*********************refresh****************************

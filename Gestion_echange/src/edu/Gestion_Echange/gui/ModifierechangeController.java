@@ -29,11 +29,15 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
+import javafx.util.Duration;
+import tray.animations.AnimationType;
+import tray.notification.NotificationType;
 
 /**
  * FXML Controller class
@@ -56,15 +60,26 @@ public class ModifierechangeController implements Initializable {
     private Button fxmodifierechange;
     @FXML
     private Button rliste;
-
+    //
+    private Echanges echange;
     /**
      * Initializes the controller class.
      */
+     public void setEchange(Echanges echange) {
+    this.echange = echange;
+    System.out.println("le set est" + echange);      
+    fxid.setText(String.valueOf(echange.getId_echange()));
+    fxpe.setText(String.valueOf(echange.getProduit_echange()));
+    fxpo.setValue(echange.getProduit_offert());
+    fxcomm.setText(echange.getCommentaire());
+    fxstatut.setValue(echange.getStatut());
+}
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-       String choice1 = new String("confirmé");
+         String choice1 = new String("confirmé");
         String choice2 = new String("annuler");
-      fxstatut.getItems().addAll(choice1, choice2);
+        fxstatut.getItems().addAll(choice1, choice2);
+      
       //combo box modifier 
       Connection conn = MyConnection.getInstance().getConnection();
         String sql = "SELECT id_produit FROM produit WHERE id_user = 12";
@@ -77,11 +92,9 @@ public class ModifierechangeController implements Initializable {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-         ObservableList<Integer> observableList = FXCollections.observableList(produits);
-         fxpo.setItems(observableList);
-     
+         ObservableList<Integer> observableList = FXCollections.observableList(produits);      
     }    
-
+    
      private void redirectToList(){
                 Parent root;
         try {
@@ -106,27 +119,37 @@ public class ModifierechangeController implements Initializable {
         String statut=fxstatut.getValue();
         String commentaire=fxcomm.getText();
         
-        Echanges e= new Echanges(id_echange,produit_echange,produit_offert,statut,commentaire);
-     //  Candidature c=new Candidature(cmp.getIdCandidature(),Nom.getText(),Prenom.getText(),Date.valueOf(DateNaissance.getValue()),Adresse.getText(),Email.getText(),chemin,etat.getValue(),data,Integer.parseInt(NumTel.getText()));
-       
-          
-      
+        Echanges e= new Echanges(id_echange,produit_echange,produit_offert,statut,commentaire);  
    ce.modifierechange(e);
-   /*   
-        if(etat.getValue().equals("Accepter")){
-            icr1.sms(c);
-        }
-*/
-    Alert alert = new Alert(Alert.AlertType.INFORMATION);
-    alert.setTitle("Success");
-    alert.setContentText("echange modifié!");
-    alert.show();
+        String tilte;
+            String message;
+            tray.notification.TrayNotification tray = new tray.notification.TrayNotification();
+            AnimationType type = AnimationType.POPUP;
+            tray.setAnimationType(type);
+         
+                tilte = "modification réussi";
+                message = "modification ajoutée";
+                tray.setTitle(tilte);
+                tray.setMessage(message);
+                tray.setNotificationType(NotificationType.SUCCESS);
+                
+                    tray.showAndDismiss(Duration.millis(30000));
+  
         this.redirectToList();}
    else{
-       Alert alert = new Alert(Alert.AlertType.ERROR);
-    alert.setTitle("ERROR");
-    alert.setContentText("Verifier les champs!");
-    alert.show();
+           String tilte;
+            String message;
+            tray.notification.TrayNotification tray = new tray.notification.TrayNotification();
+            AnimationType type = AnimationType.POPUP;
+            tray.setAnimationType(type);
+          //  (new Alert(Alert.AlertType.CONFIRMATION, "modification effectué avec success", new ButtonType[]{ButtonType.OK})).show();
+                tilte = "modification non réussi";
+                message = "modification non ajoutée";
+                tray.setTitle(tilte);
+                tray.setMessage(message);
+                tray.setNotificationType(NotificationType.ERROR);
+                
+                    tray.showAndDismiss(Duration.millis(30000));
    }
     }
 
@@ -134,5 +157,4 @@ public class ModifierechangeController implements Initializable {
     private void rlist(MouseEvent event) {
         this.redirectToList();
     }
-    
 }
