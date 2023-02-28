@@ -13,23 +13,23 @@ import Entities.Utilisateur;
 import java.sql.*;
 
 public class Auth {
-    private static Utilisateur currentUtilisateur = null;
+    private static Utilisateur currentUtilisateur;
 
     public static Utilisateur getCurrentUtilisateur() {
         return currentUtilisateur;
     }
 
-    public static boolean signIn(String email,String password) {
+    public static Utilisateur signIn(String email,String password) {
         Utilisateur user = Utilisateur.getUserByEmail(email);
         currentUtilisateur = user;
         if (user != null && user.getPassword().equals(password)) {
             System.out.println(currentUtilisateur);
             System.out.println("Utilisateur Connecte");
-            return true;
+            return currentUtilisateur;
         } else {
             System.out.println(currentUtilisateur);
             System.out.println("Utilisateur NonConnecte");
-            return false;
+            return currentUtilisateur;
         }
     }
 

@@ -7,13 +7,23 @@ package inter.gui;
 
 import Entities.Utilisateur;
 import conexionbd.services.Auth;
+import conexionbd.services.CRUDUtilisateur;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 
 /**
  * FXML Controller class
@@ -22,11 +32,10 @@ import javafx.scene.control.TextField;
  */
 public class LoginController implements Initializable {
 
-  
     @FXML
     private TextField fxemail;
     @FXML
-    private TextField fxpassword;
+    private PasswordField fxpassword;
     @FXML
     private Button fxlogin;
 
@@ -36,15 +45,41 @@ public class LoginController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-    }    
+    }
 
     @FXML
     private void login(ActionEvent event) {
-        String email=fxemail.getText();
-        String password=fxpassword.getText();
-        Utilisateur u=new Utilisateur(email,password);
-        Auth.signIn(email, password);
+
+        String email = fxemail.getText();
+        String password = fxpassword.getText();
+        Utilisateur currentUtilisateur = Auth.signIn(email, password);
+            if (currentUtilisateur != null) {
+                String role = currentUtilisateur.getRole();
+                if (role.equals("admin")) {
+                    try {
+                        Parent root = FXMLLoader.load(getClass().getResource("/edu/produit/gui/Admin.fxml")); // correction
+                        Scene scene = new Scene(root);
+                        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                        stage.setScene(scene);
+                        stage.show();
+                    } catch (IOException ex) {
+                        System.err.println(ex.getMessage());
+                    }
+                } else if (role.equals("client")) {
+                    try {
+                        Parent root = FXMLLoader.load(getClass().getResource("/edu/produit/gui/Ajouter.fxml")); // correction
+                        Scene scene = new Scene(root);
+                        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                        stage.setScene(scene);
+                        stage.show();
+                    } catch (IOException ex) {
+                        System.err.println(ex.getMessage());
+                    }
+                }}
         
     }
-    
 }
+
+
+
+        

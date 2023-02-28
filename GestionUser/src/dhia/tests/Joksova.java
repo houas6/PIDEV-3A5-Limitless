@@ -25,7 +25,7 @@ public class Joksova {
         //Utilisateur u1 = new Utilisateur("Hamdi","Dhaouedi","ham123@gmail.com");
         //cu.ajouterUtilisateur2(u1);
         //System.out.println(cu.afficherUtilsateur());
-        System.out.println(cu.afficherUtilisateur());
+        //System.out.println(cu.afficherUtilisateur());
     }
     
 }

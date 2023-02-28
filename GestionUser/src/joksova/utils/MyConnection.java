@@ -14,12 +14,12 @@ import java.sql.*;
 public class MyConnection {
 
     Connection conn;
-
+    public static MyConnection instance;
     String url = "jdbc:mysql://localhost:3306/limitless";
     String user = "root";
     String pwd = "";    
 
-    public MyConnection() {
+    private MyConnection() {
         
         try {
             conn = DriverManager.getConnection(url, user, pwd);
@@ -34,5 +34,14 @@ public class MyConnection {
     public Connection getCnx()
     {
     return conn;
+    }
+    
+    public static MyConnection getInstance() {
+        
+        if (instance==null)
+    {
+        instance =new MyConnection();
+    }
+        return instance;
     }
 }

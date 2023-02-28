@@ -5,6 +5,8 @@
  */
 package inter.gui;
 
+import Entities.MailSender;
+import Entities.Utilisateur;
 import conexionbd.services.Auth;
 import java.io.IOException;
 import java.net.URL;
@@ -58,7 +60,7 @@ public class SignupController implements Initializable {
     }    
 
     @FXML
-    private void signup(ActionEvent event) {
+    private void signup(ActionEvent event) throws Exception {
         
         String email = semail.getText();
 String password = spassword.getText();
@@ -98,6 +100,7 @@ if (!numero.matches("[0-9]{8}")) {
 
 // Appeler la méthode Auth.signUp
 boolean ConnexionResultat = Auth.signUp(nom, prenom,cin, email, password, numero);
+MailSender.sendMail(email, nom, prenom);
 if (ConnexionResultat==true) {
     try {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("login.fxml"));

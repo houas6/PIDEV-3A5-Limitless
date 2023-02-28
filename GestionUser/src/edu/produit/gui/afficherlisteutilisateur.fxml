@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane id="AnchorPane" prefHeight="647.0" prefWidth="803.0" stylesheets="@design.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.produit.gui.AfficherlisteutilisateurController">
+   <children>
+      <TableView fx:id="fxtableutilisateur" layoutX="26.0" layoutY="210.0" prefHeight="200.0" prefWidth="749.0">
+        <columns>
+          <TableColumn fx:id="fxid" prefWidth="77.0" text="ID" />
+          <TableColumn fx:id="fxnom" prefWidth="171.0" text="NOM" />
+            <TableColumn fx:id="fxprenom" minWidth="0.0" prefWidth="179.0" text="PRENOM" />
+            <TableColumn fx:id="fxemail" prefWidth="173.0" text="EMAIL" />
+            <TableColumn fx:id="fxcin" prefWidth="147.0" text="CIN" />
+        </columns>
+      </TableView>
+      <TextField fx:id="fxrecherche" layoutX="326.0" layoutY="113.0" />
+   </children>
+</AnchorPane>

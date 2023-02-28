@@ -54,6 +54,19 @@ public class Utilisateur {
         this.mail = mail;
     }
 
+    public Utilisateur(int id_user, String password, String mail, String cin, String nom, String prenom, String role, String numero) {
+        this.id_user = id_user;
+        this.numero = numero;
+        this.nom = nom;
+        this.prenom = prenom;
+        this.cin = cin;
+        this.role = role;
+        this.password = password;
+        this.mail = mail;
+    }
+    
+    
+    
     public String getNom() {
         return nom;
     }
@@ -130,14 +143,24 @@ public class Utilisateur {
         Connection conn = null;
         PreparedStatement stmt = null;
         ResultSet rs = null;
-        Utilisateur user = null;
+        Utilisateur user = new Utilisateur();
         try {
             conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/limitless", "root", "");
             stmt = conn.prepareStatement("SELECT * FROM utilisateur WHERE id_user = ?");
             stmt.setInt(1, id);
             rs = stmt.executeQuery();
             if (rs.next()) {
-                user = new Utilisateur(rs.getInt(1), rs.getString(2), rs.getString(3));
+                //user = new Utilisateur(rs.getInt(1), rs.getString(2), rs.getString(3));
+                user.setId_user(rs.getInt(1));
+                System.out.println(rs.getString(1));
+                user.setPassword(rs.getString(2));
+                user.setMail(rs.getString(3));
+                user.setCin(rs.getString(4));
+                user.setNom(rs.getString(5));
+                user.setPrenom(rs.getString(6));
+                user.setPrenom(rs.getString(7));
+                System.out.println(rs.getString(7));
+                user.setNumero(rs.getString(8));
             }
         } catch (SQLException e) {
             System.out.println(e.getMessage());
@@ -156,14 +179,14 @@ public class Utilisateur {
             stmt.setString(1, email);
             rs = stmt.executeQuery();
             if (rs.next()) {
-                user = new Utilisateur(rs.getInt(1), rs.getString(2), rs.getString(3));
+                user = new Utilisateur(rs.getInt(1), rs.getString(2), rs.getString(3),rs.getString(4), rs.getString(5),rs.getString(6), rs.getString(7),rs.getString(8));
             }
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
         return user;
     }
-
+    
     @Override
     public int hashCode() {
         int hash = 5;
@@ -200,7 +223,9 @@ public class Utilisateur {
 
     @Override
     public String toString() {
-        return "Utilisateur{" + "id_user=" + id_user + ", numero=" + numero + ", password=" + password + ", mail=" + mail + '}';
+        return "Utilisateur{" + "id_user=" + id_user + ", numero=" + numero + ", nom=" + nom + ", prenom=" + prenom + ", cin=" + cin + ", role=" + role + ", password=" + password + ", mail=" + mail + '}';
     }
+
+   
 
 }
