@@ -22,7 +22,7 @@
       <TextField fx:id="fxproduitechange" layoutX="425.0" layoutY="208.0" />
       <TextField fx:id="fxstatut" editable="false" layoutX="425.0" layoutY="297.0" text="en cours" />
       <TextArea fx:id="fxcommentaire" layoutX="425.0" layoutY="335.0" opacity="0.51" prefHeight="114.0" prefWidth="246.0" />
-      <Button fx:id="fxajout" layoutX="257.0" layoutY="481.0" mnemonicParsing="false" onAction="#addperson" text="demander l'echange" />
+      <Button fx:id="fxajout" layoutX="257.0" layoutY="481.0" mnemonicParsing="false" onAction="#dmechange" text="demander l'echange" />
       <Button fx:id="rliste" layoutX="646.0" layoutY="541.0" mnemonicParsing="false" onMouseClicked="#rlist" text="retour a la liste" />
       <Label layoutX="256.0" layoutY="210.0" prefHeight="7.0" prefWidth="157.0" text="produit à echanger " />
       <Label layoutX="259.0" layoutY="253.0" text="produit offert" />

@@ -5,7 +5,10 @@
  */
 package edu.Gestion_Echange.gui;
 import edu.Gestion_Echange.entites.Echanges;
+import edu.Gestion_Echange.entites.MailSender;
+import edu.Gestion_Echange.entites.utilisateur;
 import edu.Gestion_Echange.services.CRUDEchange;
+import edu.Gestion_Echange.services.ServiceUtilisateur;
 import edu.Gestion_Echange.utils.MyConnection;
 import java.io.IOException;
 import java.net.URL;
@@ -54,7 +57,9 @@ public class AjoutereController implements Initializable {
     private Button rliste;
     @FXML
     private ComboBox<Integer> cmbxpof;
-   
+      
+       ServiceUtilisateur u1 = new ServiceUtilisateur();
+       
     /**
      * Initializes the controller class.
      */
@@ -77,11 +82,8 @@ public class AjoutereController implements Initializable {
          cmbxpof.setItems(observableList);
         // TODO
     }    
-
-    @FXML
-    private void addperson(ActionEvent event) {
-        
-      
+ @FXML
+    private void dmechange(ActionEvent event) throws Exception {     
        CRUDEchange ce = new CRUDEchange();
         String produit_echangestr= fxproduitechange.getText();
         String  produit_offertstr=Integer.toString(cmbxpof.getValue()) ;
@@ -119,6 +121,7 @@ public class AjoutereController implements Initializable {
               alert.setTitle("Success");
                alert.setContentText("ajout!");
                 alert.show();
+                MailSender.sendMail(u1.getutilisateur(15));
                  this.redirectToList();
         } catch (NumberFormatException e) {
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
@@ -149,6 +152,8 @@ public class AjoutereController implements Initializable {
     private void rlist(MouseEvent event) {
         this.redirectToList();
     }
+
+   
 
    
    

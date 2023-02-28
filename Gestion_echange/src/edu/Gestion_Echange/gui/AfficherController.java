@@ -37,9 +37,11 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.util.Callback;
+import java.util.stream.Collectors;
 
 
 /**
@@ -65,6 +67,9 @@ public class AfficherController implements Initializable {
     private CRUDEchange ce=new CRUDEchange();
     Echanges e;
     private final ObservableList<Echanges> dataList = FXCollections.observableArrayList();
+    private List <Echanges>  echange;
+    private List <Echanges>  echangefiltre;
+    
     
     @FXML
     private Button modifierfx;
@@ -76,8 +81,6 @@ public class AfficherController implements Initializable {
     private TableColumn<Echanges, String> option;
     @FXML
     private Label headerlist;
-    @FXML
-    private Button filterbtn;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -86,15 +89,28 @@ public class AfficherController implements Initializable {
         //EchangesHolder pt = EchangesHolder.getInstance();
         //e =pt.getEchanges();
         //*************affichage*****************
+       echange= ce.afficherechange();
+        table.setItems(FXCollections.observableArrayList(echange));
         id_echange.setCellValueFactory(new PropertyValueFactory<>("id_echange"));
-        produit_echange.setCellValueFactory(new PropertyValueFactory<>("produit_echange"));
-        
+        produit_echange.setCellValueFactory(new PropertyValueFactory<>("produit_echange"));       
         produit_offert.setCellValueFactory(new PropertyValueFactory<>("produit_offert"));
         statut.setCellValueFactory(new PropertyValueFactory<>("statut"));
-        commentaire.setCellValueFactory(new PropertyValueFactory<>("commentaire"));    
-             for (Echanges c : ce.afficherechange()) {
+        commentaire.setCellValueFactory(new PropertyValueFactory<>("commentaire"));   
+  
+          filterField.textProperty().addListener((observable, oldValue, newValue) -> {
+    echangefiltre = echange.stream()
+        .filter(Echanges ->            
+            Echanges.getStatut().toLowerCase().contains(newValue.toLowerCase()) || 
+            Echanges.getCommentaire().toLowerCase().contains(newValue.toLowerCase())
+        )
+        .collect(Collectors.toList());                  
+    table.setItems(FXCollections.observableArrayList(echangefiltre));
+});
+        /*   
+        for (Echanges c : ce.afficherechange()) {
             table.getItems().add(c);
-             }                               
+             }     
+*/
  //*********************** btn supprimer et fnction sypprimer******************************
                                             option.setCellFactory(column -> {
                                                 return new TableCell<Echanges, String>() {
@@ -174,64 +190,5 @@ private void redirectToaddechange(){
     private void redajout(MouseEvent event) {
         this.redirectToaddechange();
     }
-   
-    @FXML
-private void search(ActionEvent event) {
-    // Set up the table columns
-    id_echange.setCellValueFactory(new PropertyValueFactory<>("id_echange"));
-    produit_echange.setCellValueFactory(new PropertyValueFactory<>("produit_echange"));
-    produit_offert.setCellValueFactory(new PropertyValueFactory<>("produit_offert"));
-    statut.setCellValueFactory(new PropertyValueFactory<>("statut"));
-    commentaire.setCellValueFactory(new PropertyValueFactory<>("commentaire"));
-
-    // Query the database for the search term
-    CRUDEchange ce = new CRUDEchange();
-    List<Echanges> echangeList = ce.searchEchange(filterField.getText().trim());
-    ObservableList<Echanges> dataList = FXCollections.observableArrayList(echangeList);
-
-    // Set up the filtered and sorted data
-     FilteredList<Echanges> filteredData = new FilteredList<>(dataList, b -> true);
-     filterField.textProperty().addListener((observable, oldValue, newValue) -> {
-        filteredData.setPredicate(ech -> {
-            if (newValue == null || newValue.isEmpty()) {
-                return true;
-            }
-            String lowerCaseFilter = newValue.toLowerCase();
-            if (ech. getStatut().toLowerCase().indexOf(lowerCaseFilter) != -1) {
-                return true;
-            } else if (ech.getProduit_echange() != -1) {
-                return true;
-            } else {               
-                return false;
-            }
-        });
-    });
-
-    SortedList<Echanges> sortedData = new SortedList<>(filteredData);
-    sortedData.comparatorProperty().bind(table.comparatorProperty());
-    String searchTerm = filterField.getText().trim();
-    if (!searchTerm.isEmpty()) {
-        // Filter the dataList instead of querying the database again
-        filteredData.setPredicate(prd -> {
-            String lowerCaseFilter = searchTerm.toLowerCase();
-            if (prd.getStatut().toLowerCase().indexOf(lowerCaseFilter) != -1) {
-                return true;
-            } else if (prd.getProduit_echange() != -1) {
-                return true;
-            } else {
-                return false;
-            }
-        });
-
-        // Set the table items with the filtered data
-        table.setItems(filteredData);
-    } else {
-        // If the search field is empty, show all products
-        table.setItems(sortedData);
-    }
-}
-
-     
-   
-//fianl }
+ 
 }

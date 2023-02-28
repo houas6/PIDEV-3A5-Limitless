@@ -66,7 +66,8 @@ Connection conn = MyConnection.getInstance().getConnection();
     public List<Echanges> afficherechange() {
         List<Echanges> ech = new ArrayList<Echanges>();
         try {
-             ste =conn.createStatement();
+            
+           ste =conn.createStatement();
         String req = "SELECT * FROM `echanges`";
         ResultSet result = ste.executeQuery(req);
         
