@@ -5,44 +5,51 @@
  */
 package edu.produit.gui;
 
+import com.itextpdf.text.BadElementException;
+import com.itextpdf.text.Document;
+import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.Element;
+import com.itextpdf.text.FontFactory;
+import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.Phrase;
+import com.itextpdf.text.pdf.PdfPTable;
+import com.itextpdf.text.pdf.PdfWriter;
+import com.sun.rowset.internal.Row;
 import edu.produit.entites.Produit;
 import edu.produit.services.CRUDProduit;
+import java.awt.Color;
 import java.io.ByteArrayInputStream;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.URL;
 import java.nio.file.Files;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
-import javafx.scene.control.SpinnerValueFactory;
-import javafx.scene.control.TableCell;
-import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
@@ -51,6 +58,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableCell;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+
 
 //import org.controlsfx.control.Notifications;
 
@@ -528,6 +536,61 @@ private void search(ActionEvent event) {
     private void front(ActionEvent event) {
         this.redirectToPage4();
     }
+
+    
+   
+    @FXML
+    private void pdf(ActionEvent event) throws FileNotFoundException, DocumentException, IOException {
+    Document document = new Document();
+    PdfWriter.getInstance(document, new FileOutputStream("table_produit.pdf"));
+    document.open();
+
+    PdfPTable pdfTable = new PdfPTable(table_produit.getColumns().size());
+
+    // Add table headers
+    for (int i = 0; i < table_produit.getColumns().size(); i++) {
+        pdfTable.addCell(new Phrase(table_produit.getColumns().get(i).getText()));
+    }
+
+    // Add table rows
+    for (int i = 0; i < table_produit.getItems().size(); i++) {
+        for (int j = 0; j < table_produit.getColumns().size(); j++) {
+            Object cellValue = table_produit.getColumns().get(j).getCellData(i);
+
+            if (cellValue instanceof String) {
+                pdfTable.addCell(new Phrase((String) cellValue));
+            } else if (cellValue instanceof Float) {
+                pdfTable.addCell(new Phrase(Float.toString((Float) cellValue)));
+            } else if (cellValue instanceof byte[]) {
+                com.itextpdf.text.Image image = com.itextpdf.text.Image.getInstance((byte[]) cellValue);
+
+                pdfTable.addCell(image);
+            } else {
+                // Check if id_user column is empty
+                if (j == table_produit.getColumns().indexOf(fxxiduser)) {
+                    if (cellValue != null && !cellValue.toString().isEmpty()) {
+                        pdfTable.addCell(new Phrase(cellValue.toString()));
+                    }
+                } else {
+                    pdfTable.addCell(new Phrase(""));
+                }
+            }
+        }
+    }
+
+    document.add(pdfTable);
+    document.close();
+    Process pro = Runtime.getRuntime().exec("rundll32 url.dll,FileProtocolHandler table_produit.pdf");
+}
+
+
+
+
+
+
+
+        
+    
 
 }
  
