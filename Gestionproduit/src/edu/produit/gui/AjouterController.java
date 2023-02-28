@@ -105,6 +105,8 @@ public class AjouterController implements Initializable {
     private Button fxsearch;
     @FXML
     private TextField filterfield;
+    @FXML
+    private Button front;
     
     
     /*public void setID_produit(String message)
@@ -523,6 +525,26 @@ private void search(ActionEvent event) {
         table_produit.setItems(sortedData);
     }
 }
+ private void redirectToPage4(){
+            Parent root;
+            try {
+            
+            
+           
+            root = FXMLLoader.load(getClass().getResource("FrontAjouter.fxml"));
+            Scene c=new Scene(root);
+            Stage stage=(Stage)statist.getScene().getWindow();
+            stage.setScene(c);
+        } catch (IOException ex) {
+            Logger.getLogger(AjouterController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+          
+    }
+    @FXML
+    private void front(ActionEvent event) {
+        this.redirectToPage4();
+    }
 
 }
  
