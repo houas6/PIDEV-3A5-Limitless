@@ -24,7 +24,7 @@
       <Label layoutX="166.0" layoutY="214.0" text="produit offert" />
       <Label layoutX="248.0" layoutY="301.0" text="staut" />
       <Label layoutX="168.0" layoutY="403.0" text="commentaire" />
-      <TextField fx:id="fxid" layoutX="324.0" layoutY="109.0" />
+      <TextField fx:id="fxid" editable="false" layoutX="324.0" layoutY="109.0" />
       <TextField fx:id="fxpe" layoutX="323.0" layoutY="163.0" />
       <TextArea fx:id="fxcomm" layoutX="302.0" layoutY="403.0" opacity="0.5" prefHeight="86.0" prefWidth="246.0" />
       <ComboBox fx:id="fxstatut" layoutX="324.0" layoutY="299.0" prefWidth="150.0" />

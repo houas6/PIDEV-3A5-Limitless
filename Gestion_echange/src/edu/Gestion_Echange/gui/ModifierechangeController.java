@@ -81,8 +81,8 @@ public class ModifierechangeController implements Initializable {
         fxstatut.getItems().addAll(choice1, choice2);
       
       //combo box modifier 
-      Connection conn = MyConnection.getInstance().getConnection();
-        String sql = "SELECT id_produit FROM produit WHERE id_user = 12";
+       Connection conn = MyConnection.getInstance().getConnection();
+        String sql = "SELECT id_produit FROM produit WHERE id_user = 15";
         List<Integer> produits = new ArrayList<>();
            try (PreparedStatement stmt = conn.prepareStatement(sql)) {
             ResultSet rs = stmt.executeQuery();
@@ -92,7 +92,9 @@ public class ModifierechangeController implements Initializable {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-         ObservableList<Integer> observableList = FXCollections.observableList(produits);      
+         ObservableList<Integer> observableList = FXCollections.observableList(produits);
+        // fxpo.setItems(observableList);
+
     }    
     
      private void redirectToList(){

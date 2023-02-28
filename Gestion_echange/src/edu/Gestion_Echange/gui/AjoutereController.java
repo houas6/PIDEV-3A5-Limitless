@@ -68,7 +68,7 @@ public class AjoutereController implements Initializable {
       //ajout des produit du l'utilisateur dans le combo box
        
         Connection conn = MyConnection.getInstance().getConnection();
-        String sql = "SELECT id_produit FROM produit WHERE id_user = 12";
+        String sql = "SELECT id_produit FROM produit WHERE id_user = 15";
         List<Integer> produits = new ArrayList<>();
            try (PreparedStatement stmt = conn.prepareStatement(sql)) {
             ResultSet rs = stmt.executeQuery();
