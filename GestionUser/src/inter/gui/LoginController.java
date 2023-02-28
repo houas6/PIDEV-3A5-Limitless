@@ -5,6 +5,7 @@
  */
 package inter.gui;
 
+import Entities.MailSender;
 import Entities.Utilisateur;
 import conexionbd.services.Auth;
 import conexionbd.services.CRUDUtilisateur;
@@ -21,8 +22,11 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 /**
@@ -38,6 +42,12 @@ public class LoginController implements Initializable {
     private PasswordField fxpassword;
     @FXML
     private Button fxlogin;
+    @FXML
+    private AnchorPane creeruncompte;
+    @FXML
+    private Button stosignup;
+    @FXML
+    private Label resetpassword;
 
     /**
      * Initializes the controller class.
@@ -77,6 +87,31 @@ public class LoginController implements Initializable {
                     }
                 }}
         
+    }
+
+    @FXML
+    private void redirectToSignUp(ActionEvent event) {
+        
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource("signup.fxml"));
+            Scene scene = new Scene(root);
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException ex) {
+            System.out.println(ex.getMessage());
+        }
+    }
+
+    @FXML
+    private void resetpassword(MouseEvent event) {
+        
+        try {
+            MailSender.sendMail("dhiasaibi@yahoo.com", "Dhia", "s");
+        } catch (Exception ex) {
+            Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
     }
 }
 

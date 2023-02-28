@@ -15,7 +15,7 @@
    <children>
       <AnchorPane prefHeight="616.0" prefWidth="993.0" style="-fx-background-color: #030307; -fx-background-radius: 15;">
          <children>
-            <AnchorPane layoutX="55.0" layoutY="59.0" prefHeight="531.0" prefWidth="886.0" style="-fx-background-color: #131022; -fx-background-radius: 10;">
+            <AnchorPane fx:id="creeruncompte" layoutX="55.0" layoutY="59.0" prefHeight="531.0" prefWidth="886.0" style="-fx-background-color: #131022; -fx-background-radius: 10;">
                <children>
                   <Label layoutX="39.0" layoutY="34.0" textFill="WHITE">
                      <font>
@@ -70,6 +70,12 @@
                         <Image url="@../../resources/logo.png" />
                      </image>
                   </ImageView>
+                  <Button fx:id="stosignup" blendMode="SCREEN" layoutX="261.0" layoutY="430.0" mnemonicParsing="false" onAction="#redirectToSignUp" prefHeight="25.0" prefWidth="159.0" style="-fx-background-color: 54ff34;" text="Créer un compte" />
+                  <Label fx:id="resetpassword" layoutX="225.0" layoutY="334.0" onMouseClicked="#resetpassword" text="Mot de passe oublié" textFill="WHITE">
+                     <font>
+                        <Font size="10.0" />
+                     </font>
+                  </Label>
                </children>
             </AnchorPane>
             <Label layoutX="132.0" layoutY="17.0" text="Se Connecter" textFill="WHITE">

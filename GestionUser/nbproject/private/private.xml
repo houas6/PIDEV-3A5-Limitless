@@ -5,9 +5,12 @@
         <group>
             <file>file:/C:/Users/hasse/Desktop/dhia/PIDEV-3A5-Limitless/GestionUser/src/conexionbd/services/CRUDUtilisateur.java</file>
             <file>file:/C:/Users/hasse/Desktop/dhia/PIDEV-3A5-Limitless/GestionUser/src/inter/gui/SignupWindow.java</file>
+            <file>file:/C:/Users/hasse/Desktop/dhia/PIDEV-3A5-Limitless/GestionUser/src/inter/gui/signup.fxml</file>
             <file>file:/C:/Users/hasse/Desktop/dhia/PIDEV-3A5-Limitless/GestionUser/src/inter/gui/SignupController.java</file>
             <file>file:/C:/Users/hasse/Desktop/dhia/PIDEV-3A5-Limitless/GestionUser/src/Entities/MailSender.java</file>
+            <file>file:/C:/Users/hasse/Desktop/dhia/PIDEV-3A5-Limitless/GestionUser/src/conexionbd/services/Auth.java</file>
             <file>file:/C:/Users/hasse/Desktop/dhia/PIDEV-3A5-Limitless/GestionUser/src/inter/gui/LoginWindow.java</file>
+            <file>file:/C:/Users/hasse/Desktop/dhia/PIDEV-3A5-Limitless/GestionUser/src/inter/gui/LoginController.java</file>
             <file>file:/C:/Users/hasse/Desktop/dhia/PIDEV-3A5-Limitless/GestionUser/src/edu/produit/gui/AfficherlisteutilisateurController.java</file>
             <file>file:/C:/Users/hasse/Desktop/dhia/PIDEV-3A5-Limitless/GestionUser/src/Entities/Utilisateur.java</file>
         </group>

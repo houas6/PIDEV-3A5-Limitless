@@ -83,4 +83,25 @@ public static boolean changePassword(String mail, String newPassword) {
     public static Object getInstance() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
+    public static boolean checkEmail(String email) {
+boolean exists = false;
+    try {
+        // Vérifier si l'email existe déjà dans la base de données
+        Class.forName("com.mysql.jdbc.Driver");
+        Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/limitless", "root", "");
+        String query = "SELECT COUNT(*) FROM utilisateur WHERE mail = ?";
+        PreparedStatement st = conn.prepareStatement(query);
+        st.setString(1, email);
+        ResultSet rs = st.executeQuery();
+        rs.next();
+        int count = rs.getInt(1);
+        if (count > 0) {
+            exists = true;
+        }
+    } catch (Exception ex) {
+        System.out.println(ex.getMessage());
+    }
+    return exists;
+    }
 }
