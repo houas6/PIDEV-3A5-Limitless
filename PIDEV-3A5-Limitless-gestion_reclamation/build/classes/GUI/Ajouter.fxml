@@ -133,7 +133,7 @@
                   <TextField fx:id="tfEtat" layoutX="137.0" layoutY="184.0" />
                   <TextArea fx:id="tfDesc" layoutX="119.0" layoutY="262.0" prefHeight="200.0" prefWidth="200.0" />
                   <Button fx:id="btmAjouter" layoutX="168.0" layoutY="479.0" mnemonicParsing="false" onAction="#addReclamation" prefHeight="25.0" prefWidth="145.0" styleClass="button4" stylesheets="@../css/fullpackstyling.css" text="Ajouter" textFill="WHITE" />
-                  <Label layoutX="3.0" layoutY="106.0" prefHeight="38.0" prefWidth="68.0" text="Nom" textFill="WHITE">
+                  <Label layoutX="3.0" layoutY="106.0" prefHeight="38.0" prefWidth="106.0" text="Telephpne" textFill="WHITE">
                      <font>
                         <Font size="20.0" />
                      </font>

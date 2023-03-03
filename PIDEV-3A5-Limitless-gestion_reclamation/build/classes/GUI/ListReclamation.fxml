@@ -74,7 +74,7 @@
                   </Button>
                </children>
             </VBox>
-            <AnchorPane layoutX="91.0" layoutY="69.0" prefHeight="531.0" prefWidth="886.0" style="-fx-background-color: #131022; -fx-background-radius: 10;" stylesheets="@../css/fullpackstyling.css">
+            <AnchorPane layoutX="95.0" layoutY="71.0" prefHeight="531.0" prefWidth="886.0" style="-fx-background-color: #131022; -fx-background-radius: 10;" stylesheets="@../css/fullpackstyling.css">
                <children>
                   <Label layoutX="39.0" layoutY="81.0" text="Veuiller sélectionner une réclamation avant de modifier ou supprimer" textFill="WHITE">
                      <font>
@@ -83,35 +83,26 @@
                   </Label>
                   <Line endX="100.0" layoutX="445.0" layoutY="54.0" startX="100.0" startY="418.0" stroke="#b9b1b1" strokeDashOffset="2.0" />
                   <BorderPane layoutX="569.0" layoutY="404.0" prefHeight="66.0" prefWidth="270.0" />
-                  <TableView fx:id="listReclamation" layoutX="31.0" layoutY="125.0" prefHeight="304.0" prefWidth="493.0" style="-fx-background-color: #1A172A; -fx-background-radius: 10;">
+                  <TableView fx:id="listReclamation" layoutX="31.0" layoutY="168.0" prefHeight="304.0" prefWidth="440.0" style="-fx-background-color: #1A172A; -fx-background-radius: 10;">
                      <columns>
-                        <TableColumn fx:id="NomColumn" prefWidth="117.0" text="Nom" />
-                        <TableColumn fx:id="DescriptionColumn" prefWidth="139.0" text="Description" />
-                        <TableColumn fx:id="EtatColumn" prefWidth="134.0" text="Etat" />
+                        <TableColumn fx:id="DescriptionColumn" prefWidth="197.0" text="Description" />
+                        <TableColumn fx:id="EtatColumn" prefWidth="76.0" text="Etat" />
                      </columns>
                   </TableView>
-                  <Button fx:id="btnModifier" layoutX="31.0" layoutY="437.0" mnemonicParsing="false" onAction="#initierReclamation" prefHeight="25.0" prefWidth="145.0" styleClass="button4" stylesheets="@../css/fullpackstyling.css" text="Modifier" textFill="WHITE" />
-                  <TextField fx:id="textNom" layoutX="690.0" layoutY="113.0" />
-                  <TextField fx:id="textEtat" layoutX="690.0" layoutY="185.0" />
-                  <TextArea fx:id="textDescription" layoutX="672.0" layoutY="263.0" prefHeight="200.0" prefWidth="200.0" />
-                  <Button fx:id="btnEnregistrer" layoutX="721.0" layoutY="480.0" mnemonicParsing="false" onAction="#modifier" prefHeight="25.0" prefWidth="145.0" styleClass="button4" stylesheets="@../css/fullpackstyling.css" text="Enregistrer" textFill="WHITE" />
-                  <Button fx:id="btnSupprimer" layoutX="193.0" layoutY="437.0" mnemonicParsing="false" onAction="#supprimer" prefHeight="25.0" prefWidth="185.0" styleClass="button4" stylesheets="@../css/fullpackstyling.css" text="Supprimer" textFill="WHITE" />
+                  <Button fx:id="btnModifier" layoutX="39.0" layoutY="485.0" mnemonicParsing="false" onAction="#initierReclamation" prefHeight="25.0" prefWidth="145.0" styleClass="button4" stylesheets="@../css/fullpackstyling.css" text="Modifier" textFill="WHITE" />
+                  <TextField fx:id="textEtat" layoutX="669.0" layoutY="225.0" />
+                  <Button fx:id="btnSupprimer" layoutX="193.0" layoutY="480.0" mnemonicParsing="false" onAction="#supprimer" prefHeight="25.0" prefWidth="185.0" styleClass="button4" stylesheets="@../css/fullpackstyling.css" text="Supprimer" textFill="WHITE" />
                   <Label layoutX="592.0" layoutY="53.0" text="Modifier " textFill="WHITE">
                      <font>
                         <Font size="26.0" />
                      </font>
                   </Label>
-                  <Label layoutX="556.0" layoutY="107.0" prefHeight="38.0" prefWidth="68.0" text="Nom" textFill="WHITE">
+                  <Label layoutX="553.0" layoutY="264.0" prefHeight="38.0" prefWidth="106.0" text="Description" textFill="WHITE">
                      <font>
                         <Font size="20.0" />
                      </font>
                   </Label>
-                  <Label layoutX="556.0" layoutY="263.0" prefHeight="38.0" prefWidth="106.0" text="Description" textFill="WHITE">
-                     <font>
-                        <Font size="20.0" />
-                     </font>
-                  </Label>
-                  <Label layoutX="556.0" layoutY="179.0" prefHeight="38.0" prefWidth="68.0" text="Etat" textFill="WHITE">
+                  <Label layoutX="553.0" layoutY="218.0" prefHeight="38.0" prefWidth="68.0" text="Etat" textFill="WHITE">
                      <font>
                         <Font size="20.0" />
                      </font>
@@ -124,6 +115,23 @@
                   <Label layoutX="701.0" layoutY="53.0" text="Reclamation" textFill="#fff600">
                      <font>
                         <Font size="26.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="recherche" layoutX="29.0" layoutY="126.0" />
+                  <Button fx:id="btnRechercher" layoutX="193.0" layoutY="126.0" mnemonicParsing="false" onAction="#rechercher" prefHeight="25.0" prefWidth="145.0" styleClass="button4" stylesheets="@../css/fullpackstyling.css" text="Rechercher" textFill="WHITE" />
+                  <Button fx:id="btnRepondre" layoutX="388.0" layoutY="480.0" mnemonicParsing="false" onAction="#repondre" prefHeight="25.0" prefWidth="145.0" styleClass="button4" stylesheets="@../css/fullpackstyling.css" text="Répondre" textFill="WHITE" />
+                  <Button fx:id="btnEnregistrer" layoutX="711.0" layoutY="484.0" mnemonicParsing="false" onAction="#modifier" prefHeight="25.0" prefWidth="145.0" styleClass="button4" stylesheets="@../css/fullpackstyling.css" text="Enregistrer" textFill="WHITE" />
+                  <TextArea fx:id="textDescription" layoutX="669.0" layoutY="264.0" prefHeight="173.0" prefWidth="200.0" />
+                  <TextField fx:id="textNom1" layoutX="669.0" layoutY="139.0" />
+                  <Label layoutX="553.0" layoutY="131.0" prefHeight="38.0" prefWidth="68.0" text="Nom" textFill="WHITE">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="textMail" layoutX="669.0" layoutY="179.0" />
+                  <Label layoutX="553.0" layoutY="173.0" prefHeight="38.0" prefWidth="68.0" text="Mail" textFill="WHITE">
+                     <font>
+                        <Font size="20.0" />
                      </font>
                   </Label>
                </children>

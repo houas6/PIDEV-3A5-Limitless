@@ -12,24 +12,23 @@ import java.util.Objects;
  * @author achra
  */
 public class reclamations {
-     private int id;
-    private String nomClient,description,etat;
+     private int id ,id_client;
+    private String description,etat;
 
-    public reclamations(int id, String nomClient, String description, String etat) {
+    public reclamations(int id, int id_client, String description, String etat) {
         this.id = id;
-        this.nomClient = nomClient;
+        this.id_client = id_client;
         this.description = description;
         this.etat = etat;
     }
 
-    public reclamations(String nomClient, String description, String etat) {
-        this.nomClient = nomClient;
+    public reclamations(int id_client, String description, String etat) {
+        this.id_client = id_client;
         this.description = description;
         this.etat = etat;
     }
 
     public reclamations() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     public int getId() {
@@ -40,12 +39,12 @@ public class reclamations {
         this.id = id;
     }
 
-    public String getNomClient() {
-        return nomClient;
+    public int getid_client() {
+        return id_client;
     }
 
-    public void setNomClient(String nomClient) {
-        this.nomClient = nomClient;
+    public void setid_client(int id_client) {
+        this.id_client = id_client;
     }
 
     public String getDescription() {
@@ -85,7 +84,7 @@ public class reclamations {
         if (this.id != other.id) {
             return false;
         }
-        if (!Objects.equals(this.nomClient, other.nomClient)) {
+        if (!Objects.equals(this.id_client, other.id_client)) {
             return false;
         }
         if (!Objects.equals(this.description, other.description)) {
@@ -99,7 +98,7 @@ public class reclamations {
 
     @Override
     public String toString() {
-        return "reclamations{" + "id=" + id + ", nomClient=" + nomClient + ", description=" + description + ", etat=" + etat + '}';
+        return "reclamations{" + "id=" + id + ", id_client=" + id_client + ", description=" + description + ", etat=" + etat + '}';
     }
     
     

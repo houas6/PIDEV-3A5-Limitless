@@ -6,6 +6,7 @@
 package services;
 import model.reclamations;
 import java.util.List;
+import model.reponse_reclamation;
 
 /**
  *
@@ -18,5 +19,8 @@ public interface InterfaceService {
     public void modifierpersonne(reclamations r);
     public void supprimerpersonne(int id);
     public List<reclamations> afficherreclamation();
+    public void sendSms(String toPhoneNumber, String messageText);
     
+    
+    //public void sendsms();
 }

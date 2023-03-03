@@ -7,6 +7,7 @@ package GUI;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.text.ParseException;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -22,8 +23,10 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import model.Utilisateur;
 import model.reclamations;
 import services.CrudReclamation;
+import services.MetierReclamation;
 
 /**
  * FXML Controller class
@@ -40,8 +43,9 @@ public class AjouterController implements Initializable {
     private TextField tfEtat;
     @FXML
     private Button btmAjouter;
-    @FXML
-    private Button btmModifier;
+    private Utilisateur user;
+    private String num_user;
+    
 
     /**
      * Initializes the controller class.
@@ -51,22 +55,33 @@ public class AjouterController implements Initializable {
         
         // TODO
     }    
+    public void initData(int id_user) throws SQLException {
+        MetierReclamation met = new MetierReclamation();
+        this.user=met.getUserById(id_user);
+        System.out.println(user);
+        num_user=user.getNumero();
+        
+    }
 
     @FXML
     private void addReclamation(ActionEvent event) throws ParseException {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        String nomClient = tfNom.getText();
+        String num = tfNom.getText();
+        int id_client = user.getId_user();
         String desc = tfDesc.getText();
         String Etat = tfEtat.getText();
-        if (nomClient.isEmpty()| desc.isEmpty() | Etat.isEmpty()){
+        if (id_client==0| desc.isEmpty() | Etat.isEmpty()){
             alert.setTitle("Reclamation");
             alert.setContentText("Voun ne pouvez pas envoyer une reclamation avec un champ vide!!");
             alert.show();
         }
         else {
-            reclamations r = new reclamations(nomClient, desc, Etat);
+            System.out.println("dans ajouter"+num_user);
+            reclamations r = new reclamations(id_client, desc, Etat);
             CrudReclamation CR = new CrudReclamation();
             CR.ajouterreclamation(r);
+            MetierReclamation met = new MetierReclamation();
+            met.sendSms(num, "Votre Reclamation est envoyé , vous recevrez une reponse en mail.");
             alert.setTitle("Reclamation");
             alert.setContentText("Reclamaton ajoutée Avec succées");
             alert.show();

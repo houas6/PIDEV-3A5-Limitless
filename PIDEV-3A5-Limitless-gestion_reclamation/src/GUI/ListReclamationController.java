@@ -18,7 +18,9 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
@@ -27,8 +29,10 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import model.Utilisateur;
 import model.reclamations;
 import services.CrudReclamation;
+import services.MetierReclamation;
 
 /**
  * FXML Controller class
@@ -39,7 +43,6 @@ public class ListReclamationController implements Initializable {
 
     @FXML
     private TableView<reclamations> listReclamation;
-    @FXML
     private TableColumn<reclamations, String> NomColumn;
     @FXML
     private TableColumn<reclamations, String> DescriptionColumn;
@@ -52,11 +55,20 @@ public class ListReclamationController implements Initializable {
     @FXML
     private Button btnEnregistrer;
     @FXML
+    private Button btnRechercher;
     private TextField textNom;
     @FXML
     private TextField textEtat;
     @FXML
     private TextArea textDescription;
+    @FXML
+    private TextField recherche;
+    @FXML
+    private Button btnRepondre;
+    @FXML
+    private TextField textNom1;
+    @FXML
+    private TextField textMail;
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         try {
@@ -65,7 +77,6 @@ public class ListReclamationController implements Initializable {
             System.out.println("///////");
             System.out.println(data);
             System.out.println("///////");
-            NomColumn.setCellValueFactory(new PropertyValueFactory<>("nomClient"));
             DescriptionColumn.setCellValueFactory(new PropertyValueFactory<>("description"));
             EtatColumn.setCellValueFactory(new PropertyValueFactory<>("etat"));
             listReclamation.setItems(data);
@@ -75,6 +86,7 @@ public class ListReclamationController implements Initializable {
             Logger.getLogger(ListReclamationController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+    @FXML
     public void supprimer(ActionEvent event) throws IOException {
        
         int selectedIndex = listReclamation.getSelectionModel().getSelectedIndex();
@@ -100,7 +112,6 @@ public class ListReclamationController implements Initializable {
             System.out.println("///////");
             System.out.println(data);
             System.out.println("///////");
-            NomColumn.setCellValueFactory(new PropertyValueFactory<>("nomClient"));
             DescriptionColumn.setCellValueFactory(new PropertyValueFactory<>("description"));
             EtatColumn.setCellValueFactory(new PropertyValueFactory<>("etat"));
             listReclamation.setItems(data);
@@ -115,6 +126,7 @@ public class ListReclamationController implements Initializable {
             System.out.println(ex);
         }}
     }
+    @FXML
     public void initierReclamation(ActionEvent event) throws ParseException {
         int selectedIndex = listReclamation.getSelectionModel().getSelectedIndex();
         if (selectedIndex < 0 ) {
@@ -125,14 +137,24 @@ public class ListReclamationController implements Initializable {
            Optional<ButtonType> result = alert.showAndWait();
        }
         else{
-        int idRec=listReclamation.getSelectionModel().getSelectedItem().getId();
+            
+        Utilisateur user;
+        MetierReclamation met = new MetierReclamation();
+        user=met.getUserById(listReclamation.getSelectionModel().getSelectedItem().getid_client());
+        System.out.println(user);
+        System.out.println("initier////////////////");
+        System.out.println(user.getNom());
+        textNom1.setText(user.getNom());
+        textMail.setText(user.getMail());
+        //textNom.setText(listReclamation.getSelectionModel().getSelectedItem().getid_client());
         textEtat.setText(listReclamation.getSelectionModel().getSelectedItem().getEtat());
-        textNom.setText(listReclamation.getSelectionModel().getSelectedItem().getNomClient());
+        //textNom.setText(listReclamation.getSelectionModel().getSelectedItem().getid_client());
         textDescription.setText(listReclamation.getSelectionModel().getSelectedItem().getDescription());
         
         }
         
     }
+    @FXML
     public void modifier(ActionEvent event) throws ParseException {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         if (textNom.getText().isEmpty()| textDescription.getText().isEmpty() | textEtat.getText().isEmpty()){
@@ -142,7 +164,7 @@ public class ListReclamationController implements Initializable {
         }
         else{
         int idRec=listReclamation.getSelectionModel().getSelectedItem().getId();
-        reclamations r = new reclamations(idRec,textNom.getText(), textDescription.getText(),textEtat.getText());
+        reclamations r = new reclamations(idRec,Integer.parseInt(textNom.getText()), textDescription.getText(),textEtat.getText());
         CrudReclamation crud = new CrudReclamation();
         crud.modifierreclamation(r);
         textEtat.clear();
@@ -150,7 +172,6 @@ public class ListReclamationController implements Initializable {
         textDescription.clear();
         
             ObservableList<reclamations> data = FXCollections.observableArrayList(crud.afficherreclamation());
-            NomColumn.setCellValueFactory(new PropertyValueFactory<>("nomClient"));
             DescriptionColumn.setCellValueFactory(new PropertyValueFactory<>("description"));
             EtatColumn.setCellValueFactory(new PropertyValueFactory<>("etat"));
             listReclamation.setItems(data);
@@ -159,6 +180,36 @@ public class ListReclamationController implements Initializable {
             alert.show();
     }
     }
+
+    @FXML
+         public void rechercher(ActionEvent event) throws IOException {
+        MetierReclamation met = new MetierReclamation();
+        //ServiceUser sca = new ServiceUser();
+        System.out.println("/////////////recherche//////////");
+        System.out.println(recherche.getText());
+        ObservableList<reclamations> data = FXCollections.observableArrayList(met.SearchByEtat(recherche.getText()));
+        System.out.println(data);
+        DescriptionColumn.setCellValueFactory(new PropertyValueFactory<>("description"));
+        EtatColumn.setCellValueFactory(new PropertyValueFactory<>("etat"));
+        listReclamation.setItems(data);
+
+    }
+
+    @FXML
+    private void repondre(ActionEvent event) throws SQLException {
+        try {
+            FXMLLoader loader=new FXMLLoader(getClass().getResource("ReponseReclamation.fxml"));
+            Parent root = loader.load();
+            ReponseReclamationController dcc=loader.getController();
+            //user ca=listStaff.getSelectionModel().getSelectedItem();
+            int idRec=listReclamation.getSelectionModel().getSelectedItem().getId();
+            dcc.initData(idRec);
+            btnModifier.getScene().setRoot(root);
+        } catch (IOException ex) {
+            Logger.getLogger(ReponseReclamationController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
     }    
     
 
