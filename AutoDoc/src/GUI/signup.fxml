@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane style="-fx-background-radius: 20;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.SignupController">
+   <children>
+      <AnchorPane prefHeight="616.0" prefWidth="993.0" style="-fx-background-color: #030307; -fx-background-radius: 15;">
+         <children>
+            <AnchorPane layoutX="54.0" layoutY="59.0" prefHeight="531.0" prefWidth="886.0" style="-fx-background-color: #131022; -fx-background-radius: 10;">
+               <children>
+                  <Label layoutX="73.0" layoutY="8.0" text="Acheter des pièces auto en Tunisie ? C'est           avec nous !" textFill="WHITE">
+                     <font>
+                        <Font size="26.0" />
+                     </font>
+                  </Label>
+                  <Line endX="100.0" layoutX="443.0" layoutY="73.0" startX="100.0" startY="418.0" stroke="#b9b1b1" strokeDashOffset="2.0" />
+                  <Label layoutX="569.0" layoutY="377.0" text="Qui sommes-nous ?" textFill="WHITE">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="675.0" layoutY="377.0" textFill="#fff600">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <BorderPane layoutX="569.0" layoutY="404.0" prefHeight="66.0" prefWidth="270.0">
+                     <top>
+                        <Label alignment="CENTER" prefWidth="265.0" text="Nous sommes un site de vente de pièces auto en Tunisie, spécialisé dans la fourniture de pièces de qualité pour tous les types de véhicules." textFill="#9a9292" wrapText="true" BorderPane.alignment="CENTER">
+                           <font>
+                              <Font size="13.0" />
+                           </font>
+                        </Label>
+                     </top>
+                  </BorderPane>
+                  <Label layoutX="562.0" layoutY="8.0" text="facile" textFill="#fff600">
+                     <font>
+                        <Font size="26.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="93.0" layoutY="216.0" text="E-MAIL" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="13.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="68.0" layoutY="266.0" text="MOT DE PASSE" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="13.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="semail" layoutX="221.0" layoutY="213.0" prefHeight="25.0" prefWidth="240.0" promptText="Entrez l'e-mail" />
+                  <PasswordField fx:id="spassword" layoutX="221.0" layoutY="263.0" prefHeight="25.0" prefWidth="240.0" promptText="Entrez le mot de passe" />
+                  <Button fx:id="ssignup" layoutX="262.0" layoutY="455.0" mnemonicParsing="false" onAction="#signup" prefHeight="25.0" prefWidth="159.0" style="-fx-background-color: e54233;" text="Créer un compte" textFill="WHITE" />
+                  <Label layoutX="100.0" layoutY="63.0" text="NOM" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="13.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="snom" layoutX="221.0" layoutY="63.0" prefHeight="25.0" prefWidth="240.0" promptText="Entrez le nom" />
+                  <TextField fx:id="sprenom" layoutX="221.0" layoutY="113.0" prefHeight="25.0" prefWidth="240.0" promptText="Entre le prénom" />
+                  <Label layoutX="88.0" layoutY="116.0" text="PRENOM" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="13.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="scin" layoutX="221.0" layoutY="163.0" prefHeight="25.0" prefWidth="240.0" promptText="Entrez le numéro de la CIN" />
+                  <Label layoutX="104.0" layoutY="166.0" text="CIN" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="13.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="snumero" layoutX="221.0" layoutY="363.0" prefHeight="25.0" prefWidth="240.0" promptText="Entrez le numéro" />
+                  <Label layoutX="87.0" layoutY="368.0" text="NUMERO" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="13.0" />
+                     </font>
+                  </Label>
+                  <ImageView fitHeight="199.0" fitWidth="159.0" layoutX="625.0" layoutY="92.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../resources/logo.png" />
+                     </image>
+                  </ImageView>
+                  <Button fx:id="stolign" blendMode="SCREEN" layoutX="262.0" layoutY="492.0" mnemonicParsing="false" onAction="#redirectToLogin" prefHeight="25.0" prefWidth="159.0" style="-fx-background-color: 54ff34;" text="J'ai déjà un compte" />
+                  <PasswordField fx:id="spasswordConfirm" layoutX="221.0" layoutY="313.0" prefHeight="25.0" prefWidth="240.0" promptText="Confirmez le mot de passe" />
+                  <TextField fx:id="sadresse" layoutX="221.0" layoutY="404.0" prefHeight="25.0" prefWidth="240.0" promptText="Entrez votre adresse" />
+                  <Label layoutX="89.0" layoutY="407.0" text="ADRESSE" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="13.0" />
+                     </font>
+                  </Label>
+               </children>
+            </AnchorPane>
+            <Label layoutX="132.0" layoutY="17.0" text="Inscription" textFill="WHITE">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>

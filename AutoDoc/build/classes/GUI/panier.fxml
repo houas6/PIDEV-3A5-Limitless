@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.PanierController">
+   <children>
+      <AnchorPane layoutX="10.0" layoutY="10.0" prefHeight="626.0" prefWidth="1005.0" style="-fx-background-radius: 20;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <AnchorPane fx:id="bord" prefHeight="616.0" prefWidth="993.0" style="-fx-background-color: #030307; -fx-background-radius: 15;">
+               <children>
+                  <Pane layoutX="590.0" layoutY="-1.0" prefHeight="93.0" prefWidth="405.0" style="-fx-background-radius: 20 20 0 0;" styleClass="linear-grad" stylesheets="@../css/fullpackstyling.css">
+                     <children>
+                        <ImageView fitHeight="38.0" fitWidth="34.0" layoutX="335.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../resources/ic_usr.png" />
+                           </image>
+                        </ImageView>
+                        <Label fx:id="Nomclient" layoutX="167.0" layoutY="21.0" text="EARN MONEY" textFill="WHITE">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </Pane>
+                  <VBox prefHeight="544.0" prefWidth="74.0" style="-fx-background-color: #131022; -fx-background-radius: 15 0 0 15;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <children>
+                        <Pane prefHeight="79.0" prefWidth="74.0" style="-fx-background-radius: 15 0 15 15;" />
+                        <Button contentDisplay="TOP" mnemonicParsing="false" prefHeight="66.0" prefWidth="74.0" styleClass="button3" stylesheets="@../css/fullpackstyling.css" text="Profile" textFill="#a868a0">
+                           <graphic>
+                              <ImageView fitHeight="25.0" fitWidth="34.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../resources/cat.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Button>
+                        <Button contentDisplay="TOP" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" prefHeight="66.0" prefWidth="74.0" styleClass="button3" stylesheets="@../css/fullpackstyling.css" text="Store" textFill="#a868a0">
+                           <graphic>
+                              <ImageView fitHeight="25.0" fitWidth="34.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../resources/time.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Button>
+                        <Button contentDisplay="TOP" layoutX="10.0" layoutY="76.0" mnemonicParsing="false" prefHeight="66.0" prefWidth="74.0" styleClass="button3" stylesheets="@../css/fullpackstyling.css" text="reclamation" textFill="#a868a0">
+                           <graphic>
+                              <ImageView fitHeight="25.0" fitWidth="34.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../resources/flag.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Button>
+                        <Button contentDisplay="TOP" layoutX="10.0" layoutY="142.0" mnemonicParsing="false" prefHeight="66.0" prefWidth="74.0" styleClass="button3" stylesheets="@../css/fullpackstyling.css" text="panier" textFill="#a868a0">
+                           <graphic>
+                              <ImageView fitHeight="25.0" fitWidth="34.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../resources/group.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Button>
+                     </children>
+                  </VBox>
+                  <AnchorPane layoutX="91.0" layoutY="69.0" prefHeight="531.0" prefWidth="886.0" style="-fx-background-color: #131022; -fx-background-radius: 10;" stylesheets="@../css/fullpackstyling.css">
+                     <children>
+                        <Label layoutX="26.0" layoutY="119.0" prefHeight="39.0" prefWidth="102.0" text="Panier" textFill="WHITE">
+                           <font>
+                              <Font name="Arial Black" size="26.0" />
+                           </font>
+                        </Label>
+                        <Pane layoutX="569.0" layoutY="46.0" prefHeight="297.0" prefWidth="270.0" style="-fx-background-radius: 20;" styleClass="linear-grad" stylesheets="@../css/fullpackstyling.css">
+                           <children>
+                              <Button fx:id="checkout" layoutX="63.0" layoutY="285.0" mnemonicParsing="false" onAction="#checkout" prefHeight="25.0" prefWidth="145.0" styleClass="linear-grad" stylesheets="@../css/fullpackstyling.css" text="Checkout" textFill="WHITE" />
+                              <ImageView fitHeight="66.0" fitWidth="144.0" layoutX="102.0" layoutY="49.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../resources/eruro.png" />
+                                 </image>
+                              </ImageView>
+                              <Label fx:id="total" layoutX="77.0" layoutY="159.0" text="Total" textFill="WHITE">
+                                 <font>
+                                    <Font size="36.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="77.0" layoutY="115.0" text="Totale " textFill="WHITE">
+                                 <font>
+                                    <Font name="Arial Black" size="30.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="163.0" layoutY="159.0" text="DT" textFill="WHITE">
+                                 <font>
+                                    <Font size="36.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </Pane>
+                        <Line endX="100.0" layoutX="445.0" layoutY="54.0" startX="100.0" startY="418.0" stroke="#b9b1b1" strokeDashOffset="2.0" />
+                        <BorderPane layoutX="569.0" layoutY="404.0" prefHeight="66.0" prefWidth="270.0">
+                           <center>
+                              <Label alignment="CENTER" prefWidth="265.0" text="Il est important de suivre un processus bien défini pour assurer une expérience d'achat fluide et satisfaisante pour les clients." textFill="#9a9292" wrapText="true" BorderPane.alignment="CENTER">
+                                 <font>
+                                    <Font size="13.0" />
+                                 </font>
+                              </Label>
+                           </center></BorderPane>
+                        <Label layoutX="569.0" layoutY="377.0" text="Information supplementaire" textFill="#fff600">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Label>
+                        <ScrollPane layoutX="26.0" layoutY="158.0">
+                           <content>
+                              <VBox fx:id="vboxpanier" prefHeight="357.0" prefWidth="505.0" style="-fx-background-color: #1A172A; -fx-background-radius: 10;" stylesheets="@../css/fullpackstyling.css" />
+                           </content>
+                        </ScrollPane>
+                        <Label alignment="CENTER" layoutX="26.0" layoutY="64.0" prefHeight="34.0" prefWidth="393.0" text="Profitez de la livraison gratuite pour toute commande supérieure à 50€" textFill="WHITE" wrapText="true" />
+                        <Label layoutX="27.0" layoutY="40.0" text="Votre panier est le reflet de votre Style!" textFill="#9a9292">
+                           <font>
+                              <Font name="Arial Black" size="18.0" />
+                           </font>
+                        </Label>
+                        <ImageView fitHeight="25.0" fitWidth="34.0" layoutX="25.0" layoutY="11.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../resources/group.png" />
+                           </image>
+                        </ImageView>
+                        <Label layoutX="56.0" layoutY="5.0" text="Bonjour  " textFill="WHITE">
+                           <font>
+                              <Font name="Arial Black" size="25.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="Nomclient1" layoutX="187.0" layoutY="11.0" text="EARN MONEY" textFill="RED">
+                           <font>
+                              <Font name="Arial Black" size="18.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </AnchorPane>
+                  <Label layoutX="134.0" layoutY="29.0" prefHeight="19.0" prefWidth="66.0" text="AutoDoc" textFill="WHITE">
+                     <font>
+                        <Font size="13.0" />
+                     </font>
+                  </Label>
+               </children>
+            </AnchorPane>
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>
