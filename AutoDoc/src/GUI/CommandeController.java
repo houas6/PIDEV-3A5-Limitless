@@ -254,7 +254,7 @@ line.setLayoutY(50.0);
             produits.setSpacingAfter(10f);
             document.add(produits);
  
-            ArrayList<Produit> products = spanier.getpanier(1).getProducts();
+            ArrayList<Produit> products = spanier.getpanier(u.getId_user()).getProducts();
             PdfPTable table = new PdfPTable(3); // 3 colonnes pour Nom, Prix et Quantité
             table.setWidthPercentage(100);
             table.setSpacingBefore(10f);
