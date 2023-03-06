@@ -123,7 +123,7 @@ if (imageData != null) {
     productPrixLabel.setFont(Font.font("Verdana", FontWeight.NORMAL, 12));
     productPrixLabel.setStyle("-fx-font-weight: bold; -fx-text-fill: #ffffff;");
  
-    Label productQuantiteLabel = new Label(" "+spanier.getQuantite(1, p.getId_produit()));// remplace 1 par client.id
+    Label productQuantiteLabel = new Label(" "+spanier.getQuantite(u.getId_user(), p.getId_produit()));// remplace 1 par client.id
     productQuantiteLabel.setLayoutX(375);
     productQuantiteLabel.setLayoutY(45);
     productQuantiteLabel.setFont(Font.font("Verdana", FontWeight.NORMAL, 12));
@@ -154,9 +154,9 @@ if (imageData != null) {
 incrementButton.setLayoutX(400);
 incrementButton.setLayoutY(40);
 incrementButton.setOnAction(event -> {
-    int oldQuantity = spanier.getQuantite(1, p.getId_produit());
+    int oldQuantity = spanier.getQuantite(u.getId_user(), p.getId_produit());
     spanier.incrementQuantite(spanier.getpanier(u.getId_user()), p.getId_produit());
-    int newQuantity = spanier.getQuantite(1, p.getId_produit());
+    int newQuantity = spanier.getQuantite(u.getId_user(), p.getId_produit());
     if (newQuantity > oldQuantity) {
         productQuantiteLabel.setText(" " + newQuantity);
          productQuantiteLabel.setStyle("-fx-font-weight: bold; -fx-text-fill: #ffffff;");
@@ -168,10 +168,10 @@ Button decrementButton = new Button("-");
 decrementButton.setLayoutX(350);
 decrementButton.setLayoutY(40);
 decrementButton.setOnAction(event -> {
-    int oldQuantity = spanier.getQuantite(1, p.getId_produit());
+    int oldQuantity = spanier.getQuantite(u.getId_user(), p.getId_produit());
     if (oldQuantity > 1) {
         spanier.decrementQuantite(spanier.getpanier(u.getId_user()), p.getId_produit());
-        int newQuantity = spanier.getQuantite(1, p.getId_produit());
+        int newQuantity = spanier.getQuantite(u.getId_user(), p.getId_produit());
         if (newQuantity < oldQuantity) {
             productQuantiteLabel.setText(" " + newQuantity);
              productQuantiteLabel.setStyle("-fx-font-weight: bold; -fx-text-fill: #ffffff;");
@@ -203,7 +203,7 @@ alert.setContentText("Cliquez sur OK pour confirmer.");
 Optional<ButtonType> result = alert.showAndWait();
 if (result.isPresent() && result.get() == ButtonType.OK) {
     Pane parent = (Pane) productPane.getParent();
-    spanier.supprimerproduitpannier(1, p.getId_produit());
+    spanier.supprimerproduitpannier(u.getId_user(), p.getId_produit());
     parent.getChildren().remove(productPane);
     total.setText(String.valueOf(spanier.getpanier(u.getId_user()).getTotal_panier()));
 }    

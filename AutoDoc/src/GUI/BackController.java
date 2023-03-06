@@ -42,6 +42,7 @@ public class BackController implements Initializable {
     private VBox vbox1;
     ServiceCommande sc= new ServiceCommande();
     commande c;
+    Utilisateur u=Auth.getCurrentUtilisateur();
     /**
      * Initializes the controller class.
      */
@@ -150,7 +151,7 @@ Optional<ButtonType> result = alert.showAndWait();
 if (result.isPresent() && result.get() == ButtonType.OK) {
     Pane parent = (Pane) paneback.getParent();
     sc.modifierCommand(new commande(c.getId_commande(), choiceBox.getValue()));
-    
+    nomuser.setText(u.getNom());
    
 }    
     

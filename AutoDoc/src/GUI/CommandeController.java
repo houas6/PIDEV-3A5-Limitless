@@ -94,14 +94,15 @@ public class CommandeController implements Initializable {
     private Label soustotal;
     @FXML
     private Label total;
-    
+    Utilisateur u= Auth.getCurrentUtilisateur();
+    int id=u.getId_user();
 
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-          ArrayList<Produit> products = spanier.getpanier(1).getProducts();// remplace 1 par client.id
+          ArrayList<Produit> products = spanier.getpanier(u.getId_user()).getProducts();// remplace 1 par client.id
         System.out.println( products);
         
         
@@ -121,13 +122,13 @@ public class CommandeController implements Initializable {
     productDimensionLabel.setFont(Font.font("Verdana", FontWeight.NORMAL, 12));
     productDimensionLabel.setStyle("-fx-font-weight: bold; -fx-text-fill: #ffffff;");
     
-    Label productPrixLabel = new Label(spanier.getQuantite(1, p.getId_produit()) +"     *    " + p.getPrix());
+    Label productPrixLabel = new Label(spanier.getQuantite(u.getId_user(), p.getId_produit()) +"     *    " + p.getPrix());
     productPrixLabel.setLayoutX(80);
     productPrixLabel.setLayoutY(20);
     productPrixLabel.setFont(Font.font("Verdana", FontWeight.NORMAL, 12));
     productPrixLabel.setStyle("-fx-font-weight: bold; -fx-text-fill: #ffffff;");
     
-    Label producttotal = new Label(""+spanier.getQuantite(1, p.getId_produit())*p.getPrix()+" DT");
+    Label producttotal = new Label(""+spanier.getQuantite(u.getId_user(), p.getId_produit())*p.getPrix()+" DT");
     producttotal.setLayoutX(280);
     producttotal.setLayoutY(20);
     producttotal.setFont(Font.font("Verdana", FontWeight.NORMAL, 12));
@@ -149,13 +150,13 @@ line.setStrokeWidth(0.8);
 line.setStroke(Color.WHITE);
 line.setLayoutX(30.0);
 line.setLayoutY(50.0);
-          adresse.setText(sclient.getutilisateur(1).getAdresse());
+          adresse.setText(sclient.getutilisateur(u.getId_user()).getAdresse());
           
           
           
-          nomuser.setText(sclient.getutilisateur(1).getNom());
-          soustotal.setText(String.valueOf(spanier.getpanier(1).getTotal_panier()));
-          total.setText(String.valueOf(spanier.getpanier(1).getTotal_panier()+14));
+          nomuser.setText(sclient.getutilisateur(u.getId_user()).getNom());
+          soustotal.setText(String.valueOf(spanier.getpanier(u.getId_user()).getTotal_panier()));
+          total.setText(String.valueOf(spanier.getpanier(u.getId_user()).getTotal_panier()+14));
           
           
           
@@ -188,12 +189,12 @@ line.setLayoutY(50.0);
 
     @FXML
     private void payercommande(ActionEvent event) throws FileNotFoundException, DocumentException {
-      client= sclient.getutilisateur(1);
+      client= sclient.getutilisateur(u.getId_user());
      client.setAdresse(adresse.getText());
         //commande.setCl(client);
         //commande.setTotal_commande(spanier.getpanier(1).getTotal_panier()+14);
        // commande.setId_commande(0);
-         commande c1= new commande(0,client,spanier.getpanier(1).getTotal_panier()+14);
+         commande c1= new commande(0,client,spanier.getpanier(u.getId_user()).getTotal_panier()+14);
         scommande.ajoutercommande(c1);
         genererTicketAchatPDF(spanier, bord.getScene().getWindow());
         
@@ -223,7 +224,7 @@ line.setLayoutY(50.0);
      
         
     }
-    public static void genererTicketAchatPDF(ServicePanier spanier, Window parentWindow) {
+    public  void genererTicketAchatPDF(ServicePanier spanier, Window parentWindow) {
     FileChooser fileChooser = new FileChooser();
     fileChooser.setTitle("Enregistrer les données");
     File selectedFile = fileChooser.showSaveDialog(parentWindow);
@@ -263,12 +264,14 @@ line.setLayoutY(50.0);
             table.addCell(new PdfPCell(new Phrase("Nom", regularFont)));
             table.addCell(new PdfPCell(new Phrase("Prix", regularFont)));
             table.addCell(new PdfPCell(new Phrase("Quantité", regularFont)));
+            
  
             // Contenu de table
             for (Produit p : products) {
+                int q = spanier.getQuantite(u.getId_user(), p.getId_produit());
                 table.addCell(new PdfPCell(new Phrase(p.getNom_produit(), regularFont)));
                 table.addCell(new PdfPCell(new Phrase(String.valueOf(p.getPrix()), regularFont)));
-                table.addCell(new PdfPCell(new Phrase(String.valueOf(spanier.getQuantite(1, p.getId_produit())), regularFont)));
+                table.addCell(new PdfPCell(new Phrase(String.valueOf(q), regularFont)));
             }
             document.add(table);
  

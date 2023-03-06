@@ -6,7 +6,7 @@
 package GUI;
 import services.*;
 import models.*;
-
+import GUI.*;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.net.URL;
@@ -37,6 +37,8 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import models.*;
+import services.*;
 
 /**
  * FXML Controller class
@@ -57,6 +59,7 @@ public class FrontAjouterController implements Initializable {
     private GridPane productgridpane;
     @FXML
     private Button Ajouterproduit;
+  Utilisateur u= Auth.getCurrentUtilisateur();
 
     /**
      * Initializes the controller class.
@@ -86,12 +89,65 @@ public void initialize(URL url, ResourceBundle rb) {
 
         // Create a Label to display the product description
         Label descriptionLabel = new Label(p.getDescription());
+         Button echanger = new Button("Echanger");
+    echanger.setLayoutX(400);
+    echanger.setLayoutY(40);
+    echanger.setOnAction(event -> {
+    
+    FXMLLoader loader = new FXMLLoader(getClass().getResource("Ajoutere.fxml"));
+        try{
+            Parent root = loader.load();
+            mainBorderPane.getChildren().setAll(root);
+           
+                 AjoutereController controller = loader.getController();
+                 controller.setId_p(p.getId_produit());
+                 System.out.println("aaaa"+p.getId_produit());
 
+           }
+        catch(IOException ex){
+            System.out.println(ex);
+        }
+        
+    
+});
+    
+    
+    Button Ajouter = new Button("Ajouter");
+    Ajouter.setLayoutX(400);
+    Ajouter.setLayoutY(40);
+    Ajouter.setOnAction(event -> {
+        panier pan2= new panier(u.getId_user());
+    ServicePanier serv3 = new ServicePanier();
+ 
+   serv3.ajouterPanier(pan2, p.getId_produit()); 
+    
+        
+    
+});
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+        
+         
         // Add the ImageView and Labels to the gridpane
         productgridpane.add(imageView, col, row);
         productgridpane.add(nameLabel, col, row+1);
         productgridpane.add(descriptionLabel, col, row+2);
         productgridpane.add(priceLabel, col, row+3);
+        productgridpane.add(echanger, col, row+4);
+        productgridpane.add(Ajouter, col, row+5);
         
 
         // Increment the column index
@@ -105,7 +161,6 @@ public void initialize(URL url, ResourceBundle rb) {
     }
 }
     
-
     @FXML
     private void proccessLogout(ActionEvent event) {
     }

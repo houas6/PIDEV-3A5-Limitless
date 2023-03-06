@@ -49,6 +49,7 @@ public class PaymentController implements Initializable {
     panier panier ;
     ServiceUtilisateur sclient = new ServiceUtilisateur();
     Utilisateur client;
+    Utilisateur u= Auth.getCurrentUtilisateur();
     /**
      * Initializes the controller class.
      */
@@ -64,7 +65,7 @@ public class PaymentController implements Initializable {
           if ((isValidVisaCardNo(card.getText()) && (!card.getText().isEmpty()) && (isNum(card.getText())))
                 && (!m_exp.getText().isEmpty()) && (isNum(m_exp.getText()))
                 && (parseInt(y_exp.getText()) >= LocalDate.now().getYear()) && (!y_exp.getText().isEmpty()) && (isNum(y_exp.getText())) && (isNum(cvc.getText()))) {
-            float f = (float) ((spanier.getpanier(1).getTotal_panier()+14)*100);
+            float f = (float) ((spanier.getpanier(u.getId_user()).getTotal_panier()+14)*100);
               System.out.println(f);
               
              int k =floatToInt(f);
@@ -72,7 +73,7 @@ public class PaymentController implements Initializable {
           PaymentApi.pay(k);
          ServiceUtilisateur serv4 = new ServiceUtilisateur();
          Utilisateur client;
-         client=serv4.getutilisateur(1);
+         client=serv4.getutilisateur(u.getId_user());
          
          MailSender2.sendMail(client);
 

@@ -3,37 +3,22 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/rassa/Documents/NetBeansProjects/AutoDoc/src/autodoc/AutoDoc.java</file>
-            <file>file:/C:/Users/rassa/Documents/NetBeansProjects/AutoDoc/src/GUI/SignupController.java</file>
+            <file>file:/C:/Users/rassa/Documents/NetBeansProjects/AutoDoc/src/GUI/BackController.java</file>
+            <file>file:/C:/Users/rassa/Documents/NetBeansProjects/AutoDoc/src/GUI/PaymentController.java</file>
             <file>file:/C:/Users/rassa/Documents/NetBeansProjects/AutoDoc/src/GUI/LoginController.java</file>
+            <file>file:/C:/Users/rassa/Documents/NetBeansProjects/AutoDoc/src/GUI/ModifierechangeController.java</file>
             <file>file:/C:/Users/rassa/Documents/NetBeansProjects/AutoDoc/src/GUI/FrontAjouterController.java</file>
-            <file>file:/C:/Users/rassa/Documents/NetBeansProjects/AutoDoc/src/GUI/ModifierController.java</file>
-            <file>file:/C:/Users/rassa/Documents/NetBeansProjects/AutoDoc/src/GUI/Modifier.fxml</file>
-            <file>file:/C:/Users/rassa/Documents/NetBeansProjects/AutoDoc/src/GUI/AjouterController.java</file>
-            <file>file:/C:/Users/rassa/Documents/NetBeansProjects/AutoDoc/src/models/MailSender.java</file>
-            <file>file:/C:/Users/rassa/Documents/NetBeansProjects/AutoDoc/src/GUI/changermotdepasse.fxml</file>
-            <file>file:/C:/Users/rassa/Documents/NetBeansProjects/AutoDoc/src/GUI/AjouterPFrontController.java</file>
-            <file>file:/C:/Users/rassa/Documents/NetBeansProjects/AutoDoc/src/GUI/SignupWindow.java</file>
-            <file>file:/C:/Users/rassa/Documents/NetBeansProjects/AutoDoc/src/models/Utilisateur.java</file>
-            <file>file:/C:/Users/rassa/Documents/NetBeansProjects/AutoDoc/src/GUI/afficherlisteutilisateur.fxml</file>
-            <file>file:/C:/Users/rassa/Documents/NetBeansProjects/AutoDoc/src/BD/MyConnection.java</file>
-            <file>file:/C:/Users/rassa/Documents/NetBeansProjects/AutoDoc/src/GUI/AfficherlisteutilisateurController.java</file>
-            <file>file:/C:/Users/rassa/Documents/NetBeansProjects/AutoDoc/src/services/Auth.java</file>
-            <file>file:/C:/Users/rassa/Documents/NetBeansProjects/AutoDoc/src/GUI/signup.fxml</file>
-            <file>file:/C:/Users/rassa/Documents/NetBeansProjects/AutoDoc/src/GUI/ProduitstatController.java</file>
-            <file>file:/C:/Users/rassa/Documents/NetBeansProjects/AutoDoc/src/edu/produit/gui/ModifierController.java</file>
-            <file>file:/C:/Users/rassa/Documents/NetBeansProjects/AutoDoc/src/GUI/Produitstat.fxml</file>
-            <file>file:/C:/Users/rassa/Documents/NetBeansProjects/AutoDoc/src/GUI/AdminController.java</file>
-            <file>file:/C:/Users/rassa/Documents/NetBeansProjects/AutoDoc/src/GUI/Admin.fxml</file>
-            <file>file:/C:/Users/rassa/Documents/NetBeansProjects/AutoDoc/src/GUI/FrontAjouter.fxml</file>
-            <file>file:/C:/Users/rassa/Documents/NetBeansProjects/AutoDoc/src/GUI/gerercompte.fxml</file>
+            <file>file:/C:/Users/rassa/Documents/NetBeansProjects/AutoDoc/src/GUI/AjoutereController.java</file>
+            <file>file:/C:/Users/rassa/Documents/NetBeansProjects/AutoDoc/src/GUI/firstwindow.java</file>
+            <file>file:/C:/Users/rassa/Documents/NetBeansProjects/AutoDoc/src/GUI/PanierController.java</file>
+            <file>file:/C:/Users/rassa/Documents/NetBeansProjects/AutoDoc/src/GUI/AfficherController.java</file>
+            <file>file:/C:/Users/rassa/Documents/NetBeansProjects/AutoDoc/src/models/Produit.java</file>
+            <file>file:/C:/Users/rassa/Documents/NetBeansProjects/AutoDoc/src/GUI/CommandeController.java</file>
+            <file>file:/C:/Users/rassa/Documents/NetBeansProjects/AutoDoc/src/models/MailSender3.java</file>
+            <file>file:/C:/Users/rassa/Documents/NetBeansProjects/AutoDoc/src/services/ServicePanier.java</file>
             <file>file:/C:/Users/rassa/Documents/NetBeansProjects/AutoDoc/src/services/CRUDProduit.java</file>
-            <file>file:/C:/Users/rassa/Documents/NetBeansProjects/AutoDoc/src/GUI/login.fxml</file>
-            <file>file:/C:/Users/rassa/Documents/NetBeansProjects/AutoDoc/src/GUI/ChangermotdepasseController.java</file>
-            <file>file:/C:/Users/rassa/Documents/NetBeansProjects/AutoDoc/src/services/CRUDUtilisateur.java</file>
-            <file>file:/C:/Users/rassa/Documents/NetBeansProjects/AutoDoc/src/GUI/AjouterPFront.fxml</file>
+            <file>file:/C:/Users/rassa/Documents/NetBeansProjects/AutoDoc/src/models/MailSender2.java</file>
             <file>file:/C:/Users/rassa/Documents/NetBeansProjects/AutoDoc/src/GUI/LoginWindow.java</file>
-            <file>file:/C:/Users/rassa/Documents/NetBeansProjects/AutoDoc/src/GUI/Ajouter.fxml</file>
         </group>
     </open-files>
 </project-private>
