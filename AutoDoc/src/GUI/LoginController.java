@@ -77,7 +77,7 @@ public class LoginController implements Initializable {
                     }
                 } else if (role.equals("client")) {
                     try {
-                        Parent root = FXMLLoader.load(getClass().getResource("FrontAjouter.fxml")); // correction
+                        Parent root = FXMLLoader.load(getClass().getResource("houas.fxml")); // correction
                         Scene scene = new Scene(root);
                         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
                         stage.setScene(scene);

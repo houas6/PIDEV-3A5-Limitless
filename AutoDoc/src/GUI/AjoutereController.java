@@ -150,7 +150,7 @@ public class AjoutereController implements Initializable {
             Parent root;
             try {
             
-            root = FXMLLoader.load(getClass().getResource("FrontAjouter.fxml"));
+            root = FXMLLoader.load(getClass().getResource("houas.fxml"));
             Scene c=new Scene(root);
              Stage stage=(Stage)fxajout.getScene().getWindow();
             stage.setScene(c);

@@ -7,6 +7,7 @@ package services;
 import BD.MyConnection;
 import models.*;
 import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -70,7 +71,31 @@ public class ServiceCommande implements InterfaceServiceCommande{
         command.setTotal_commande(resultpanier.getTotal_panier());
     return command;
     }
+    public List<commande> afficherCommands2() {
+        List<commande> comds = new ArrayList<>();
+        Utilisateur user = Auth.getCurrentUtilisateur();
+        PreparedStatement stmt = null;
+        Connection conn = null;
+        ResultSet rs = null;
+        try {
+//        String req = "SELECT * FROM commande WHERE id_user = ?";
+//        ste=conn.createStatement();
+//        ResultSet result = ste.executeQuery(req);
+            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/limitless", "root", "");
+            stmt = conn.prepareStatement("SELECT * FROM commande WHERE id_user = ?");
+            stmt.setInt(1, user.getId_user());
+            rs = stmt.executeQuery();
 
+            while (rs.next()) {
+                commande resultCommand = new commande(rs.getInt("id_commande"), rs.getInt("id_user"), rs.getString("nom"), rs.getString("prenom"), rs.getString("adresse"), rs.getFloat("total"), rs.getString("status"));
+                comds.add(resultCommand);
+            }
+
+        } catch (SQLException ex) {
+            System.out.println(ex);
+        }
+        return comds;
+    }
     @Override
     public void supprimercommande(int id_commande) {
        PreparedStatement stmt = null;

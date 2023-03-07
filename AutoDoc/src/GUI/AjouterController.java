@@ -522,7 +522,7 @@ private void search(ActionEvent event) {
             
             
            
-            root = FXMLLoader.load(getClass().getResource("FrontAjouter.fxml"));
+            root = FXMLLoader.load(getClass().getResource("houas.fxml"));
             Scene c=new Scene(root);
             Stage stage=(Stage)statist.getScene().getWindow();
             stage.setScene(c);

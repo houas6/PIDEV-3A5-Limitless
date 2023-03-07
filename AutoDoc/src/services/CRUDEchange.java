@@ -102,6 +102,30 @@ Connection conn = MyConnection.getInstance().getConnection();
    
 return t ;
    } 
+   
+   
+   @Override
+    public List<Echanges> afficherechangeFront(int id) {
+        List<Echanges> ech = new ArrayList<Echanges>();
+        try {
+            
+           ste =conn.createStatement();
+        String req = "SELECT * FROM `echanges`  ";
+        ResultSet result = ste.executeQuery(req);
+        
+        while (result.next()) {
+            Echanges resultPerson = new Echanges(result.getInt("id_echange"), result.getInt("produit_echange"), result.getInt("produit_offert"), result.getString("statut"), result.getString("commentaire"));
+            ech.add(resultPerson);
+        }
+        System.out.println(ech);
+      
+    } catch (SQLException ex) {
+         System.out.println(ex);   
+    }
+   return ech;
+    }
+   
+   
 @Override
 public List<Echanges> searchEchange(String searchTerm) {
     List<Echanges> echangeList = new ArrayList<>();

@@ -67,7 +67,7 @@
                   <Button fx:id="fxlogin" layoutX="261.0" layoutY="378.0" mnemonicParsing="false" onAction="#login" prefHeight="25.0" prefWidth="159.0" style="-fx-background-color: e54233;" text="Connexion" textFill="WHITE" />
                   <ImageView fitHeight="167.0" fitWidth="140.0" layoutX="659.0" layoutY="131.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../../resources/logo.png" />
+                        <Image url="@../resources/logo.png" />
                      </image>
                   </ImageView>
                   <Button fx:id="stosignup" blendMode="SCREEN" layoutX="261.0" layoutY="430.0" mnemonicParsing="false" onAction="#redirectToSignUp" prefHeight="25.0" prefWidth="159.0" style="-fx-background-color: 54ff34;" text="Créer un compte" />

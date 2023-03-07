@@ -20,8 +20,10 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import models.*;
 import services.Auth;
@@ -45,7 +47,19 @@ public class AjouterrController implements Initializable {
     private Button btmAjouter;
     private Utilisateur user=Auth.getCurrentUtilisateur();
     private String num_user;
-    
+    @FXML
+    private Button redprof;
+    @FXML
+    private Button redstore;
+    @FXML
+    private Button redrec;
+    @FXML
+    private Button repanier;
+    @FXML
+    private AnchorPane bord;
+    @FXML
+    private Label Nomclient;
+    Utilisateur u1=Auth.getCurrentUtilisateur();
     
 
     /**
@@ -53,6 +67,7 @@ public class AjouterrController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        Nomclient.setText(u1.getNom());
         
         // TODO
     }    
@@ -91,7 +106,52 @@ public class AjouterrController implements Initializable {
             tfEtat.clear();
            
         }
-        }}
+        }
+
+    @FXML
+    private void redprof(ActionEvent event) {
+            
+    }
+
+    @FXML
+    private void redstore(ActionEvent event) {
+                 FXMLLoader loader = new FXMLLoader(getClass().getResource("houas.fxml"));
+        try{
+            Parent root = loader.load();
+            bord.getChildren().setAll(root);
+           
+           }
+        catch(IOException ex){
+            System.out.println(ex);
+        }
+    }
+
+    @FXML
+    private void redrec(ActionEvent event) {
+                 FXMLLoader loader = new FXMLLoader(getClass().getResource("Ajouterr.fxml"));
+        try{
+            Parent root = loader.load();
+            bord.getChildren().setAll(root);
+           
+           }
+        catch(IOException ex){
+            System.out.println(ex);
+        }
+    }
+
+    @FXML
+    private void redpanier(ActionEvent event) {
+                 FXMLLoader loader = new FXMLLoader(getClass().getResource("panier.fxml"));
+        try{
+            Parent root = loader.load();
+            bord.getChildren().setAll(root);
+           
+           }
+        catch(IOException ex){
+            System.out.println(ex);
+        }
+    }
+}
 
     
     
