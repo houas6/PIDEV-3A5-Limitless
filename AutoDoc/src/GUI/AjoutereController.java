@@ -62,6 +62,7 @@ public class AjoutereController implements Initializable {
        
     }
     
+    Utilisateur u=Auth.getCurrentUtilisateur();
      
        ServiceUtilisateur u1 = new ServiceUtilisateur();
        
@@ -74,7 +75,7 @@ public class AjoutereController implements Initializable {
        
       
         Connection conn = MyConnection.getInstance().getConnection();
-        String sql = "SELECT id_produit FROM produit WHERE id_user = 15";
+        String sql = "SELECT id_produit FROM produit WHERE id_user =" +u.getId_user()+"";
         List<Integer> produits = new ArrayList<>();
         System.out.println("aaa a"+id_p);
            try (PreparedStatement stmt = conn.prepareStatement(sql)) {
@@ -130,7 +131,7 @@ public class AjoutereController implements Initializable {
               alert.setTitle("Success");
                alert.setContentText("ajout!");
                 alert.show();
-                MailSender3.sendMail(u1.getutilisateur(15));
+                MailSender3.sendMail(u1.getutilisateur(u.getId_user()));
                  this.redirectToList();
         } catch (NumberFormatException e) {
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
@@ -149,7 +150,7 @@ public class AjoutereController implements Initializable {
             Parent root;
             try {
             
-            root = FXMLLoader.load(getClass().getResource("Afficher.fxml"));
+            root = FXMLLoader.load(getClass().getResource("FrontAjouter.fxml"));
             Scene c=new Scene(root);
              Stage stage=(Stage)fxajout.getScene().getWindow();
             stage.setScene(c);

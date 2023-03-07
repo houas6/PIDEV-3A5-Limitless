@@ -60,6 +60,7 @@ public class FrontAjouterController implements Initializable {
     @FXML
     private Button Ajouterproduit;
   Utilisateur u= Auth.getCurrentUtilisateur();
+  
 
     /**
      * Initializes the controller class.
@@ -67,7 +68,7 @@ public class FrontAjouterController implements Initializable {
     @Override
 public void initialize(URL url, ResourceBundle rb) {
     CRUDProduit cr= new CRUDProduit();
-    List<Produit> li = cr.afficherproduit();
+    List<Produit> li = cr.afficherproduit1(u.getId_user());
 
     // Create a counter for the row and column indices of the gridpane
     int row = 0;
