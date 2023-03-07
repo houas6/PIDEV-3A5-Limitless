@@ -3,17 +3,24 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/rassa/Documents/NetBeansProjects/AutoDoc/src/GUI/ListRecController.java</file>
-            <file>file:/C:/Users/rassa/Documents/NetBeansProjects/AutoDoc/src/GUI/ListRec.fxml</file>
-            <file>file:/C:/Users/rassa/Documents/NetBeansProjects/AutoDoc/src/GUI/ListReclamationController.java</file>
+            <file>file:/C:/Users/rassa/Documents/NetBeansProjects/AutoDoc/src/GUI/GerercompteController.java</file>
+            <file>file:/C:/Users/rassa/Documents/NetBeansProjects/AutoDoc/src/GUI/BackController.java</file>
             <file>file:/C:/Users/rassa/Documents/NetBeansProjects/AutoDoc/src/GUI/LoginController.java</file>
-            <file>file:/C:/Users/rassa/Documents/NetBeansProjects/AutoDoc/src/services/MetierReclamation.java</file>
-            <file>file:/C:/Users/rassa/Documents/NetBeansProjects/AutoDoc/src/models/reclamations.java</file>
-            <file>file:/C:/Users/rassa/Documents/NetBeansProjects/AutoDoc/src/GUI/Interfaces.java</file>
-            <file>file:/C:/Users/rassa/Documents/NetBeansProjects/AutoDoc/src/services/ServiceUtilisateur.java</file>
-            <file>file:/C:/Users/rassa/Documents/NetBeansProjects/AutoDoc/src/services/CrudReclamation.java</file>
+            <file>file:/C:/Users/rassa/Documents/NetBeansProjects/AutoDoc/src/GUI/ModifierechangeController.java</file>
+            <file>file:/C:/Users/rassa/Documents/NetBeansProjects/AutoDoc/src/GUI/FrontAjouterController.java</file>
+            <file>file:/C:/Users/rassa/Documents/NetBeansProjects/AutoDoc/src/GUI/Afficher.fxml</file>
+            <file>file:/C:/Users/rassa/Documents/NetBeansProjects/AutoDoc/src/GUI/AjouterController.java</file>
             <file>file:/C:/Users/rassa/Documents/NetBeansProjects/AutoDoc/src/GUI/ReponseReclamationController.java</file>
-            <file>file:/C:/Users/rassa/Documents/NetBeansProjects/AutoDoc/src/models/MailSender.java</file>
+            <file>file:/C:/Users/rassa/Documents/NetBeansProjects/AutoDoc/src/GUI/AfficherController.java</file>
+            <file>file:/C:/Users/rassa/Documents/NetBeansProjects/AutoDoc/src/GUI/AjouterPFrontController.java</file>
+            <file>file:/C:/Users/rassa/Documents/NetBeansProjects/AutoDoc/src/GUI/AjouterrController.java</file>
+            <file>file:/C:/Users/rassa/Documents/NetBeansProjects/AutoDoc/src/services/CRUDEchange.java</file>
+            <file>file:/C:/Users/rassa/Documents/NetBeansProjects/AutoDoc/src/GUI/ListReclamationController.java</file>
+            <file>file:/C:/Users/rassa/Documents/NetBeansProjects/AutoDoc/src/GUI/EchangeFrontController.java</file>
+            <file>file:/C:/Users/rassa/Documents/NetBeansProjects/AutoDoc/src/GUI/AfficherlisteutilisateurController.java</file>
+            <file>file:/C:/Users/rassa/Documents/NetBeansProjects/AutoDoc/src/GUI/EchangeFront.fxml</file>
+            <file>file:/C:/Users/rassa/Documents/NetBeansProjects/AutoDoc/src/services/CRUDProduit.java</file>
+            <file>file:/C:/Users/rassa/Documents/NetBeansProjects/AutoDoc/src/GUI/HouasController.java</file>
             <file>file:/C:/Users/rassa/Documents/NetBeansProjects/AutoDoc/src/GUI/LoginWindow.java</file>
         </group>
     </open-files>

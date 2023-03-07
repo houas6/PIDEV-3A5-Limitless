@@ -93,6 +93,7 @@ public class ModifierechangeController implements Initializable {
 }
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        Nomclient.setText(u.getNom());
          String choice1 = new String("confirmé");
         String choice2 = new String("annuler");
         fxstatut.getItems().addAll(choice1, choice2);

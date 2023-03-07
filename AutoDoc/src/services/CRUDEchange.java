@@ -148,5 +148,23 @@ public List<Echanges> searchEchange(String searchTerm) {
     }
     return echangeList;
 }
-
+public List<Echanges> afficherechangeFont(int u) {
+        List<Echanges> ech = new ArrayList<Echanges>();
+        try {
+           
+           ste =conn.createStatement();
+        String req = "SELECT e.* FROM `utilisateur` u JOIN `produit` p ON u.id_user=p.id_user JOIN `echanges` e ON p.id_produit = e.produit_offert WHERE u.id_user = "+u+" ";
+        ResultSet result = ste.executeQuery(req);
+       
+        while (result.next()) {
+            Echanges resultPerson = new Echanges(result.getInt("id_echange"), result.getInt("produit_echange"), result.getInt("produit_offert"), result.getString("statut"), result.getString("commentaire"));
+            ech.add(resultPerson);
+        }
+        System.out.println(ech);
+     
+    } catch (SQLException ex) {
+         System.out.println(ex);  
+    }
+   return ech;
+    }
 }

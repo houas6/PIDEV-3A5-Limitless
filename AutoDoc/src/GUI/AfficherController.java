@@ -97,9 +97,13 @@ public class AfficherController implements Initializable {
     private Button fxechanges;
     @FXML
     private Label Nomclient;
+    
+   Utilisateur u=Auth.getCurrentUtilisateur();
 
     @Override
     public void initialize(URL url, ResourceBundle rb) { 
+        
+        Nomclient.setText(u.getNom());
         //*************affichage*****************
        echange= ce.afficherechange();
         table.setItems(FXCollections.observableArrayList(echange));

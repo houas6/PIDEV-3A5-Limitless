@@ -57,11 +57,13 @@ Utilisateur u= Auth.getCurrentUtilisateur();
     @FXML
     private Button boutonrec;
     @FXML
-    private Button profileboutton;
-    @FXML
-    private ImageView fxmonprofile;
-    @FXML
     private Button fxpanier;
+    @FXML
+    private ImageView fxmonprofile1;
+    @FXML
+    private Button profilebou;
+    @FXML
+    private Button fxprofil;
     /**
      * Initializes the controller class.
      */
@@ -202,9 +204,11 @@ Utilisateur u= Auth.getCurrentUtilisateur();
         }
     }
 
+    
+
     @FXML
-    private void profileboutton(ActionEvent event) {
-         FXMLLoader loader = new FXMLLoader(getClass().getResource("gerercompte.fxml"));
+    private void boutonpanier(ActionEvent event) {
+         FXMLLoader loader = new FXMLLoader(getClass().getResource("panier.fxml"));
         try{
             Parent root = loader.load();
             bord.getChildren().setAll(root);
@@ -213,11 +217,33 @@ Utilisateur u= Auth.getCurrentUtilisateur();
         catch(IOException ex){
             System.out.println(ex);
         }
-        
     }
 
     @FXML
-    private void boutonpanier(ActionEvent event) {
+    private void boutton(ActionEvent event) {
+         FXMLLoader loader = new FXMLLoader(getClass().getResource("EchangeFront.fxml"));
+        try{
+            Parent root = loader.load();
+            bord.getChildren().setAll(root);
+           
+           }
+        catch(IOException ex){
+            System.out.println(ex);
+        }
     }
-    
+
+    @FXML
+    private void boutonprofil(ActionEvent event) {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("gerercompte.fxml"));
+        try{
+            Parent root = loader.load();
+            bord.getChildren().setAll(root);
+           
+           }
+        catch(IOException ex){
+            System.out.println(ex);
+        }
+    }
+
+
 }

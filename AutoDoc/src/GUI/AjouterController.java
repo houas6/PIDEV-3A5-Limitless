@@ -125,6 +125,7 @@ public class AjouterController implements Initializable {
     private ImageView fxmonprofile;
     @FXML
     private Button fxechanges;
+    Utilisateur u=Auth.getCurrentUtilisateur();
     
     
     /*public void setID_produit(String message)
@@ -149,6 +150,7 @@ public class AjouterController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        Nomclient.setText(u.getNom());
         // TODO
        // fxxidproduit.setCellValueFactory(new PropertyValueFactory<>("id_produit"));
         fxxnomproduit.setCellValueFactory(new PropertyValueFactory<>("nom_produit"));
