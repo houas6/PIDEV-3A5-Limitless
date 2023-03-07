@@ -41,6 +41,8 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.util.Callback;
 import java.util.stream.Collectors;
+import javafx.scene.Node;
+import javafx.scene.image.ImageView;
 
 
 /**
@@ -78,11 +80,23 @@ public class AfficherController implements Initializable {
     @FXML
     private Button modifierfx;
     @FXML
-    private Button redajout;   
-    @FXML
     private TextField filterField;
     @FXML
     private Label headerlist;
+    @FXML
+    private Button fxpanier;
+    @FXML
+    private Button storebouton;
+    @FXML
+    private Button boutonrec;
+    @FXML
+    private Button profileboutton;
+    @FXML
+    private ImageView fxmonprofile;
+    @FXML
+    private Button fxechanges;
+    @FXML
+    private Label Nomclient;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) { 
@@ -230,9 +244,70 @@ private void redirectToaddechange(){
             Logger.getLogger(AfficherController.class.getName()).log(Level.SEVERE, null, ex);
         }       
     }
-    @FXML
-    private void redajout(MouseEvent event) {
-        this.redirectToaddechange();
-    }
  
+
+  @FXML
+    private void boutonpanier(ActionEvent event) {
+      try {
+            Parent root = FXMLLoader.load(getClass().getResource("Back.fxml"));
+            Scene scene = new Scene(root);
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException ex) {
+            System.out.println(ex.getMessage());
+        }
+    }
+
+    @FXML
+    private void storebouton(ActionEvent event) {
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource("Ajouter.fxml"));
+            Scene scene = new Scene(root);
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException ex) {
+            System.out.println(ex.getMessage());
+        }
+    }
+
+    @FXML
+    private void boutonrec(ActionEvent event) {
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource("ListReclamation.fxml"));
+            Scene scene = new Scene(root);
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException ex) {
+            System.out.println(ex.getMessage());
+        }
+    }
+
+    @FXML
+    private void profileboutton(ActionEvent event) {
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource("afficherlisteutilisateur.fxml"));
+            Scene scene = new Scene(root);
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException ex) {
+            System.out.println(ex.getMessage());
+        }
+    }
+
+    @FXML
+    private void boutonechanges(ActionEvent event) {
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource("Afficher.fxml"));
+            Scene scene = new Scene(root);
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException ex) {
+            System.out.println(ex.getMessage());
+        }
+    } 
 }

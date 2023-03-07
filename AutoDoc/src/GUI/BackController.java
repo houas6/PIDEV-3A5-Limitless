@@ -5,18 +5,26 @@
  */
 package GUI;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
@@ -24,6 +32,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Paint;
 import javafx.scene.text.Font;
+import javafx.stage.Stage;
 import services.*;
 import models.*;
 
@@ -43,6 +52,20 @@ public class BackController implements Initializable {
     ServiceCommande sc= new ServiceCommande();
     commande c;
     Utilisateur u=Auth.getCurrentUtilisateur();
+    @FXML
+    private Button fxechanges;
+    @FXML
+    private Button storebouton;
+    @FXML
+    private Button boutonrec;
+    @FXML
+    private Button profileboutton;
+    @FXML
+    private ImageView fxmonprofile;
+    @FXML
+    private Button fxpanier;
+    @FXML
+    private TextField rech;
     /**
      * Initializes the controller class.
      */
@@ -166,5 +189,70 @@ paneback.getChildren().addAll(label1, label2, label3, label4, label5, label6, la
            vbox1.setSpacing(1);
         // TODO
     }    
+
+     @FXML
+    private void boutonpanier(ActionEvent event) {
+      try {
+            Parent root = FXMLLoader.load(getClass().getResource("Back.fxml"));
+            Scene scene = new Scene(root);
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException ex) {
+            System.out.println(ex.getMessage());
+        }
+    }
+
+    @FXML
+    private void storebouton(ActionEvent event) {
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource("Ajouter.fxml"));
+            Scene scene = new Scene(root);
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException ex) {
+            System.out.println(ex.getMessage());
+        }
+    }
+
+    @FXML
+    private void boutonrec(ActionEvent event) {
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource("ListReclamation.fxml"));
+            Scene scene = new Scene(root);
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException ex) {
+            System.out.println(ex.getMessage());
+        }
+    }
+
+    @FXML
+    private void profileboutton(ActionEvent event) {
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource("afficherlisteutilisateur.fxml"));
+            Scene scene = new Scene(root);
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException ex) {
+            System.out.println(ex.getMessage());
+        }
+    }
+
+    @FXML
+    private void boutonechanges(ActionEvent event) {
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource("Afficher.fxml"));
+            Scene scene = new Scene(root);
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException ex) {
+            System.out.println(ex.getMessage());
+        }
+    } 
     
 }

@@ -31,8 +31,10 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import javafx.util.Duration;
@@ -63,6 +65,20 @@ public class ModifierechangeController implements Initializable {
     //
     private Echanges echange;
     Utilisateur u =Auth.getCurrentUtilisateur();
+    @FXML
+    private Button fxpanier;
+    @FXML
+    private Button storebouton;
+    @FXML
+    private Button boutonrec;
+    @FXML
+    private Button profileboutton;
+    @FXML
+    private ImageView fxmonprofile;
+    @FXML
+    private Button fxechanges;
+    @FXML
+    private Label Nomclient;
     /**
      * Initializes the controller class.
      */
@@ -159,5 +175,25 @@ public class ModifierechangeController implements Initializable {
     @FXML
     private void rlist(MouseEvent event) {
         this.redirectToList();
+    }
+
+    @FXML
+    private void boutonpanier(ActionEvent event) {
+    }
+
+    @FXML
+    private void storebouton(ActionEvent event) {
+    }
+
+    @FXML
+    private void boutonrec(ActionEvent event) {
+    }
+
+    @FXML
+    private void profileboutton(ActionEvent event) {
+    }
+
+    @FXML
+    private void boutonechanges(ActionEvent event) {
     }
 }
