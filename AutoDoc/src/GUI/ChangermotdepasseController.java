@@ -5,17 +5,23 @@
  */
 package GUI;
 
+import java.io.IOException;
 import models.*;
 import services.*;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.input.MouseEvent;
+import javafx.stage.Stage;
 
 /**
  * FXML Controller class
@@ -58,6 +64,17 @@ if (u.getPassword().equals(oldPassword)) {
         alert.setTitle("Changement de mot de passe");
         alert.setHeaderText("Votre mot de passe a été modifié avec succès.");
         alert.showAndWait();
+        Auth.logout();
+        try {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("login.fxml"));
+                Parent root = loader.load();
+                Scene scene = new Scene(root);
+                Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                stage.setScene(scene);
+                stage.show();}
+         catch (IOException ex) {
+                System.out.println(ex.getMessage());
+            }
     } else {
         // Afficher un message d'erreur dans une alerte box
         Alert alert = new Alert(Alert.AlertType.ERROR);

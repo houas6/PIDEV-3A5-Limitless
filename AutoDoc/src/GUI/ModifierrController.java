@@ -23,7 +23,7 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-import model.reclamations;
+import models.reclamations;
 import services.CrudReclamation;
 
 

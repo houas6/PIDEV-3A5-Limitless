@@ -71,8 +71,6 @@ public class PanierController implements Initializable {
     private Button boutonproff;
     @FXML
     private Button boutonrec;
-    @FXML
-    private Button boutonpanier;
     /**
      * Initializes the controller class.
      */
@@ -267,9 +265,6 @@ Nomclient1.setText(u.getNom());
         
     }
 
-    @FXML
-    private void boutonproff(ActionEvent event) {
-    }
 
     @FXML
     private void boutonrec(ActionEvent event) {
@@ -287,6 +282,19 @@ Nomclient1.setText(u.getNom());
     @FXML
     private void boutonpanier(ActionEvent event) {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("panier.fxml"));
+        try{
+            Parent root = loader.load();
+            bord.getChildren().setAll(root);
+           
+           }
+        catch(IOException ex){
+            System.out.println(ex);
+        }
+    }
+
+    @FXML
+    private void boutonprofil(ActionEvent event) {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("gerercompte.fxml"));
         try{
             Parent root = loader.load();
             bord.getChildren().setAll(root);

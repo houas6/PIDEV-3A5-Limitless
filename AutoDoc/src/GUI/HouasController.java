@@ -165,17 +165,17 @@ Utilisateur u= Auth.getCurrentUtilisateur();
         // TODO
     }    
 
-    private void panierboutton(ActionEvent event) {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("panier.fxml"));
-        try{
-            Parent root = loader.load();
-            bord.getChildren().setAll(root);
-           
-           }
-        catch(IOException ex){
-            System.out.println(ex);
-        }
-    }
+//    private void panierboutton(ActionEvent event) {
+//        FXMLLoader loader = new FXMLLoader(getClass().getResource("panier.fxml"));
+//        try{
+//            Parent root = loader.load();
+//            bord.getChildren().setAll(root);
+//           
+//           }
+//        catch(IOException ex){
+//            System.out.println(ex);
+//        }
+//    }
 
 
     @FXML

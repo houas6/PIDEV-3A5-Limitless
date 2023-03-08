@@ -105,13 +105,16 @@ public class LoginController implements Initializable {
 
     @FXML
     private void resetpassword(MouseEvent event) {
-        
-        try {
-            MailSender.sendMail("dhiasaibi@yahoo.com", "Dhia", "s");
-        } catch (Exception ex) {
-            Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
+    try {
+            Parent root = FXMLLoader.load(getClass().getResource("forgotpassword.fxml"));
+            Scene scene = new Scene(root);
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException ex) {
+            System.out.println(ex.getMessage());
+        }    
+         
     }
 }
 

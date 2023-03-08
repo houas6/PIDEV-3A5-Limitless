@@ -5,8 +5,6 @@
 
 <AnchorPane id="AnchorPane" prefHeight="647.0" prefWidth="803.0" stylesheets="@design.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.AdminController">
    <children>
-      <Button fx:id="fxmodifierUtilisateur" layoutX="318.0" layoutY="120.0" mnemonicParsing="false" onAction="#modifierUtilisateur" text="Modifier un utilisateur" />
-      <Button fx:id="fxsupprimerutilisateur" layoutX="312.0" layoutY="207.0" mnemonicParsing="false" onAction="#fxsupprimerUtilisateur" text="Supprimer un utilisateur" />
-      <Button fx:id="fxafficherlisteutilisateur" layoutX="292.0" layoutY="293.0" mnemonicParsing="false" onAction="#fxafficherlisteutilisateur" text="Afficher la liste des utilisateurs" />
+      <Button fx:id="fxafficherlisteutilisateur" layoutX="292.0" layoutY="172.0" mnemonicParsing="false" onAction="#fxafficherlisteutilisateur" text="Afficher la liste des utilisateurs" />
    </children>
 </AnchorPane>

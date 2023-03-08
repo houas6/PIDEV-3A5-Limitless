@@ -5,13 +5,17 @@
  */
 package GUI;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.ChoiceBox;
@@ -164,5 +168,72 @@ paneback.getChildren().addAll(label1,  label3, label4, label5, label6, imageView
         // TODO
     }  
         // TODO
+    
+    @FXML
+    private void storebouton(ActionEvent event) {
+         FXMLLoader loader = new FXMLLoader(getClass().getResource("houas.fxml"));
+        try{
+            Parent root = loader.load();
+            bord.getChildren().setAll(root);
+           
+           }
+        catch(IOException ex){
+            System.out.println(ex);
+        }
+    }
+
+    @FXML
+    private void boutonrec(ActionEvent event) {
+         FXMLLoader loader = new FXMLLoader(getClass().getResource("Ajouterr.fxml"));
+        try{
+            Parent root = loader.load();
+            bord.getChildren().setAll(root);
+           
+           }
+        catch(IOException ex){
+            System.out.println(ex);
+        }
+    }
+
+    
+
+    @FXML
+    private void boutonpanier(ActionEvent event) {
+         FXMLLoader loader = new FXMLLoader(getClass().getResource("panier.fxml"));
+        try{
+            Parent root = loader.load();
+            bord.getChildren().setAll(root);
+           
+           }
+        catch(IOException ex){
+            System.out.println(ex);
+        }
+    }
+
+//    @FXML
+//    private void boutton(ActionEvent event) {
+//         FXMLLoader loader = new FXMLLoader(getClass().getResource("EchangeFront.fxml"));
+//        try{
+//            Parent root = loader.load();
+//            bord.getChildren().setAll(root);
+//           
+//           }
+//        catch(IOException ex){
+//            System.out.println(ex);
+//        }
+//    }
+
+    @FXML
+    private void boutonprofil(ActionEvent event) {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("gerercompte.fxml"));
+        try{
+            Parent root = loader.load();
+            bord.getChildren().setAll(root);
+           
+           }
+        catch(IOException ex){
+            System.out.println(ex);
+        }
+    }
     }    
     

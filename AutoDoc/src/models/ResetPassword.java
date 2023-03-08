@@ -5,6 +5,8 @@
  */
 package models;
 
+
+import services.Auth;
 import java.sql.Date;
 import java.time.LocalDate;
 import java.util.Properties;
@@ -18,13 +20,19 @@ import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
-
 /**
  *
  * @author hasse
  */
-public class MailSender {
-     public static void sendMail(String Mail, String Nom, String Prenom) throws Exception {
+import java.util.Arrays;
+import services.ResetPasswordRandomCodeGenerator;
+
+public class ResetPassword {
+
+    public static void sendMail(Utilisateur u) throws Exception {
+
+        String code = ResetPasswordRandomCodeGenerator.nextString();
+        Config.setVerificationCode(code);
         String mailContent = "<!DOCTYPE html>\n"
                 + "\n"
                 + "<html lang=\"en\" xmlns:o=\"urn:schemas-microsoft-com:office:office\" xmlns:v=\"urn:schemas-microsoft-com:vml\">\n"
@@ -144,15 +152,15 @@ public class MailSender {
                 + "																			style=\"margin: 0; font-size: 14px; text-align: center; mso-line-height-alt: 75px;\">\n"
                 + "																			<span style=\"font-size:50px;\"><strong><span\n"
                 + "																						style=\"font-size:50px;\"><span\n"
-                + "																							style=\"font-size:38px;\">BIENVENUE\n"
+                + "																							style=\"font-size:38px;\">Bienvenu\n"
                 + "																							A\n"
-                + "																							AUTODOC</span></span></strong></span>\n"
+                + "																							AutoDoc</span></span></strong></span>\n"
                 + "																		</p>\n"
                 + "																		<p\n"
                 + "																			style=\"margin: 0; font-size: 14px; text-align: center; mso-line-height-alt: 51px;\">\n"
                 + "																			<span style=\"font-size:34px;\"><strong><span\n"
                 + "																						style=\"font-size:34px;\"><span\n"
-                + "																							style=\"color:#2190e3;font-size:34px;\">"+Nom+" "+Prenom+"</span></span></strong></span>\n"
+                + "																							style=\"color:#2190e3;font-size:34px;\">" + u.getNom() + "</span></span></strong></span>\n"
                 + "																		</p>\n"
                 + "																	</div>\n"
                 + "																</div>\n"
@@ -171,25 +179,26 @@ public class MailSender {
                 + "																		<p\n"
                 + "																			style=\"margin: 0; font-size: 14px; text-align: center;\">\n"
                 + "																			<span\n"
-                + "																				style=\"font-size:18px;color:#000000;\">Merci de rejoindre notre site</span></p>\n"
+                + "																				style=\"font-size:18px;color:#000000;\">Vous avez oublie votre mot de passe..<br>\n"
+                + "																				</span></p>\n"
+                + "																		<p\n"
+                + "																			style=\"margin: 0; font-size: 14px; text-align: center;\">\n"
+                + "																			</p>\n"
                 + "																		<p\n"
                 + "																			style=\"margin: 0; font-size: 14px; text-align: center;\">\n"
                 + "																			<span\n"
-                + "																				style=\"font-size:18px;color:#000000;\">This\n"
-                + "																				mail contains all the infos (do no\n"
-                + "																				reply).</span></p>\n"
-                + "																		<p\n"
-                + "																			style=\"margin: 0; font-size: 14px; text-align: center;\">\n"
+                + "																				style=\"font-size:18px;color:#000000;\"><br>\n"
+                + "																				</span></p>\n"
                 + "																		<p\n"
                 + "																			style=\"margin: 0; font-size: 14px; text-align: center;\">\n"
                 + "																			<span\n"
-                + "																				style=\"font-size:18px;color:#000000;\"><br>Details:<br> Notre site de vente de pieces autos : "+"AutoDoc"+"</span>\n"
+                + "																				style=\"font-size:18px;color:#000000;\"><br> Nouveau mot de passe : <br>" + code + "<br></span>\n"
                 + "																		</p>\n"
                 + "																		<p\n"
                 + "																			style=\"margin: 0; font-size: 14px; text-align: center;\">\n"
                 + "																			<span\n"
-                + "																				style=\"font-size:18px;color:#000000;\"><br>Votre inscription a ete effectuee avec succes\n"
-                + "																				by : "+Nom+"</span></p>\n"
+                + "																				style=\"font-size:18px;color:#000000;\"><br><br>Requested\n"
+                + "																				by : " + u.getMail() + "</span></p>\n"
                 + "																		<p\n"
                 + "																			style=\"margin: 0; font-size: 14px; text-align: center; mso-line-height-alt: 14.399999999999999px;\">\n"
                 + "																			 </p>\n"
@@ -231,7 +240,7 @@ public class MailSender {
                 + "																		style=\"font-size: 12px; mso-line-height-alt: 18px; color: #555555; line-height: 1.5; font-family: Lato, Tahoma, Verdana, Segoe, sans-serif;\">\n"
                 + "																		<p\n"
                 + "																			style=\"margin: 0; font-size: 14px; text-align: center;\">\n"
-                + "																			AUTODOC © -  Your favorite company tool.\n"
+                + "																			MasterHR © -  Your favorite company tool.\n"
                 + "																		</p>\n"
                 + "																		<p\n"
                 + "																			style=\"margin: 0; font-size: 14px; text-align: center;\">\n"
@@ -348,8 +357,8 @@ public class MailSender {
                 + "</body>\n"
                 + "\n"
                 + "</html>";
-        String myAccountEmail = "alarassaa1477@gmail.com";
-        String password = "ngwhvnhhkbybhizs";
+        String myAccountEmail = "alarassaa147@gmail.com";
+        String password = "xwgasmdtzmkoiltb";
         System.out.println("Preparing to send email");
         Properties p = new Properties();
 
@@ -365,25 +374,27 @@ public class MailSender {
             }
         });
 
-        Message message = prepareMessage(session, myAccountEmail, Mail, mailContent);
+        Message message = prepareMessage(session, myAccountEmail, u.getMail(), mailContent);
 
         Transport.send(message);
         System.out.println("Message sent successfully");
+        Auth.changePassword(u.getMail(), code);
 
     }
 
-    private static Message prepareMessage(Session session, String myAccountEmail, String recipient , String mailContent) {
+    private static Message prepareMessage(Session session, String myAccountEmail, String recipient, String mailContent) {
         try {
             Message message = new MimeMessage(session);
             message.setFrom(new InternetAddress(myAccountEmail));
             message.setRecipient(Message.RecipientType.TO, new InternetAddress(recipient));
-            message.setSubject("Vous avez crée un compte à AutoDoc");
+            message.setSubject("Mot de passe oublié - AutoDoc");
             message.setContent(mailContent, "text/html");
+
             return message;
         } catch (Exception ex) {
             System.err.println(ex.getMessage());
         }
         return null;
     }
-    
+
 }

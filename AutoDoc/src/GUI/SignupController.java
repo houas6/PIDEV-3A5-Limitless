@@ -110,6 +110,14 @@ public class SignupController implements Initializable {
             alert.showAndWait();
             return;
         }
+         if (!cin.matches("[0-9]{8}")) {
+            // afficher le message d'erreur dans une alert box
+            Alert alert = new Alert(AlertType.ERROR);
+            alert.setTitle("Erreur de saisie");
+            alert.setHeaderText("Votre CIN est invalide.");
+            alert.showAndWait();
+            return;
+        }
         if (Auth.checkEmail(email)) {
             // afficher un message d'erreur dans une alert box
             Alert alert = new Alert(AlertType.ERROR);
@@ -135,7 +143,7 @@ public class SignupController implements Initializable {
 
 // Appeler la méthode Auth.signUp
         boolean ConnexionResultat = Auth.signUp(nom, prenom, cin, email, password, numero, adresse);
-        MailSender.sendMail("dhiasaibi@yahoo.com", nom, prenom);
+        MailSender.sendMail(email, nom, prenom);
         if (ConnexionResultat == true) {
             try {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("login.fxml"));

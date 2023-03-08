@@ -14,13 +14,15 @@
 
 <AnchorPane id="AnchorPane" prefHeight="722.0" prefWidth="887.0" stylesheets="@design.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.AfficherlisteutilisateurController">
    <children>
-      <TableView fx:id="fxtableutilisateur" layoutX="114.0" layoutY="282.0" prefHeight="200.0" prefWidth="749.0">
+      <TableView fx:id="fxtableutilisateur" layoutX="114.0" layoutY="282.0" prefHeight="200.0" prefWidth="863.0">
         <columns>
           <TableColumn fx:id="fxid" prefWidth="77.0" text="ID" />
           <TableColumn fx:id="fxnom" prefWidth="171.0" text="NOM" />
             <TableColumn fx:id="fxprenom" minWidth="0.0" prefWidth="179.0" text="PRENOM" />
             <TableColumn fx:id="fxemail" prefWidth="173.0" text="EMAIL" />
             <TableColumn fx:id="fxcin" prefWidth="147.0" text="CIN" />
+                        <TableColumn fx:id="fxsupprimer" maxWidth="500.0" prefWidth="115.0" text="delete" />
+
         </columns>
       </TableView>
       <TextField fx:id="fxrecherche" layoutX="413.0" layoutY="229.0" />
@@ -76,7 +78,7 @@
       </VBox>
       <Pane layoutX="594.0" layoutY="26.0" prefHeight="93.0" prefWidth="405.0" style="-fx-background-radius: 20 20 0 0;" styleClass="linear-grad" stylesheets="@../css/fullpackstyling.css">
          <children>
-            <Label fx:id="Nomclient" layoutX="167.0" layoutY="21.0" text="EARN MONEY" textFill="WHITE">
+            <Label fx:id="Nomclient" layoutX="167.0" layoutY="21.0" text="AutoDoc" textFill="WHITE">
                <font>
                   <Font size="18.0" />
                </font>

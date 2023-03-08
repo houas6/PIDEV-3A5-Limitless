@@ -22,6 +22,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -68,6 +69,8 @@ public class AfficherlisteutilisateurController implements Initializable {
     private Button fxechanges;
     @FXML
     private Label Nomclient;
+    @FXML
+    private TableColumn<Utilisateur, Void> fxsupprimer;
 
     /**
      * Initializes the controller class.
@@ -87,6 +90,29 @@ public class AfficherlisteutilisateurController implements Initializable {
         fxprenom.setCellValueFactory(new PropertyValueFactory<>("prenom"));
         fxemail.setCellValueFactory(new PropertyValueFactory<>("mail"));
         fxcin.setCellValueFactory(new PropertyValueFactory<>("cin"));
+        // Créer la colonne "Supprimer" avec un bouton pour chaque ligne
+        fxsupprimer.setCellFactory(param -> new TableCell<Utilisateur, Void>() {
+            private final Button supprimerButton = new Button("Supprimer");
+
+            {
+                supprimerButton.setOnAction(event -> {
+                    Utilisateur utilisateur = getTableView().getItems().get(getIndex());
+                    cu.supprimerUtilisateur(utilisateur.getId_user());
+                    fxtableutilisateur.getItems().remove(utilisateur);
+                });
+            }
+
+            @Override
+            protected void updateItem(Void item, boolean empty) {
+                super.updateItem(item, empty);
+
+                if (empty) {
+                    setGraphic(null);
+                } else {
+                    setGraphic(supprimerButton);
+                }
+            }
+        });
 
         fxrecherche.textProperty().addListener((observable, oldValue, newValue) -> {
             utilisateursFiltres = utilisateurs.stream()

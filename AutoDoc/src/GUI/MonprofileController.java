@@ -5,6 +5,7 @@
  */
 package GUI;
 
+import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -14,10 +15,17 @@ import java.sql.SQLException;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
+import models.Utilisateur;
+import services.Auth;
 
 /**
  * FXML Controller class
@@ -48,8 +56,9 @@ public class MonprofileController implements Initializable {
         
         try {
             Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/limitless", "root", "");
+            Utilisateur u =Auth.getCurrentUtilisateur();
             PreparedStatement stmt = conn.prepareStatement("SELECT nom, prenom, adresse, numero, cin FROM utilisateur WHERE id_user = ?");
-            stmt.setInt(1, 1); // Remplacez 1 par l'ID de l'utilisateur dont vous souhaitez récupérer les informations
+            stmt.setInt(1, u.getId_user()); // Remplacez 1 par l'ID de l'utilisateur dont vous souhaitez récupérer les informations
             ResultSet rs = stmt.executeQuery();
             if (rs.next()) {
                 monnom.setText(rs.getString("nom"));
@@ -74,7 +83,8 @@ public class MonprofileController implements Initializable {
         stmt.setString(2, monprenom.getText());
         stmt.setString(3, monadresse.getText());
         stmt.setString(4, monnumero.getText());
-        stmt.setInt(5, 1); // Remplacez 1 par l'ID de l'utilisateur que vous souhaitez modifier
+        Utilisateur u =Auth.getCurrentUtilisateur();
+        stmt.setInt(5, u.getId_user()); // Remplacez 1 par l'ID de l'utilisateur que vous souhaitez modifier
         int result = stmt.executeUpdate();
         if (result > 0) {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -94,5 +104,72 @@ public class MonprofileController implements Initializable {
             System.out.println(ex.getMessage());
     }
     }
+    @FXML
+    private void storebouton(ActionEvent event) {
+          try {
+            Parent root = FXMLLoader.load(getClass().getResource("houas.fxml"));
+            Scene scene = new Scene(root);
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException ex) {
+            System.out.println(ex.getMessage());
+        }
+    }
+
+    @FXML
+    private void boutonrec(ActionEvent event) {
+          try {
+            Parent root = FXMLLoader.load(getClass().getResource("Ajouterr.fxml"));
+            Scene scene = new Scene(root);
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException ex) {
+            System.out.println(ex.getMessage());
+        }
+    }
+
+    
+
+    @FXML
+    private void boutonpanier(ActionEvent event) {
+         try {
+            Parent root = FXMLLoader.load(getClass().getResource("panier.fxml"));
+            Scene scene = new Scene(root);
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException ex) {
+            System.out.println(ex.getMessage());
+        }
+    }
+
+//    @FXML
+//    private void boutton(ActionEvent event) {
+//          try {
+//            Parent root = FXMLLoader.load(getClass().getResource("EchangeFront.fxml"));
+//            Scene scene = new Scene(root);
+//            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+//            stage.setScene(scene);
+//            stage.show();
+//        } catch (IOException ex) {
+//            System.out.println(ex.getMessage());
+//        }
+//    }
+
+    @FXML
+    private void boutonprofil(ActionEvent event) {
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource("gerercompte.fxml"));
+            Scene scene = new Scene(root);
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException ex) {
+            System.out.println(ex.getMessage());
+        }
+    }
+    
     
 }
