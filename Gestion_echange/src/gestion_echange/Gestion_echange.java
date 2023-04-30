@@ -8,6 +8,10 @@ package gestion_echange;
 import edu.Gestion_Echange.entites.Echanges;
 import edu.Gestion_Echange.services.CRUDEchange;
 import edu.Gestion_Echange.utils.MyConnection;
+import edu.Gestion_Echange.entites.Livreur;
+import edu.Gestion_Echange.services.CRUDLivreur;
+import edu.Gestion_Echange.entites.Livraison;
+import edu.Gestion_Echange.services.CRUDLivraison;
 
 /**
  *
@@ -26,9 +30,14 @@ public class Gestion_echange {
     //  Echanges e1=new Echanges(2,2,"","sel3a jdida");
       //Echanges e2=new Echanges(20,20,"","sel3a jdida");
      // Echanges e2=new Echanges(6,14,"annule","sel3a jdida");
-      
-      
+     
+      Livreur l1=new Livreur("le houas","lehouas@mail.com",59869411);
+      CRUDLivreur crud1 = new CRUDLivreur();
         CRUDEchange crud = new CRUDEchange();
+       CRUDLivraison crud2 = new CRUDLivraison();
+       //crud2.afficherLivraison();
+     // crud1.afficherLivreur();
+      //  crud1.ajouterLivreur(l1);
         //crud.ajouterechange(e1);
        // crud.ajouterechange(e2);
      //   crud.afficherpersonnes();

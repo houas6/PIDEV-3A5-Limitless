@@ -3,8 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/amine/Documents/GitHub/PIDEV-3A5-Limitless/Gestion_echange/src/edu/Gestion_Echange/gui/AjoutereController.java</file>
-            <file>file:/C:/Users/amine/Documents/GitHub/PIDEV-3A5-Limitless/Gestion_echange/src/edu/Gestion_Echange/gui/ModifierechangeController.java</file>
+            <file>file:/C:/Users/amine/Documents/GitHub/PIDEV-3A5-Limitless/Gestion_echange/src/gestion_echange/Gestion_echange.java</file>
+            <file>file:/C:/Users/amine/Documents/GitHub/PIDEV-3A5-Limitless/Gestion_echange/src/edu/Gestion_Echange/services/InterfaceServices.java</file>
+            <file>file:/C:/Users/amine/Documents/GitHub/PIDEV-3A5-Limitless/Gestion_echange/src/edu/Gestion_Echange/services/CRUDLivraison.java</file>
+            <file>file:/C:/Users/amine/Documents/GitHub/PIDEV-3A5-Limitless/Gestion_echange/src/edu/Gestion_Echange/entites/Livraison.java</file>
         </group>
     </open-files>
 </project-private>

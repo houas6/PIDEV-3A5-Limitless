@@ -31,6 +31,6 @@
       <Button fx:id="fxmodifierechange" layoutX="361.0" layoutY="504.0" mnemonicParsing="false" onAction="#modifierechange" text="modifier" />
       <ButtonBar layoutX="636.0" layoutY="500.0" prefHeight="40.0" prefWidth="68.0" />
       <Button fx:id="rliste" layoutX="548.0" layoutY="504.0" mnemonicParsing="false" onMouseClicked="#rlist" text="retour a la liste" />
-      <ComboBox fx:id="fxpo" editable="true" layoutX="324.0" layoutY="213.0" prefWidth="150.0" />
+      <ComboBox fx:id="fxpo" layoutX="324.0" layoutY="213.0" prefWidth="150.0" />
    </children>
 </AnchorPane>
